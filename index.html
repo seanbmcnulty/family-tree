@@ -307,6 +307,33 @@ const KO = {
  "Focus":"본인","Grandparents":"조부모","Great-grandparents":"증조부모","Spouse & children":"배우자와 자녀",
 };
 const T = s => (LANG === "ko" && KO[s]) || s;
+const KO_NAMES = {"*": "*", "*(gr-mother": "그를모세", "***": "***", "**Heiress": "헤레스스", "13th": "스", "17th": "스", "1st": "스트", "2nd": "느드", "5th": "스", "?": "?", "A": "아", "ADAMS": "애덤스", "AEBI": "에비", "ALKIN": "알킨", "ALSOP": "알소프", "ANN": "앤", "ARTIS": "아를티스", "ASTLEY": "아스트리", "AUSTIN": "오스틴", "Abagail": "아바겔", "Abenaki": "아베나키", "Abiah": "아뱌", "Abigail": "애비게일", "Abigall": "아비갈", "Abraham": "에이브러햄", "Ada": "아다", "Adaline": "아다리네", "Adam": "아담", "Adams": "애덤스", "Adelard": "아데라드", "Adele": "아데레", "Adelheid": "아델헤드", "Adelina": "아데리나", "Adeline": "아데리네", "Adrian": "아드랸", "Adrienne": "아드린네", "Aebi": "에비", "Aelick": "에리크", "Aethgen": "에스젠", "Agnes": "아그네스", "Agnew": "아그네", "Agnus": "아그누스", "Aimar": "에마", "Aimee": "에미", "Alan": "아란", "Alanson": "아란손", "Albert": "앨버트", "Alberta": "알베를타", "Albertine": "알베를티네", "Alberts": "알베를트스", "Albrecht": "알브레츠트", "Ales": "아레스", "Alexander": "알렉산더", "Alexis": "아레지스", "Alfonso": "알폰소", "Alfred": "앨프리드", "Ali": "아리", "Alice": "앨리스", "Alix": "아리스", "Allan": "알란", "Allen": "알렌", "Allgeier": "알를게에", "Allgeyer": "알를기에", "Allison": "알리손", "Alma": "알마", "Almeda": "알메다", "Alonzo": "아론조", "Alpaida": "알페다", "Alsop": "알소프", "Alvena": "알베나", "Alvin": "알빈", "Alzona": "알조나", "Amable": "아마브레", "Ambrose": "암브로세", "Amelia": "아메랴", "Ames": "아메스", "Amos": "아모스", "Amy": "에이미", "Anastasia": "아나스타샤", "Andelot": "안데로트", "Andre": "안드레", "Andreas": "안드리스", "Andresli": "안드레스리", "Andrew": "앤드루", "Andries": "안드리스", "Andriuk": "안드리우크", "Andriy": "안드리으", "André": "안드", "Angelique": "안제리케", "Angevine": "안제비네", "Angouleme": "안구레메", "Angoulême": "안굴메", "Angus": "앵거스", "Angélique": "앙리케", "Anjou": "안주", "Ann": "앤", "Anna": "애나", "Anne": "앤", "Anneke": "안네케", "Annesley": "안네스리", "Annetje": "안네트제", "Annie": "안니", "Ansegisel": "안세지셀", "Anthoni": "안소니", "Anthonia": "안소냐", "Anthony": "안소니", "Antje": "안트제", "Antoine": "안토네", "Antoinette": "안토네트테", "Anton": "안톤", "Apolline": "아폴리네", "Appleby": "아프프레비", "Aquitaine": "아키테네", "Arcedekne": "아를케데네", "Archer": "아를크헤", "Ardiaensz": "아를댜엔스즈", "Arent": "아렌트", "Arentse": "아렌트세", "Ari": "아리", "Ariaens": "아랴엔스", "Ariens": "아린스", "Armager": "아를마제", "Armstrong": "암스트롱", "Armstrong*": "아를므스트롱", "Arnulf": "아를눌프", "Aronetz": "아로네츠", "Arrientje": "아를린트제", "Arthur": "아서", "Artys": "아를티스", "Ashley": "애슐리", "Astley": "아스트리", "Athanase": "아사나세", "Atkinson": "아트킨손", "Atwater": "아트와테", "Augustin": "오구스틴", "Augustine": "오구스티네", "Austin": "오스틴", "Avesnes\\": "아베스네스", "Awberry": "오베를리", "Awbery": "오베리", "Ayala": "에아라", "Azuba": "아주바", "Azubah": "아주바", "B": "브", "BABCOCK": "뱁콕", "BAER": "베", "BAR": "바르", "BAUMAN": "보만", "BELLAMY": "벨라미", "BORRINGTON": "보를링톤", "BOURNE": "본", "BRIGHTE": "브리그테", "BROWNSON": "브론손", "BRYDEN": "브리덴", "Babcock": "뱁콕", "Babington": "바빙톤", "Badcock": "바드코크", "Baer": "베", "Baillie": "벨리", "Baker": "베이커", "Bald": "발드", "Baldwin": "발드인", "Baptiste": "바프티스테", "Bar": "바르", "Barbara": "바버라", "Barbe": "바를베", "Barbel": "바를벨", "Barbeli": "바를베리", "Barber": "바를베", "Barbli": "바를브리", "Barcelona\\": "바를케로나", "Bardwell": "바를드엘", "Barley": "바를리", "Barlow": "바를로", "Barnes": "바를네스", "Baron": "바론", "Baroness": "남작부인", "Barrett": "바를레트트", "Bartels": "바를텔스", "Bartholome": "바를트호로메", "Bartholomew": "바를트호로메", "Barthomee": "바를트호미", "Bartlis": "바를트리스", "Baschi": "바시", "Basile": "바시레", "Basing": "바싱", "Basset": "바스세트", "Bassnett": "바스스네트트", "Bathsheba": "바스세바", "Baude": "보데", "Baugh": "보", "Bauman": "보만", "Baumann": "보만", "Bavaria": "바바랴", "Baxter": "바즈테", "Bayer": "베에", "Bayern": "베에", "Beahm": "비", "Beam": "빔", "Beatrice": "비트리세", "Beatrix": "비트리스", "Beauchamp": "비우참프", "Beaufort": "보퍼트", "Becker": "베케", "Beedham": "비드함", "Begga": "베그가", "Belamy": "베라미", "Beletje": "베레트제", "Belitje": "베리트제", "Bell": "벨", "Bellamy": "벨라미", "Belle": "벨레", "Bellingham": "벨링함", "Bemmel": "벰멜", "Benedict": "베네디크트", "Benedicta": "베네디크타", "Benjamin": "벤저민", "Benkert": "벤케트", "Bennet": "벤네트", "Bennett": "벤네트트", "Berdewell": "베를데엘", "Berengar": "베렌가", "Berengaria": "베렌가랴", "Berenguela": "베렌구라", "Berkeley": "베를케리", "Bernadette": "베를나데트테", "Bernhard": "베를느하드", "Bernice": "베를니세", "Bernkertin": "베를느케를틴", "Bertha": "베를트하", "Berthelot": "베를트헤로트", "Bertrada": "베를트라다", "Bertrade": "베를트라데", "Besserer": "베스세레", "Bessie": "베시", "Bethia": "베샤", "Bethiah": "베샤", "Betts": "베트트스", "Betty": "베트티", "Beverly": "베베를리", "Bichsel": "비츠셀", "Biedermann": "비데를만", "Bilichilde": "비리칠데", "Bill": "빌", "Bishop": "비소프", "Bitfield": "비트필드", "Blanca": "브란카", "Blanch": "브란치", "Blanche": "블랑시", "Blaser": "브라세", "Blennerhassett": "브렌네를하스세트트", "Blooming": "브루밍", "Blount": "브룬트", "Blout": "브루트", "Blow": "블로", "Boeckhout": "보크후트", "Boehm": "보", "Boehme": "보흐메", "Boekhout": "보크후트", "Bogardus": "보가를두스", "Boham": "보함", "Bole": "보레", "Boleyn": "보린", "Bonello": "보넬로", "Bonnalie": "본나리", "Bonnallie": "본날리", "Boomer": "부메", "Borington": "보링톤", "Borrington": "보를링톤", "Borroridge": "보를로리드게", "Bosch": "보스", "Boston": "보스톤", "Botetourt": "보테투트", "Both": "보스", "Bourgogne": "부를고그네", "Bourne": "본", "Boutendr": "부텐드", "Bower": "보에", "Bowman": "보만", "Bowsey": "보시", "Boys": "보스", "Bradbury": "브래드버리", "Brampton;": "브람프톤", "Brand": "브란드", "Brandt": "브란드트", "Brant": "브란트", "Braose": "브라오세", "Bratscher": "브라트스크헤", "Braun": "브론", "Brenda": "브렌다", "Brent": "브렌트", "Brian": "브랸", "Briant": "브라이언트", "Bridget": "브리드게트", "Brigham": "브리감", "Bright": "브리그트", "Brighte": "브리그테", "Brigid": "브리지드", "Bromfeldt": "브롬펠트", "Bronson": "브론손", "Brooke": "브루케", "Brooks": "브루크스", "Brounker": "브룬케", "Brown": "브라운", "Browne": "브로네", "Brownlee": "브론리", "Bruce": "브루스", "Brugmann": "브루그만", "Brundeli": "브룬데리", "Bruners": "브루네스", "Brunner": "브룬네", "Brunnerin": "브룬네린", "Bryan": "브라이언", "Bryden": "브리덴", "Bucannan": "부칸난", "Buchner": "부흐너", "Buchont": "부촌트", "Buck": "벅", "Buechi": "부치", "Burdetta": "부를데트타", "Burgundy": "부를군디", "Burke": "부를케", "Burleighl": "부를레글", "Burley": "부를리", "Burnam": "부를남", "Burnham": "번햄", "Burns": "부를느스", "Burris": "부를리스", "Burt": "부트", "Burtch": "부를트크흐", "Burton": "부를톤", "Butler": "부트레", "Bye": "비에", "Byers": "비에스", "Byrch": "비를크흐", "Byron": "비론", "Bär": "브르", "Bärbel": "브를벨", "C": "크", "CLARK": "크라크", "COSGROVE": "코스그로브", "COTTON": "코트톤", "Calvin": "칼빈", "Cam": "캄", "Cameron": "카메론", "Camm": "캄", "Capitola": "카피토라", "Capt": "대위", "Captain": "대위", "Carbosie": "카를보시", "Carey": "케리", "Caribert": "카리베트", "Carl": "카", "Carling": "카를링", "Carly": "카를리", "Carmel": "카를멜", "Carol": "카롤", "Caroline": "캐럴라인", "Carpenter": "카펜터", "Carrie": "카를리", "Carrier": "카를리", "Carrington": "카를링톤", "Carrs": "카를를스", "Carry": "카를리", "Carter": "카를테", "Cary": "카리", "Caseborne": "카세보를네", "Caser": "카세", "Caspar": "카스파", "Casper": "카스페", "Castella": "카스텔라", "Castile": "카스티레", "Castilla": "카스틸라", "Catharina": "카사리나", "Catharine": "카사리네", "Catherina": "카세리나", "Catherine": "캐서린", "Catriona": "카트료나", "Cave": "카베", "Caye": "케에", "Cecelia": "세세랴", "Cecil": "세실", "Cecile": "세시레", "Cecilia": "세실리아", "Cecilla": "세실라", "Celeste": "세레스테", "Celina": "셀리나", "Chamard": "차마드", "Chandler": "찬드레", "Charity": "차리티", "Charlemagne": "차를레마그네", "Charles": "찰스", "Charlotte": "샬럿", "Chatillion": "차틸룐", "Chatillon-Blaigny": "차틸론브레그니", "Chatterson": "채터슨", "Cheif": "체프", "Cheryl": "체릴", "Chester": "체스테", "Chiefs": "치프스", "Christiaen": "츠리스탸엔", "Christian": "크리스천", "Christiana": "츠리스탸나", "Christina": "크리스티나", "Christine": "츠리스티네", "Christmann": "츠리스트만", "Christophe": "츠리스토페", "Christopher": "츠리스토페", "Chrysostome": "츠리소스토메", "Churchyard": "추를크히아드", "Ciara": "키아라", "Cicill": "시실", "Clara": "크라라", "Clare": "클레어", "Clark": "크라크", "Clarke": "크라를케", "Clarrotta": "크라를로트타", "Claude": "클로드", "Claussen": "크로스센", "Claxton": "크라즈톤", "Clemens": "크레멘스", "Clere": "크레레", "Clifton": "크리프톤", "Cockington": "코킹톤", "Coffin": "코프핀", "Coffley": "코프프리", "Coit": "코트", "Cole": "코레", "Coleman": "코레만", "Colerick": "코레리크", "Coles": "코레스", "Collins": "콜린스", "Collis": "콜리스", "Colman": "콜만", "Combe": "콤베", "Comfort": "콤포트", "Compe": "콤페", "Condon": "콘돈", "Condra": "콘드라", "Conrad": "콘라드", "Consider": "콘시데", "Consort": "콘소트", "Constable": "콘스타브레", "Constance": "콘스탄세", "Cook": "쿠크", "Coonradt": "쿤라드트", "Coopersmith": "쿠페를스미스", "Coore": "쿠레", "Cora": "코라", "Corinne": "코린", "Cornelia": "코를네랴", "Cornelis": "코를네리스", "Cornelius": "코닐리어스", "Corriane": "코를랴네", "Corrigan": "코를리간", "Cosgrove": "코스그로브", "Cotton": "코트톤", "Count": "쿤트", "Countess": "쿤테스스", "Courtenay": "쿠를테네", "Cox": "코스", "Craig": "크레이그", "Cranckheyt": "크란크히트", "Crankeyt": "크란키트", "Crankheyt": "크란크히트", "Cree": "크리", "Creedy": "크리디", "Crochrode": "크로츠로데", "Cromee": "크로미", "Cromwell": "크롬엘", "Crowe": "크로에", "Cudot": "쿠도트", "Cuinghein": "큉헨", "Cumming": "커밍", "Cummings": "쿰밍스", "Curtis": "쿠를티스", "Curtiss": "쿠를티스스", "Curtmantle": "쿠를트만트레", "Cynthia": "신샤", "Cyrus": "시루스", "D": "드", "D'Wiltsie": "드일트시", "DANDIKER": "단디케", "DENTONE": "덴토네", "DIVINE": "디비네", "DORMAN": "도를만", "DUCHESS": "두체스스", "DUKE": "두케", "Dale": "다레", "Damon": "다몬", "Dampierre": "담피를레", "Dandiker": "단디케", "Daniel": "대니얼", "Daria": "다랴", "Darlene": "달린", "Darrell": "다를렐", "David": "데이비드", "Davidson": "다비드손", "Davis": "다비스", "Day": "데", "De": "드", "DeBeaufort": "데비우포트", "DeBrouncker": "데브룬케", "DeFalsom": "데팔솜", "DeFalson": "데팔손", "DeHoniwood": "데호니우드", "DeLint": "데린트", "DeNeville": "드네빌", "DeSomery": "데소메리", "DeVoe": "데보", "Deacon": "디컨", "Deane": "디네", "Debora": "데보라", "Deborah": "데버라", "Decker": "데케", "Dedham": "데드함", "Delamare": "데라마레", "Delaval": "델라발", "Dell": "델", "Delves": "델베스", "Demarest": "데마레스트", "Denebaud": "데네보드", "Dennis": "덴니스", "Dennison": "덴니손", "Denurieux": "데누리우스", "Deol": "데올", "Derbyshire": "데를비시레", "Deseado": "데시도", "Devon": "데본", "Dewey": "데이", "Diana": "댜나", "Dick": "디크", "Dijver": "디즈베", "Dill": "딜", "Dionezi": "됴네지", "Divine": "디비네", "Dixey": "디지", "Doda": "도다", "Dominie": "도미니", "Donald": "도날드", "Doney": "도니", "Donough": "도누", "Dora": "도라", "Dorcas": "도를카스", "Doreen": "도린", "Doris": "도리스", "Dorman": "도를만", "DorotheaDorothy": "도로시도로시", "Dorothee": "도로시", "Dorothy": "도로시", "Dorreen": "도를린", "Dorthea": "도를트히", "Dot": "도트", "Dotsa": "도트사", "Douglas": "더글러스", "Dowling": "도링", "Dowse": "도세", "Doyon": "도온", "Duberley": "두베를리", "Duchesme": "두체스메", "Duchess": "두체스스", "Dudley": "두드리", "Duke": "두케", "Dun": "둔", "Duncan": "둔칸", "Dupuis": "두퓌스", "Durs": "두스", "Durst": "두를스트", "Dyer": "디에", "Dynewell": "디네엘", "Dysli": "디스리", "E": "에", "EICHINGER": "에친제", "ELEANOR": "엘리너", "ELIZABETH": "엘리자베스", "Eagar": "이가", "Earl": "얼", "Earnest": "이를네스트", "Eatington": "이팅톤", "Ebelken": "에벨켄", "Ebeneger": "에베네제", "Ebenezer": "에베네제", "Eberhard": "에베를하드", "Eby": "이비", "Eckher": "에크헤", "Eddie": "에드디", "Eden": "에덴", "Edith": "이디스", "Edmond": "에드몬드", "Edmund": "에드문드", "Edna": "에드나", "Edon": "에돈", "Edward": "에드워드", "Edwin": "에드인", "Effie": "에프피", "Eggiman": "에그기만", "Egloffer": "에그로프페", "Eilidh": "에일리", "Elana": "에라나", "Elburn": "엘부", "Elder": "엘데", "Eleanor": "엘리너", "Elena": "에레나", "Elenor": "에레노", "Eleonore": "에레오노레", "Elgin": "엘진", "Eli": "에리", "Elias": "에랴스", "Elida": "에리다", "Elihu": "에리후", "Elijah": "일라이자", "Elisabeth": "엘리자베트", "Elisabetha": "에리사베사", "Elisha": "에리사", "Elithorpe": "에리소를페", "Eliza": "에리자", "Elizabeth": "엘리자베스", "Ellen": "엘런", "Elliott": "엘료트트", "Ellsworth": "엘를스오를트흐", "Elsa": "엘사", "Elsbeth": "엘스베스", "Elsi": "엘시", "Elsie": "엘시", "Elvaston": "엘바스톤", "Elveston": "엘베스톤", "Elwin": "엘인", "Emile": "에미레", "Emily": "에밀리", "Emma": "에마", "Empire": "엠피레", "Empress": "엠프레스스", "Engelbert": "엔젤베트", "England": "엥란드", "Enoch": "에노치", "Enos": "에노스", "Ephraim": "에프렘", "Ephrosina": "에프로시나", "Erad": "에라드", "Erb": "에브", "Ermengarde": "에를멘가를데", "Ernest": "에를네스트", "Ervin": "에를빈", "Erwin": "에를인", "Esaias": "에세아스", "Esaiasz": "에세아스즈", "Esak": "에사크", "Essex": "에스세스", "Essie": "에스시", "Ester": "에스테", "Esther": "에스더", "Ethel": "에설", "Etienette": "에티네트테", "Eugene": "유제네", "Eulalia": "유라랴", "Eunice": "유니세", "Euphemia": "유페먀", "Eustasia": "유스타샤", "Eva": "에바", "Evan": "에반", "Evans": "에반스", "Evardus": "에바를두스", "Eve": "이브", "Evelyn": "에벌린", "Everdin": "에베를딘", "Everett": "에버렛", "Ewart": "에와트", "Experience": "에즈페린세", "Ezekiel": "에제킬", "F": "프", "FRANCIS": "프랜시스", "Fairborn": "페를보", "Fairis": "페리스", "Falson": "팔손", "Famie": "파미", "Fanny": "판니", "Felicite": "페리시테", "Felix": "페리스", "Ferdinand": "페를디난드", "Fernando": "페를난도", "Ferne": "펀", "Ferrette": "페를레트테", "Filcox": "필코스", "Fitz": "피트즈", "FitzLewis": "피트즈레이스", "Fitzgerald": "피트즈게랄드", "Flavie": "프라비", "Fleda": "프레다", "Fleming": "플레밍", "Flemming": "플레밍", "Fletcher": "프레트크헤", "Flora": "프로라", "Florence": "플로렌스", "Florentine": "프로렌티네", "Forester": "포레스테", "Forrer": "포를레", "Forstmeister": "포를스트메스테", "Fortin": "포를틴", "Foster": "포스테", "Fr": "프르", "Frampton": "프램프턴", "France": "프란세", "Frances": "프랜시스", "Francis": "프랜시스", "Francois": "프란코스", "Francoise": "프란코세", "Frank": "프란크", "Frankhauser": "프란크호세", "Franklin": "프랭클린", "Franks": "프란크스", "Frantz": "프란트즈", "Frau": "프로", "Freddie": "프레드디", "Frederich": "프레데리치", "Frederick": "프레더릭", "French": "프렌치", "Freni": "프레니", "Freville": "프레빌레", "Frick": "프리크", "Fricker": "프리케", "Frickinger": "프리킨제", "Friderich": "프리데리치", "Frideswold": "프리데스올드", "Fridli": "프리드리", "Fridrici": "프리드리시", "Friederich": "프리데리치", "Fronica": "프로니카", "Frowick": "프로이크", "Frozina": "프로지나", "Fulcher": "풀체", "Fulcois": "풀코스", "Fulk": "풀크", "Fuller": "풀레", "Fulmerston": "풀메를스톤", "Fulton": "풀톤", "Fytje": "피트제", "Félix": "프리스", "G": "그", "GAGNON": "가그논", "GATINAIS": "가티네스", "GILBERT": "질베트", "GOODALE": "구다레", "GOODERE": "구데레", "GOODYEAR": "굿이어", "GORIS": "고리스", "GREEN": "그린", "GRUNDBACHER": "그룬드바체", "GUTT": "구트트", "Gabriel": "가브릴", "Gagne": "가그네", "Gagnon": "가그논", "Gagné": "가그", "Gaignon": "게그논", "Gainford": "겐포드", "García": "가를카", "Garter": "가를테", "Gary": "가리", "Gasnier": "가스니", "Gaspard-Grommont": "가스파를드그롬몬트", "Gater": "가테", "Gates": "가테스", "Gatherest": "가세레스트", "Gatinais": "가티네스", "Gaunt": "곤트", "Gawryliuk": "고리리우크", "Geertje": "지를트제", "Geertruid": "지를트뤼드", "Geertruijt": "지를트뤼지트", "Geertruy": "지를트뤼", "General": "제네랄", "Genette": "제네트테", "Genevieve": "제네비베", "Geoffrey": "제오프프리", "Geoffroy": "제오프프로", "Geofrey": "제오프리", "Geordie": "제오를디", "Georg": "제오그", "George": "조지", "Georgiana": "제오를갸나", "Georgina": "조지나", "Geraldine": "제랄디네", "Gerard": "제라드", "Gerberge": "제를베를게", "Gerdt": "제를드트", "Germaine": "제를메네", "Gerrit": "제를리트", "Gerrits": "제를리트스", "Gerritsen": "제를리트센", "Gerritszone": "제를리트스조네", "Gibb": "깁", "Gibson": "깁슨", "Gideon": "지데온", "Gifford": "기퍼드", "Gignac": "지그나크", "Gilbert": "질베트", "Gilgen": "질젠", "Gipping": "지프핑", "Gladstone": "그라드스토네", "Gladys": "그라디스", "Glavimans": "그라비만스", "Glenn": "그렌", "Glenna": "그렌나", "Godfrey": "고드프리", "Godly": "고드리", "Good": "구드", "Goodale": "구다레", "Goodere": "구데레", "Goodman": "구드만", "Goodyear": "굿이어", "Goodyere": "구디에레", "Gordon": "고든", "Goris": "고리스", "Gorius": "고리우스", "Gottfried": "고트트프리드", "Graaf": "그라프", "Grace": "그레이스", "Gracie": "그라시", "Grafin": "그라핀", "Graham": "그레이엄", "Granger": "그란제", "Greene": "그리네", "Greenway": "그린에", "Gregor": "그레고", "Gregori": "그레고리", "Gregorious": "그레고료우스", "Greiner": "그레네", "Gresley": "그레스리", "Grey": "그리", "Griet": "그리트", "Griffos": "그리프포스", "Griselda": "그리셀다", "Gross": "그로스스", "Grundbacher": "그룬드바체", "Gräfin": "그를핀", "Guerin": "구린", "Guillaume": "귈로메", "Gunter": "군테", "Gurdon": "구를돈", "Gut": "구트", "Gutt": "구트트", "Guy": "귀", "Gwen": "그엔", "Gwendolyn": "그엔도린", "Gybsone": "지브소네", "H": "흐", "HANFORD": "한포드", "HART": "하트", "HEIGHAM": "헤감", "HEINRICH": "하인리히", "HEYWARD": "히와드", "HOCKMAN": "호크만", "HOLWAY": "홀에", "HOPKINS": "홉킨스", "HOPPE": "호프페", "HOPPEN": "호프펜", "HULL": "헐", "Haas": "하스", "Hackett": "하케트트", "Hackluyt": "하크뤼트", "Hadderton": "하드데를톤", "Haegis": "헤지스", "Hagmann": "하그만", "Hainault": "헤놀트", "Haine": "헤네", "Hall": "홀", "Hannah": "해나", "Hannes": "한네스", "Hans": "한스", "Hanss": "한스스", "Hapoone": "하푸네", "Harcourt": "하를쿠트", "Harcx": "하를크즈", "Harcxs": "하를크즈스", "Harding": "하를딩", "Hardt": "하를드트", "Harley": "하를리", "Harmeo": "하를메오", "Harold": "해럴드", "Harper": "하를페", "Harriet": "해리엇", "Harris": "하를리스", "Harrison": "하를리손", "Harry": "하를리", "Hart": "하트", "Harvey": "하를비", "Hasler": "하스레", "Hausz": "호스즈", "Hawkridge": "호크리드게", "Hawley": "호리", "Hayward": "헤와드", "Hazel": "헤이즐", "Heath": "히스", "Heber": "헤베", "Hedrisken": "헤드리스켄", "Heigham": "헤감", "Heini": "헤니", "Heinrich": "하인리히", "Helen": "헬렌", "Helena": "헤레나", "Helene": "헤레네", "Helion": "헤룐", "Hende": "헨데", "Hendrick": "헨드리크", "Hendricks": "헨드리크스", "Hendricksen": "헨드리크센", "Hendrik": "헨드리크", "Henneberg-Schleusingen": "헨네베를그스크흐류신젠", "Henri": "헨리", "Henrich": "헨리치", "Henrick": "헨리크", "Henrietta": "헨리트타", "Henriette": "헨리트테", "Henry": "헨리", "Hensley": "헨즐리", "Herbert": "헤를베트", "Herck": "헤를크크", "Herexen": "헤레젠", "Herman": "헤를만", "Hermann": "헤를만", "Hermans": "헤를만스", "Heron": "헤론", "Herr": "헤르", "Herrick": "헤를리크", "Herrin": "헤를린", "Herron": "헤를론", "Herstal": "헤를스탈", "Hervé": "헤브", "Herzog": "헤를조그", "Heslerigg": "헤스레리그그", "Hewett": "헤에트트", "Hey": "히", "Heyward": "히와드", "Hickox": "히코스", "Hilaire": "히레레", "Hildegard": "힐데가드", "Hildegarde": "힐데가를데", "Hill": "힐", "Hinton": "힌톤", "Hobson": "호브손", "Hodnel": "호드넬", "Hodnell": "호드넬", "Hodnet;": "호드네트", "Hoff": "호프프", "Hoffman": "호프프만", "Hofmann": "호프만", "Hogel": "호젤", "Holbrook": "홀브루크", "Holland": "홀란드", "Holway": "홀에", "Holy": "호리", "Honeywood": "호니우드", "Honiwood": "호니우드", "Honnywood": "혼니우드", "Honywood": "호니우드", "Hope": "호페", "Hopkins": "홉킨스", "Hopper": "호프페", "Horace": "호라세", "Horseley": "호를세리", "House": "후세", "Howard": "하워드", "Hrihory": "흐리호리", "Hubbard": "후브바드", "Hubbard**": "후브바드", "Huber": "후버", "Hubert": "후베트", "Huffelberg": "후프펠베그", "Huffellberg": "후프펠를베그", "Hugh": "휴", "Hughes": "후게스", "Hughs": "후그스", "Hugill": "후질", "Hugues": "후구스", "Hull": "헐", "Humphrey": "훔프리", "Humphreys": "훔프리스", "Hunt": "훈트", "Hunte": "훈테", "Huntington": "훈팅톤", "Hurlbert": "후를를베트", "Hussey": "후스시", "Hutton": "허턴", "Hyardin": "히아를딘", "Hyatt": "히아트트", "I": "1세", "II": "2세", "III": "3세", "IIII": "이이이이", "IV": "4세", "IX": "이스", "Iain": "야인", "Ibbotson": "이브보트손", "Ichabod": "이차보드", "Ida": "이다", "Ierland": "이를란드", "Ignace": "이그나세", "Ione": "요네", "Irene": "이레네", "Isaac": "아이작", "Isabel": "이사벨", "Isabela": "이사베라", "Isabella": "이저벨라", "Isabelle": "이사벨레", "Isett": "이세트트", "Isold": "이솔드", "Israel": "이스렐", "Ivan": "이반", "J": "즈", "JACOB": "제이컵", "JANE": "제인", "JOHN": "존", "JURCKXEN": "주를크크젠", "Jack": "잭", "Jackson": "자크손", "Jacob": "제이컵", "Jacobez": "자코베즈", "Jacobs": "자코브스", "Jaggi\"Heinrich": "자그기헨리치", "Jagli": "자그리", "Jakob": "자코브", "Jakob(James": "자코브자메스", "James": "제임스", "Jami": "자미", "Jamie": "제이미", "Jan": "잔", "Jana": "자나", "Jane": "제인", "Janes": "자네스", "Janet": "자네트", "Janice": "자니세", "Jankel": "잔켈", "Jans": "잔스", "Janse": "잔세", "Jansen": "잔센", "Jansz": "잔스즈", "Janszen": "잔스젠", "Jarvis": "자를비스", "Jas": "자스", "Jean": "진", "Jean-Baptiste": "진바프티스테", "Jeanette": "지네트테", "Jeanne": "진네", "Jemima": "제미마", "Jenneken": "젠네켄", "Jenners": "젠네스", "Jenney": "젠니", "Jennie": "젠니", "Jennings": "젠닝스", "Jens": "젠스", "Jeon": "전", "Jerany": "제라니", "Jeremiah": "제레마이아", "Jerg": "제그", "Jermyn": "제를민", "Jerome": "제로메", "Jerusalem": "제루사렘", "Jesse": "제스세", "Jessica": "제스시카", "Jessie": "제시", "Joachim": "조침", "Joan": "조앤", "Joane": "조네", "Joanna": "존나", "Joanne": "존네", "Joannet": "존네트", "Joannis": "존니스", "Job": "잡", "Jochem": "조쳄", "Joel": "조엘", "Joh": "조", "Johae": "조헤", "Johan": "조한", "Johane": "조하네", "Johann": "요한", "Johanna": "조한나", "Johannes": "요하네스", "Johis": "조히스", "John": "존", "Johns": "존스", "Johnston": "조흐느스톤", "Jonas": "조나스", "Jonathan": "조너선", "Jones": "존스", "Jordan": "조를단", "Jorg": "조그", "Joseph": "조지프", "Joseph-Arthur": "조세파를트후", "Joseph-Georges": "조세프제오를게스", "Josephine": "조지핀", "Josephte": "조세프테", "Joshua": "조수아", "Josiah": "조샤", "Joux": "주스", "Joyce": "조세", "Jr": "주니어", "Judith": "주디스", "Julia": "주랴", "Juliana": "주랴나", "Julianna": "주랸나", "Julie": "주리", "June": "주네", "Junghans": "중한스", "Junker": "준케", "Jurckse": "주를크크세", "Jurckxen": "주를크크젠", "KATHERINE": "카세리네", "KENDIG": "켄디그", "KENWORTHY": "켄오를트히", "KG": "크그", "Kaer": "케", "Kaspar": "카스파", "Kate": "카테", "Katharina": "카사리나", "Katharine": "카사리네", "Katherina": "카세리나", "Katherine": "카세리네", "Katherine*": "카세리네", "Kathleen": "카스린", "Kathrina": "카스리나", "Katie": "카티", "Keer": "키", "Keiser": "케세", "Kelly": "켈리", "Kelvedon": "켈베돈", "Kember": "켐베", "Kempten": "켐프텐", "Kendig": "켄디그", "Kendrick": "켄드리크", "Kerber": "케를베", "Kerrer": "케를레", "Kestner": "케스트네", "Ketlesby": "케트레스비", "Kevin": "케빈", "Kigley": "키그리", "Kiklaus": "키크로스", "Kilpatrick": "킬파트리크", "Kindig": "킨디그", "King": "킹", "Kircher": "키를크헤", "Kirkpatrick": "커크패트릭", "Kissane": "키스사네", "Klein": "크렌", "Kleves": "크레베스", "Klingen": "크린젠", "Knight": "기사", "Knights": "니그트스", "Knowles": "노레스", "Koeckin": "코킨", "Koerber": "코를베", "Kolotylo": "코로티로", "Kowalchuk": "코왈추크", "Kraf": "크라프", "Krista": "크리스타", "Kuendig": "쿤디그", "Kumpula": "쿰푸라", "Kundig": "쿤디그", "Kundig^": "쿤디그", "Kupferschmid": "쿠프페를스크흐미드", "Kupferschmidt": "쿠프페를스크흐미드트", "Kupperschmidt": "쿠프페를스크흐미드트", "Kündig": "느디그", "L": "르", "LAMPRECHT": "람프레츠트", "LLoyd": "를로드", "LOVELOCK": "로베로크", "La": "라", "Labelle": "라벨레", "Lady": "레이디", "Laila": "라일라", "Laingham": "렝함", "Lake": "라케", "Lambert": "람베트", "Lamberton": "램버턴", "Lancaster": "란카스테", "Lancelot": "란세로트", "Landis": "란디스", "Langdon": "랑돈", "Lanoy": "라노", "Lansing": "란싱", "Lanz": "란즈", "Laon": "라온", "Large": "라를게", "Larkin": "라킨", "Laubespin": "로베스핀", "Launay": "로네", "Launcelot": "론세로트", "Laura": "로라", "Laurel": "로렐", "Laurence": "로런스", "Lauretta": "로레트타", "Laurie": "로리", "Lauwerijssen": "로에리즈스센", "Laverne": "라베를네", "Lavina": "라비나", "Lavinia": "라비냐", "Laware": "로와레", "Lawrence": "로렌세", "Lawton": "로톤", "Le": "레", "Leah": "레아", "Ledbeter": "레드베테", "Ledbetter": "레드베트테", "Lee": "리", "Leeds": "리드스", "Lehoux": "레후스", "Leigh": "레", "Leila": "레라", "Leloutre": "레루트레", "Lemieux": "레미우스", "Lemon": "레몬", "Lena": "레나", "Leolde": "레올데", "Leon": "레온", "Leonard": "레오나드", "Leonor": "레오노", "Lessard": "레스사드", "Leudwinus": "류드이누스", "Levere": "러비어", "Levi": "레비", "Lewen": "루언", "Lewes": "레에스", "Lewis": "루이스", "Lewknor": "레크노", "Lewyn": "레인", "Leyman": "리만", "León": "렌", "León\\": "렌", "Lida": "리다", "Lieberman": "리베를만", "Lillian": "릴랸", "Lillie": "릴리", "Lincolnshire": "린콜느스히레", "Linda": "린다", "Linden": "린덴", "Lingen": "린젠", "Lint": "린트", "Lion": "룐", "Lisle": "리스레", "Litfoote": "리트푸테", "Liz": "리즈", "Lleó": "를레", "Lloyd": "를로드", "Loan": "론", "Lodewijk": "로데이지크", "Loewen": "로엔", "Lois": "로스", "Long": "롱", "Lonzam": "론잠", "Lord": "로드", "Lorene": "로레네", "Lorenz": "로렌즈", "Loretto": "로레트토", "Lorraine": "로를레네", "Louis": "루이스", "Louisa": "루이사", "Louise": "루이즈", "Loutre": "루트레", "Lovelace": "로베라세", "Lovelock": "로베로크", "Lovey": "로비", "Lownde": "론데", "Lucas": "루카스", "Lucia": "루샤", "Lucretia": "루크레탸", "Lucy": "루시", "Ludivine": "루디비네", "Ludwig": "루드이그", "Lulia": "루랴", "Lundy": "런디", "Lydia": "리디아", "Lyndye": "린디에", "Lynn": "린", "Lyon": "리온", "Lyons": "라이언스", "LÖW": "를으", "Léger": "를게", "M": "므", "MARGARET": "마거릿", "MARTIN": "마틴", "MARY": "메리", "MCKITTRICK": "므크키트트리크", "MORIN": "모린", "MP": "므프", "MYLIN": "미린", "Mabel": "메이벨", "Mabell": "마벨", "Mable": "마브레", "MacPherson": "마크프헤를손", "Macon": "마콘", "Madeleine": "마들렌", "Madlena": "마드레나", "Madlene": "마드레네", "Mae": "메", "Maertgen": "메를트겐", "Magdalena": "마그달레나", "Magdelin": "마그데린", "Magill": "머길", "Maine": "메네", "Malcolm": "맬컴", "Mallocke": "말로케", "Manor": "마노", "Maraya": "마레아", "Marc": "마크", "Marche": "마를크헤", "Marcy": "마를키", "Maretta": "마레트타", "Margaret": "마거릿", "Margareta": "마를가레타", "Margaretha": "마를가레사", "Margarethe": "마를가레세", "Margaritha": "마를가리사", "Margery": "마를게리", "Margret": "마를그레트", "Margreth": "마를그레스", "Margretha": "마를그레사", "Margrietje": "마를그리트제", "Marguerite": "마르그리트", "Maria": "마리아", "Mariah": "마랴", "Mariann": "마랸", "Marianne": "마랸네", "Marie": "마리", "Marie-Geneviève": "마리제네비베", "Marilyn": "마리린", "Marinel": "마리넬", "Mariner": "마리네", "Marion": "마룐", "Marjorie": "마를조리", "Mark": "마크", "Marla": "말라", "Marquess": "마를쿠스스", "Marshall": "마를스할", "Martel": "마를텔", "Martensen": "마를텐센", "Martha": "마사", "Marti": "마를티", "Martin": "마틴", "Martje": "마를트제", "Martyn": "마를틴", "Mary": "메리", "Maryanne": "마리안네", "Marytje": "마리트제", "Masterlandt": "마스테를란드트", "Matheis": "마세스", "Mathew": "마세", "Mathews": "마세스", "Mathias": "마샤스", "Mathieu": "마시우", "Mathilda": "마실다", "Mathilde": "마실데", "Mathurin": "마수린", "Mathurine": "마수리네", "Matilda": "마틸다", "Maton": "마톤", "Matthew": "마트트헤", "Matthys": "마트트히스", "Mattie": "마트티", "Maud": "모드", "Maude": "모데", "Maudlin": "모드린", "Maurer": "모레", "Max": "맥스", "May": "메이", "Mayberry": "메베를리", "Mc": "맥", "McAvoy": "므카보", "McCausland": "매코즐런드", "McClennan": "므크크렌난", "McComb": "므크콤브", "McFerran": "맥페런", "McGarrel": "맥개럴", "McGarrell": "므크가를렐", "McGee": "므크기", "McGill": "므크길", "McGrath": "므크그라스", "McKitrick": "므크키트리크", "McKitterick": "므크키트테리크", "McKittrick": "므크키트트리크", "McNulty": "맥널티", "McPhee": "므크프히", "McPherson": "맥퍼슨", "McWha": "므크하", "Mccausland": "므크코스란드", "Mckitrick": "므크키트리크", "Mcnulty": "므크눌티", "Medhurst": "메드후를스트", "Medley": "메드리", "Meerendonk": "미렌돈크", "Megan": "메간", "Mehitable": "메히타브레", "Meier": "메에", "Meili": "메리", "Meilin": "메린", "Melchior": "멜쵸", "Meline": "메리네", "Melisende": "메리센데", "Melissa": "메리스사", "Melvin": "멜빈", "Membertou": "멤베를투", "Menno": "멘노", "Menzak": "멘자크", "Mercy": "메를키", "Mere": "메레", "Meringe": "메린제", "Merritt": "메를리트트", "Metro": "메트로", "Metselaer": "메트세레", "Metz": "메트즈", "Meyer": "미에", "Meyers": "미에스", "Meynell": "미넬", "Meyrinck": "미린크", "Mi'kMaq": "미크마크", "Michael": "마이클", "Michel": "미첼", "Michell": "미첼", "Michelle": "미첼레", "Michiels": "미칠스", "Micmac": "미크마크", "MicmacAbenaki": "미크마카베나키", "Middleton": "미드드레톤", "Mikhialo": "미크햐로", "Mikmaq": "미크마크", "Milders": "밀데스", "Mildred": "밀드레드", "Miles": "미레스", "Millar": "밀라", "Miller": "밀레", "Millicent": "밀리센트", "Minidora": "미니도라", "Miriam": "미럄", "Miss": "미스스", "Mitchell": "미트크헬", "Mitford": "미트포드", "Molly": "몰리", "Montbeliard": "몬트베랴드", "Montfort": "몬트포트", "Montgomery": "몽고메리", "Morganstern": "모를간스테", "Morgenstern": "모를겐스테", "Morin": "모린", "Morningstar": "모를닝스타", "Morris": "모를리스", "Mortagne": "모를타그네", "Mortagne-au-Perche": "모를타그니우페를크헤", "Morton": "모를톤", "Moses": "모지스", "Moss": "모스스", "Mother": "모세", "Moulson": "물손", "Mrs": "므를스", "Mueller": "뮐러", "Muldrew": "물드레", "Mulvahill": "물바힐", "Mulvihill": "멀비힐", "Munroe": "문로", "Muriel": "뮤리얼", "Murphy": "무를프히", "Murray": "무를레", "Musgrave": "무스그라베", "Mylin": "미린", "Mynno": "민노", "Mömpelgard": "므므펠가드", "Müller": "므를레", "N": "느", "NEEDHAM": "니드함", "NEIL": "닐", "Nakoly": "나코리", "Nancy": "낸시", "Nathan": "네이선", "Nathaniel": "너새니얼", "Navarra": "나바를라", "Neal": "닐", "Neb": "네브", "Neeb": "니브", "Needham": "니드함", "Neelkin": "닐킨", "Neff": "네프프", "Nehemiah": "네헤먀", "Neil": "닐", "Nellie": "넬리", "Nelson": "넬손", "Neukomm": "뉴콤", "Neustria": "뉴스트랴", "Nicholas": "니초라스", "Nichols": "니촐스", "Nicklos": "니크로스", "Nickolaus": "니코로스", "Nicolas": "니코라스", "Niklaus": "니크로스", "Nissley": "니스스리", "Nln": "느를느", "Nn": "느느", "Noah": "노", "Noble": "노브레", "Nodes": "노데스", "Noel": "놀", "Noelle": "노엘", "Nogent-le-Rotrou": "노젠트레로트루", "Norah": "노라", "Norman": "노먼", "Northumberland": "노를트훔베를란드", "Norval": "노를발", "Norwood": "노를우드", "Notinghamshire": "노팅함시레", "Nulty": "눌티", "Nykyla": "니키라", "Näf": "느프", "O": "오", "O'Brian": "오브랸", "O'Brien": "오브린", "ODonald": "오도날드", "ORMILL": "오를밀", "Obadiah": "오바댜", "Obrien": "오브린", "Odey": "오디", "Oerlemans": "오를레만스", "Of": "오프", "Old": "올드", "Olive": "오리베", "Oliver": "오리베", "Olivia": "오리뱌", "Olivine": "오리비네", "Ona": "오나", "Ophelia": "오페랴", "Orbe": "오를베", "Orchard": "오를크하드", "Orendorf": "오렌도프", "Orlando": "오를란도", "Ormand": "오를만드", "Osborn": "오스보", "Osbourne": "오스부를네", "Oscar": "오스카", "Osli": "오스리", "Ostashek": "오스타세크", "Oswald": "오스왈드", "Ould": "울드", "Oulds": "울드스", "Overmeyer": "오베를미에", "P": "프", "PARE": "파레", "PFAUTZ": "프포트즈", "PUENTER": "푼테", "Palatine": "파라티네", "Pamina": "파미나", "Paraska": "파라스카", "Pare": "파레", "Parent": "파렌트", "Paret": "파레트", "Park": "파크", "Parker": "파를케", "Parks": "파를크스", "Parkyns": "파를킨스", "Paré": "파", "Patching": "파트크힝", "Patrick": "패트릭", "Paul": "폴", "Paulet": "포레트", "Paulett": "포레트트", "Pauline": "포리네", "Paulus": "포루스", "Payne": "페네", "Pearl": "피", "Peck": "페크", "Peckham": "페크함", "Peeter": "피테", "Peggy": "페그기", "Peletiah": "펠레타이아", "Pembridge": "펨브리드게", "Pembrugge": "펨브루그게", "Pepin": "페핀", "Perche": "페를크헤", "Percy": "퍼시", "Perkes": "페를케스", "Perkins": "페를킨스", "Perolz": "페롤즈", "Perrette": "페를레트테", "Perry": "페리", "Peter": "피터", "Phebe": "피비", "Phernambucq": "페를남부크크", "Phiffeny": "피프페니", "Philappa": "피라프파", "Philip": "피리프", "Philipp": "피리프프", "Philippa": "피리프파", "Philippe": "피리프페", "Philippine": "피리프피네", "Phillip": "필리프", "Phillipp": "필리프프", "Phyllis": "필리스", "Pierre": "피를레", "Pieter": "피테", "Pieters": "피테스", "Pietersdr": "피테를스드르", "Pike": "피케", "Pious": "표우스", "Plantagenet": "플랜태저넷", "Plante": "프란테", "Pomerleau": "포메를리우", "Ponthieu": "폰시우", "Poole": "푸레", "Porter": "포터", "Portugal": "포를투갈", "Postling": "포스트링", "Poulin": "푸린", "Pounder": "푼데", "Pratt": "프라트트", "Preston": "프레스톤", "Prince": "프린스", "Priscilla": "프리스킬라", "Prisque": "프리스쿠", "Proc": "프로크", "Provence": "프로벤세", "Pudley": "푸드리", "Putnam": "푸트남", "Pye": "피에", "Queen": "킨", "Quick": "키크", "Quirion": "키룐", "R": "르", "RALPH": "랄프", "REGEL": "레젤", "RENNEBAUGH": "렌네보", "REYNOLDS": "레이놀즈", "RICHARD": "리처드", "RUEGG": "루그그", "RUSSELL": "루스셀", "Rachael": "라첼", "Rachel": "레이철", "Racine": "라시네", "Rae": "레이", "Rahn": "라", "Raimond": "레몬드", "Ralph": "랄프", "Ramírez": "람레즈", "Randall": "란달", "Randolpe": "란돌페", "Rannelegh": "란네레", "Rapp": "라프프", "Rawlingson": "로링손", "Rawlinson": "롤린슨", "Ray": "레", "Raynor": "레이너", "Read": "리드", "Reb": "레브", "Rebecca": "리베카", "Reginald": "레지날드", "Regula": "레구라", "Rehm": "레", "Reichard": "레차드", "Reinhard": "렌하드", "Rememberance": "레멤베란세", "Rena": "레나", "Renaud": "레노드", "Rene": "레네", "Restaurador": "레스토라도", "Reuben": "류벤", "Rev": "목사", "Reverend": "레베렌드", "Reyney": "리니", "Reynolds": "레이놀즈", "Reynolds\\Runnels": "리놀드스룬넬스", "Rheemst": "를힘스트", "Rice": "리세", "Richard": "리처드", "Richards": "리차를드스", "Richardson": "리처드슨", "Rijck": "리즈크크", "Rijcken": "리즈크켄", "Rijcksen": "리즈크크센", "Rijicken": "리지켄", "Riley": "리리", "Rinsler": "린스레", "Rising": "리싱", "Robert": "로버트", "Roberts": "로베를트스", "Robertson": "로베를트손", "Robyn": "로빈", "Rockhill": "로크힐", "Rodrigue": "로드리구", "Roeloff": "로로프프", "Roelt": "롤트", "Roger": "로제", "Rogers": "로제스", "Rollet": "롤레트", "Roman": "로만", "Roos": "루스", "Ros": "로스", "Rosalie": "로사리", "Rosanna": "로잔나", "Rose": "로세", "Rosemary": "로즈메리", "Rosia": "로샤", "Rosina": "로시나", "Ross": "로스스", "Rossiter": "로스시테", "Rosswood": "로스스우드", "Roth": "로트", "Rothilde": "로실데", "Rotrude": "로트루데", "Rouse": "루세", "Roussel": "루스셀", "Rowland": "로란드", "Rowlinson": "로린손", "Rowse": "로세", "Roy": "로", "Roydon": "로돈", "Roydon-Atwater": "로도나트와테", "Royton": "로톤", "Rozamond": "로자몬드", "Rudd": "루드드", "Rudoff": "루도프프", "Rudolf": "루돌프", "Rudolph": "루돌프", "Ruegg": "루그그", "Ruehti": "루흐티", "Rufs": "루프스", "Ruggin": "루그긴", "Runnels": "룬넬스", "Rushall": "루살", "Russell": "루스셀", "Russerin": "루스세린", "Rutgers": "루트게스", "Ruth": "루스", "Rutt": "루트트", "Ruys": "뤼스", "Rychard": "리차드", "Ryley": "리리", "Rysen": "리센", "S": "스", "SHEFFIELD": "세프필드", "SMITH": "스미스", "SNEDEKER": "스네데케", "SUSAN": "수전", "SYDAY": "시데", "Sabina": "사비나", "Sabraham": "사브라함", "Sabrina": "사브리나", "Sachem": "사쳄", "Sage": "사제", "Saint": "센트", "Salamy": "사라미", "Sale": "사레", "Sally": "살리", "Salop": "사로프", "Samon": "사몬", "Samuel": "새뮤얼", "Sancha": "산차", "Sancho": "산초", "Sandeby": "산데비", "Sanders": "산데스", "Santmann": "산트만", "Sanual": "사누알", "Sara": "사라", "Sarah": "세라", "Sardus": "사를두스", "Sargeant": "사를긴트", "Sargent": "사를겐트", "Sarvis": "사비스", "Saultman": "솔트만", "Saunders": "손데스", "Savage": "사바제", "Savoie": "사보에", "Savoy": "사보", "Scales": "스카레스", "Scharger": "사를게", "Schlappech": "스라프페치", "Schneiter": "스네테", "Schneitter": "스네트테", "Schnitker": "스니트케", "Schoni": "소니", "Schooley": "수리", "Schurch": "셔치", "Schönwetter": "슨에트테", "Sean": "션", "Searle": "시를레", "Searles": "설스", "Sebastian": "세바스탼", "Sedore": "세도어", "Sena": "세나", "Senlis": "센리스", "Serena": "세레나", "Sergent": "세를겐트", "Seth": "세스", "Sewallis": "세왈리스", "Shackleton": "사크레톤", "Shannon": "산논", "Sharlon": "사를론", "Sheffield": "세프필드", "Shepherd": "세페드", "Sherer": "세레", "Sheriff": "세리프프", "Sherk": "셔크", "Sherman": "세를만", "Shirk": "시크", "Shirley": "셜리", "Short": "소트", "Siboutszen": "시부트스젠", "Sidney": "시드니", "Sieber": "시베", "Sijbet": "시즈베트", "Sikking": "시크킹", "Simmons": "심몬스", "Simon": "사이먼", "Sinclair": "신크레", "Sinthy": "신시", "Sir": "경(Sir)", "Sisson": "시슨", "Skaife": "스케페", "Skerrels": "스케를렐스", "Small": "스말", "Smith": "스미스", "Smithson": "스미스손", "Smyth": "스미스", "Smythe": "스미세", "Snedeger": "스네데제", "Snedeker": "스네데케", "Solomon": "솔로몬", "Somerset": "소메를세트", "Sonder": "손데", "Sophia": "소피아", "Sophie": "소피", "Sophrona": "소프로나", "Southwell-Atwater": "수스엘라트와테", "Spangler": "스팡레", "Speed": "스피드", "Spencer": "스펜서", "Spengler": "스펭레", "Squier": "스퀴에", "Sr": "시니어", "St": "스트", "Stanis": "스타니스", "Stanley": "스탄리", "Starkes": "스타를케스", "Starkey": "스타를키", "Staunton": "스톤톤", "Stebbing": "스테브빙", "Stedelmann": "스테델만", "Steele": "스티레", "Steevens": "스티벤스", "Steihouwen": "스테후엔", "Stein": "스텐", "Steiner": "스타이너", "Stella": "스텔라", "Stephen": "스티븐", "Stephens": "스테펜스", "Stevens": "스테벤스", "Stockman": "스토크만", "Stoffel": "스토프펠", "Stoneham": "스토네함", "Stoner": "스토너", "Stonor": "스토노", "Story": "스토리", "Straelsman": "스트렐스만", "Straitsman": "스트레트스만", "Straitsmans": "스트레트스만스", "Strauss": "스트로스스", "Street": "스트리트", "Strong": "스트롱", "Struebi": "스트루비", "Strynadka": "스트리나드카", "Stuttgart": "스투트트가트", "Styntie": "스틴티", "Styntje": "스틴트제", "Sully": "설리", "Sunnah": "순나", "Susan": "수전", "Susanna": "수재나", "Susannah": "수재나", "Swabia": "스와뱌", "Swann": "스완", "Swarr": "스와르", "Sweete": "스이테", "Swifte": "스이프테", "Swynford": "스윈퍼드", "Swynford-Plantagenet": "스인포를드프란타제네트", "Syday": "시데", "Sylvain": "실벤", "Sylvester": "실베스터", "Symons": "시몬스", "T": "트", "THOMAS": "토머스", "TOWE": "토에", "Taillefer": "텔레페", "Tamar": "타마", "Tancke": "탄케", "Tebb": "테브브", "Temperance": "템페란세", "Ter": "테", "Teresa": "테레사", "Terrence": "테를렌세", "Terringham": "테를링함", "Teunis": "튜니스", "Teuntje": "튠트제", "Thaddeus": "사드듀스", "The": "세", "Theiss": "세스스", "Theobold": "세오볼드", "Theodorus": "세오도루스", "Theophilus": "세오피루스", "Theresa": "세레사", "Therese": "세레세", "Theunis": "슈니스", "Theunisen": "슈니센", "Thomae": "소메", "Thomas": "토머스", "Thomaszen": "소마스젠", "Thomazine": "소마지네", "Thomes": "소메스", "Thompson": "톰프슨", "Thomson": "솜손", "Thorndon": "소를느돈", "Thressa": "스레스사", "Timothy": "티모시", "Tobias": "토뱌스", "Todd": "토드드", "Tomkyns": "톰킨스", "Tompkins": "톰프킨스", "Torrance": "토를란세", "Tory": "토리", "Towner": "토네", "Towthby": "토스비", "Traut": "트로트", "Travers": "트라베스", "Treasurer": "트리수레", "Trenham": "트렌함", "Trennum": "트레넘", "Trenvathen": "트렌바센", "Trepanier": "트레파니", "Trevett": "트레베트트", "Trier": "트리", "Trijn": "트리지", "Tristram": "트리스트람", "Trépagnez": "트를파그네즈", "Trépagnié": "트를파그니", "Trépanier": "트를파니", "Tuenisz": "투니스즈", "Tufts": "투프트스", "Turner": "터너", "Tybott": "티보트트", "Tyringham": "티링함", "Tyrrell": "티를렐", "U.E.L": "울", "UMN": "움", "Uli": "우리", "Ulrich": "울리히", "Unk": "운크", "Unknown": "운논", "Urraca": "우를라카", "Ursula": "우를수라", "V": "브", "VANREEMST": "반림스트", "VEILLEUX": "베이외", "VERNON": "베를논", "VI": "비", "VII": "비이", "VIII": "비이이", "Vachon": "바촌", "Valance": "바란세", "Valentine": "바렌티네", "Vallee": "발리", "Van": "반", "VanKleef": "반크리프", "Vander": "반데", "Vannest": "반네스트", "Vantilburg": "반틸부그", "Vasteed": "바스티드", "Veilleux": "베이외", "Velma": "벨마", "Venie": "베니", "Verena": "베레나", "Verieul": "베리울", "Verna": "베를나", "Verona": "베로나", "Veronica": "베로니카", "Veronika": "베로니카", "Verreau": "베를리우", "Vevy": "베비", "Vicaris": "비카리스", "Vicars": "비카스", "Victor": "비크토", "Victoria": "빅토리아", "Ville": "빌레", "Vina": "비나", "Vinson": "빈손", "Vinzgau": "빈즈고", "Violet": "뵤레트", "Violetta": "뵤레트타", "Visconti": "비스콘티", "Vital": "비탈", "Vlechtenstyn": "브레츠텐스틴", "Vleckenstyn": "브레켄스틴", "Vliet": "브리트", "Vogelmann": "보젤만", "Voll": "볼", "Vollenweiderr": "볼렌에데", "Vollenwieder": "볼렌이데", "Von": "폰", "VonWuerttemberg": "본우를트템베그", "Vrene": "브레네", "W": "으", "WAEBER": "에베", "WHITRENT": "히트렌트", "WIFE": "이페", "WILBOURNE": "일부를네", "WILLIAM": "윌리엄", "WILLIAMSON": "일럄손", "WYDLER": "이드레", "WYMANN": "이만", "Wade": "와데", "Waeber": "에베", "Waelchli": "엘츠리", "Waert": "에트", "Waitt": "에트트", "Waldeshof": "왈데소프", "Waldren": "왈드렌", "Walker": "왈케", "Wallace": "왈라세", "Wallja": "왈를자", "Walpurga": "왈푸를가", "Walsh": "왈시", "Walter": "월터", "Walthers": "왈세스", "Wanda": "완다", "Ward": "와드", "Warehurst": "와레후를스트", "Warner": "와를네", "Warr": "와", "Warren": "와를렌", "Warsted": "와를스테드", "Warwick": "와를이크", "Warwickshire": "와를이크시레", "Wasel": "와셀", "Washington": "와싱톤", "Wasserfluh": "와스세를프루", "Wasylena": "와시레나", "Wathen": "와센", "Wayne": "웨인", "Weaver": "이베", "Webber": "에브베", "Weber": "베버", "Wees": "이스", "Weese": "위스", "Weil": "엘", "Weingartner": "엔가를트네", "Weiss": "에스스", "Welbe": "엘베", "Weller": "엘레", "Wellington": "엘링톤", "Wendel": "엔델", "Werner": "에를네", "Wert": "에트", "Wesley": "에스리", "West": "에스트", "Weyntie": "인티", "Whart": "하트", "Wheeler": "히레", "White": "히테", "Whitebred": "히테브레드", "Whiterent": "히테렌트", "Whitgift": "히트기프트", "Whitmore": "히트모레", "Whittingham": "휘팅엄", "Whitworth": "히트오를트흐", "Widler": "이드레", "Widman": "이드만", "Wilcockes": "윌콕스", "Wildcat": "일드카트", "Wilfred": "일프레드", "Wilhelm": "빌헬름", "Willam": "일람", "Willard": "일라드", "Willem": "일렘", "Willemszen": "일렘스젠", "William": "윌리엄", "Williams": "일럄스", "Williamson": "일럄손", "Willie": "일리", "Willoughby": "일루그비", "Willson": "일를손", "Wilma": "일마", "Wilmot": "일모트", "Wilson": "일손", "Wiltsee": "일트시", "Wiltshire": "일트스히레", "Wiltsie": "일트시", "Winchester": "인체스테", "Winifred": "이니프레드", "Winston": "인스톤", "Winstone": "인스토네", "Winter": "인테", "Winters": "윈터스", "Wolfgang": "올프강", "Wollaston": "올라스톤", "Wollaton": "올라톤", "Woman": "오만", "Wood": "우드", "Woodman": "우드만", "Woolhouse": "울후세", "Wooster": "우스테", "Wordsworth": "워즈워스", "Worrell": "오를렐", "Woutersz": "우테를스즈", "Wouterszen": "우테를스젠", "Wright": "라이트", "Wrighte": "리그테", "Wufe": "우페", "Wurtemberg": "우를템베그", "Wurttemberg": "우를트템베그", "Wurttemburg": "우를트템부그", "Wyant": "이안트", "Wymann": "이만", "Wymond": "이몬드", "Wyntje": "인트제", "Wysler": "이스레", "Wäber": "베", "Württemberg": "르트템베그", "Württemberg-Urach": "르트템베를구라치", "YORKS": "오를크스", "Yarena": "아레나", "Yorkshire": "오를크스히레", "Young": "영", "Yumi": "유미", "Yvonne": "본네", "ZIEGLER": "지그레", "ZUBLIN": "주브린", "ZUEBLIN": "주브린", "Zachary": "자차리", "Zardus": "자를두스", "Zehrung": "제흐룽", "Zimmerman": "짐메를만", "Zoe": "조", "Zublin": "주브린", "Zwingli": "즈잉리", "a": "아", "and": "안드", "consort": "콘소트", "consorte": "콘소를테", "d'Andelot": "단데로트", "daughter": "도그테", "de": "드", "deOlney": "데올니", "deVere": "데베레", "deWit": "데이트", "del'Aubespin": "데로베스핀", "der": "데", "dit": "디트", "du": "두", "el": "엘", "en": "엔", "frau": "프로", "gen": "젠", "heini": "헤니", "i": "1세", "jared": "자레드", "johannes": "요하네스", "l'Aigle": "레그레", "la": "라", "le": "레", "m": "므", "of": "오브", "reina": "레나", "rey": "리", "seymour": "시무", "the": "세", "to": "토", "und": "운드", "van": "반", "von": "폰", "y": "으"};
+const KO_COUNTRY = {"Canada":"캐나다","United States":"미국","England":"잉글랜드","Scotland":"스코틀랜드","Wales":"웨일스","United Kingdom":"영국","Ireland":"아일랜드","Northern Ireland":"북아일랜드","Switzerland":"스위스","Germany":"독일","France":"프랑스","Netherlands":"네덜란드","Belgium":"벨기에","Luxembourg":"룩셈부르크","Austria":"오스트리아","Spain":"스페인","Italy":"이탈리아","Denmark":"덴마크","Norway":"노르웨이","Sweden":"스웨덴","Poland":"폴란드","Ukraine":"우크라이나","Russia":"러시아","Hungary":"헝가리","Jordan":"요르단","South Korea":"대한민국","Singapore":"싱가포르","India":"인도","Australia":"호주","New Zealand":"뉴질랜드","Czechia":"체코","Portugal":"포르투갈","Israel":"이스라엘","Jersey":"저지","Isle of Man":"맨섬","Bermuda":"버뮤다","Finland":"핀란드","Iceland":"아이슬란드","Greece":"그리스","Romania":"루마니아"};
+const cName = c => (LANG === "ko" && KO_COUNTRY[c]) || c;
+function koizeName(name){
+  return name.split(/\s+/).map(t => {
+    const bare = t.replace(/^[("']+|[)",']+$/g, "");
+    const k = KO_NAMES[bare];
+    return k ? t.replace(bare, k) : t;
+  }).join(" ");
+}
+Object.values(P).forEach(p => { p._ko = koizeName(p.name); p._kog = p.given ? koizeName(p.given) : ""; p._kos = p.surname ? (KO_NAMES[p.surname] || p.surname) : "";
+  if (p.country === "South Korea" && p._kos && p._kog) p._ko = p._kos + p._kog; });
+const nmOf = p => (LANG === "ko" && p._ko) || p.name;
+const KOMON = {JAN:1,FEB:2,MAR:3,APR:4,MAY:5,JUN:6,JUL:7,AUG:8,SEP:9,OCT:10,NOV:11,DEC:12};
+function fmtDate(d){
+  if (!d || LANG !== "ko") return d;
+  let s = d.trim();
+  let m = s.match(/^(\d{1,2})\s+(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)[A-Za-z]*\s+(\d{3,4})$/i);
+  if (m) return `${m[3]}년 ${KOMON[m[2].slice(0,3).toUpperCase()]}월 ${+m[1]}일`;
+  m = s.match(/^(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)[A-Za-z]*\s+(\d{3,4})$/i);
+  if (m) return `${m[2]}년 ${KOMON[m[1].slice(0,3).toUpperCase()]}월`;
+  m = s.match(/^(ABT|EST|CAL|abt|est)\.?\s+(\d{3,4})$/);
+  if (m) return `${m[2]}년경`;
+  m = s.match(/^(\d{3,4})$/);
+  if (m) return `${m[1]}년`;
+  return s;
+}
 function genLabel(g){
   if (LANG === "ko") return g === 0 ? "본인" : g === 1 ? "부모" : g === 2 ? "조부모" : g === 3 ? "증조부모" : g === 4 ? "고조부모" : g + "대조";
   return ["Focus","Parents","Grandparents","Great-grandparents","2× great-grandparents","3× great-grandparents"][g] || (g-2) + "× great-grandparents";
@@ -496,8 +523,8 @@ function drawOTD(){
   const KOVERB = {"was born":"태어났습니다","married":"결혼했습니다","passed away":"별세했습니다"};
   el.innerHTML = `<b>📅 ${LANG === "ko" ? "오늘의 가족 역사" : "On this day"} (${today}):</b>` + hits.sort((a,b)=>a.y-b.y).slice(0,6).map(h => {
     const ago = yNow - h.y;
-    const nm2 = h.pid2 ? ` &amp; <span class="l" data-p="${h.pid2}">${esc(P[h.pid2].name)}</span>` : "";
-    if (LANG === "ko") return `<div class="otd-item">• <span class="l" data-p="${h.pid}">${esc(P[h.pid].name)}</span>${nm2} — <b>${h.y}년</b>${h.place ? " " + esc(h.place) + "에서" : ""} ${KOVERB[h.verb] || h.verb} (${ago}년 전 오늘)</div>`;
+    const nm2 = h.pid2 ? ` &amp; <span class="l" data-p="${h.pid2}">${esc(nmOf(P[h.pid2]))}</span>` : "";
+    if (LANG === "ko") return `<div class="otd-item">• <span class="l" data-p="${h.pid}">${esc(nmOf(P[h.pid]))}</span>${nm2} — <b>${h.y}년</b>${h.place ? " " + esc(h.place) + "에서" : ""} ${KOVERB[h.verb] || h.verb} (${ago}년 전 오늘)</div>`;
     return `<div class="otd-item">• <span class="l" data-p="${h.pid}">${esc(P[h.pid].name)}</span>${nm2} ${h.verb} ${h.y === 0 ? "" : "in <b>" + h.y + "</b>"} — ${ago} years ago today${h.place ? " in " + esc(h.place) : ""}.</div>`;
   }).join("");
   el.addEventListener("click", e => { const t = e.target.closest("[data-p]"); if (t) openProfile(t.dataset.p); });
@@ -527,7 +554,7 @@ function cardSVG(pid, x, y, isFocus){
   const docd = DOCUMENTED.has(pid) ? " 📷" : "";
   const mil = p.military ? " 🎖" : "";
   const col = isFocus ? "var(--gold)" : (p.directAncestor ? "var(--green2)" : "#b9ad92");
-  let nm = p.name; if (nm.length > 26) nm = nm.slice(0, 25) + "…";
+  let nm = nmOf(p); if (nm.length > 26) nm = nm.slice(0, 25) + "…";
   return `<g class="pcard${isFocus ? " focus" : ""}${unproven ? " unproven" : ""}" data-p="${pid}" transform="translate(${x},${y})">
     <rect class="bg" width="${COLW}" height="${CARDH}" rx="9"></rect>
     <rect width="4" height="${CARDH}" rx="2" fill="${col}"></rect>
@@ -588,7 +615,9 @@ function renderHorizontal(){
   }
   $("#treewrap").innerHTML = `<svg id="treesvg" width="${totalW}" height="${totalH+40}" viewBox="0 0 ${totalW} ${totalH+40}" xmlns="http://www.w3.org/2000/svg">${lines}${leftcol}${svg}</svg>`;
   const fp = P[FOCUS];
-  $("#crumb").innerHTML = `Centered on <b>${esc(fp.name)}</b> ${flagOf(fp)} — ${sibs.length} sibling${sibs.length===1?"":"s"}, ${kids.length} child${kids.length===1?"":"ren"} shown. Click any card to open a profile, then “Center tree”.`;
+  $("#crumb").innerHTML = LANG === "ko"
+    ? `<b>${esc(nmOf(fp))}</b> ${flagOf(fp)} 중심 — 형제자매 ${sibs.length}명, 자녀 ${kids.length}명 표시. 카드를 클릭하면 상세 정보가 열립니다.`
+    : `Centered on <b>${esc(fp.name)}</b> ${flagOf(fp)} — ${sibs.length} sibling${sibs.length===1?"":"s"}, ${kids.length} child${kids.length===1?"":"ren"} shown. Click any card to open a profile, then “Center tree”.`;
   $("#treesvg").addEventListener("click", e => { const t = e.target.closest(".pcard"); if (t) openProfile(t.dataset.p); });
 }
 
@@ -652,7 +681,7 @@ function renderVertical(){
 function vcard(pid, x, y, CW, CH, isFocus){
   const p = P[pid]; if (!p) return "";
   const col = isFocus ? "var(--gold)" : (p.directAncestor ? "var(--green2)" : "#b9ad92");
-  let nm = p.name; if (nm.length > 20) nm = nm.slice(0, 19) + "…";
+  let nm = nmOf(p); if (nm.length > 20) nm = nm.slice(0, 19) + "…";
   return `<g class="pcard${isFocus ? " focus" : ""}${!p.connected ? " unproven" : ""}" data-p="${pid}" transform="translate(${x},${y})">
     <rect class="bg" width="${CW}" height="${CH}" rx="8"></rect><rect width="${CW}" height="4" rx="2" fill="${col}"></rect>
     <text class="nm" x="9" y="22" style="font-size:11.5px">${esc(nm)}</text>
@@ -687,7 +716,7 @@ function renderFan(){
       const tx = cx + rm * Math.cos(mid), ty = cy - rm * Math.sin(mid);
       let rot = 90 - mid * 180 / Math.PI;
       if (rot > 90) rot -= 180;
-      let nm = (p.given ? p.given.split(" ")[0] : "") + " " + (p.surname || "");
+      let nm = LANG === "ko" ? ((p._kog ? p._kog.split(" ")[0] : "") + " " + (p._kos || "")) : ((p.given ? p.given.split(" ")[0] : "") + " " + (p.surname || ""));
       const maxc = g >= 4 ? 12 : (g === 3 ? 16 : 20);
       if (nm.length > maxc) nm = nm.slice(0, maxc - 1) + "…";
       const fsz = g >= 4 ? 9 : (g === 3 ? 10.5 : 12);
@@ -699,15 +728,12 @@ function renderFan(){
   }
   const f = P[FOCUS];
   svg += `<g class="pcard focus" data-p="${FOCUS}"><circle cx="${cx}" cy="${cy}" r="${r0 - 10}" fill="#fdf9ec" stroke="var(--gold)" stroke-width="2.5"></circle>
-    <text x="${cx}" y="${cy - 8}" text-anchor="middle" font-size="13" fill="var(--ink)">${esc(f.given ? f.given.split(" ")[0] : f.name)}</text>
-    <text x="${cx}" y="${cy + 9}" text-anchor="middle" font-size="12" fill="var(--ink)">${esc(f.surname || "")}</text>
+    <text x="${cx}" y="${cy - 8}" text-anchor="middle" font-size="13" fill="var(--ink)">${esc(LANG === "ko" ? (f._kog ? f._kog.split(" ")[0] : f._ko) : (f.given ? f.given.split(" ")[0] : f.name))}</text>
+    <text x="${cx}" y="${cy + 9}" text-anchor="middle" font-size="12" fill="var(--ink)">${esc(LANG === "ko" ? (f._kos || "") : (f.surname || ""))}</text>
     <text x="${cx}" y="${cy + 26}" text-anchor="middle" font-size="10.5" fill="var(--ink2)">${yrs(f)}</text></g>`;
   // legend
-  svg += `<g font-size="11" fill="var(--ink2)">
-    <rect x="20" y="16" width="11" height="11" rx="2" fill="${shade(HUES[0], .85)}"></rect><text x="36" y="26">Father's father's line</text>
-    <rect x="20" y="34" width="11" height="11" rx="2" fill="${shade(HUES[1], .85)}"></rect><text x="36" y="44">Father's mother's line</text>
-    <rect x="20" y="52" width="11" height="11" rx="2" fill="${shade(HUES[2], .85)}"></rect><text x="36" y="62">Mother's father's line</text>
-    <rect x="20" y="70" width="11" height="11" rx="2" fill="${shade(HUES[3], .85)}"></rect><text x="36" y="80">Mother's mother's line</text></g>`;
+  const FANL = LANG === "ko" ? ["친조부 계열","친조모 계열","외조부 계열","외조모 계열"] : ["Father's father's line","Father's mother's line","Mother's father's line","Mother's mother's line"];
+  svg += `<g font-size="11" fill="var(--ink2)">${FANL.map((l, i) => `<rect x="20" y="${16 + i*18}" width="11" height="11" rx="2" fill="${shade(HUES[i], .85)}"></rect><text x="36" y="${26 + i*18}">${l}</text>`).join("")}</g>`;
   $("#treewrap").innerHTML = `<svg id="treesvg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">${svg}</svg>`;
   hookTreeClicks();
   crumb();
@@ -733,11 +759,11 @@ function renderList(){
   const countries = Object.keys(DATA.meta.stats.countries);
   $("#treewrap").innerHTML = `
     <div id="listctl">
-      <input id="lq" placeholder="Filter by name or place…" style="flex:1;min-width:180px">
-      <select id="lsurn"><option value="">All surnames</option>${topSurn.map(s => `<option>${esc(s)}</option>`).join("")}</select>
-      <select id="lctry"><option value="">All countries</option>${countries.map(c => `<option>${esc(c)}</option>`).join("")}</select>
-      <label><input type="checkbox" id="ldir"> direct ancestors only</label>
-      <label><input type="checkbox" id="lmil"> military only</label>
+      <input id="lq" placeholder="${LANG === "ko" ? "이름 또는 장소로 검색…" : "Filter by name or place…"}" style="flex:1;min-width:180px">
+      <select id="lsurn"><option value="">${LANG === "ko" ? "모든 성씨" : "All surnames"}</option>${topSurn.map(s => `<option value="${esc(s)}">${LANG === "ko" ? esc(KO_NAMES[s] || s) : esc(s)}</option>`).join("")}</select>
+      <select id="lctry"><option value="">${LANG === "ko" ? "모든 국가" : "All countries"}</option>${countries.map(c => `<option value="${esc(c)}">${esc(cName(c))}</option>`).join("")}</select>
+      <label><input type="checkbox" id="ldir"> ${LANG === "ko" ? "직계 조상만" : "direct ancestors only"}</label>
+      <label><input type="checkbox" id="lmil"> ${LANG === "ko" ? "군 복무자만" : "military only"}</label>
       <span id="lcount" style="color:var(--ink2)"></span>
     </div><div id="ltbl"></div>`;
   const redraw = () => {
@@ -754,17 +780,17 @@ function renderList(){
       const vb = key === "nm" ? b.name : key === "by" ? ((b.birth && b.birth.year) || 99999) : key === "dy" ? ((b.death && b.death.year) || 99999) : (b.generation === undefined ? 999 : b.generation);
       return (va < vb ? -1 : va > vb ? 1 : 0) * dir;
     });
-    $("#lcount").textContent = rows.length.toLocaleString() + " people";
+    $("#lcount").textContent = rows.length.toLocaleString() + (LANG === "ko" ? "명" : " people");
     const shown = rows.slice(0, 400);
     $("#ltbl").innerHTML = `<table class="ltable"><thead><tr>
-        <th data-k="nm">Name</th><th data-k="by">Born</th><th>Birthplace</th><th data-k="dy">Died</th><th data-k="gen">Gen</th><th>Notes</th></tr></thead>
-      <tbody>${shown.map(p => `<tr><td><span class="plink" data-p="${p.id}">${esc(p.name)}</span></td>
+        <th data-k="nm">${LANG === "ko" ? "이름" : "Name"}</th><th data-k="by">${LANG === "ko" ? "출생" : "Born"}</th><th>${LANG === "ko" ? "출생지" : "Birthplace"}</th><th data-k="dy">${LANG === "ko" ? "사망" : "Died"}</th><th data-k="gen">${LANG === "ko" ? "세대" : "Gen"}</th><th>${LANG === "ko" ? "표시" : "Notes"}</th></tr></thead>
+      <tbody>${shown.map(p => `<tr><td><span class="plink" data-p="${p.id}">${esc(nmOf(p))}</span></td>
         <td>${(p.birth && p.birth.year) || ""}</td>
         <td>${p.country ? flagSVG(p.country, 15, 10) : ""} ${esc(((p.birth && p.birth.place) || "")).slice(0, 48)}</td>
         <td>${(p.death && p.death.year) || ""}</td>
         <td>${p.directAncestor ? '<span title="direct ancestor">★' + (p.generation !== undefined ? p.generation : "") + '</span>' : ""}</td>
         <td>${p.military ? "🎖" : ""}${DOCUMENTED.has(p.id) ? " 📷" : ""}${!p.connected ? " ⚠" : ""}</td></tr>`).join("")}</tbody></table>
-      ${rows.length > 400 ? `<div style="padding:10px;color:var(--ink2);font-size:13px">Showing first 400 of ${rows.length.toLocaleString()} — refine the filters to narrow down.</div>` : ""}`;
+      ${rows.length > 400 ? `<div style="padding:10px;color:var(--ink2);font-size:13px">${LANG === "ko" ? `전체 ${rows.length.toLocaleString()}명 중 400명 표시 — 필터로 좁혀 보세요.` : `Showing first 400 of ${rows.length.toLocaleString()} — refine the filters to narrow down.`}</div>` : ""}`;
     $("#ltbl").querySelectorAll(".plink").forEach(el => el.onclick = () => openProfile(el.dataset.p));
     $("#ltbl").querySelectorAll("th[data-k]").forEach(th => th.onclick = () => {
       listSort = {key: th.dataset.k, dir: listSort.key === th.dataset.k ? -listSort.dir : 1}; redraw();
@@ -772,7 +798,9 @@ function renderList(){
   };
   ["lq","lsurn","lctry","ldir","lmil"].forEach(id => $("#" + id).addEventListener("input", redraw));
   redraw();
-  $("#crumb").innerHTML = `Browsing all ${Object.keys(P).length.toLocaleString()} people. ★ = direct ancestor (number = generations back), 🎖 = military, 📷 = documents, ⚠ = detached/unproven.`;
+  $("#crumb").innerHTML = LANG === "ko"
+    ? `전체 ${Object.keys(P).length.toLocaleString()}명 목록. ★ = 직계 조상(숫자는 세대 수), 🎖 = 군 복무, 📷 = 기록 보유, ⚠ = 미입증.`
+    : `Browsing all ${Object.keys(P).length.toLocaleString()} people. ★ = direct ancestor (number = generations back), 🎖 = military, 📷 = documents, ⚠ = detached/unproven.`;
 }
 function hookTreeClicks(){
   const s = $("#treesvg");
@@ -780,7 +808,9 @@ function hookTreeClicks(){
 }
 function crumb(){
   const fp = P[FOCUS], kids = childrenOf(FOCUS), sibs = siblingsOf(FOCUS);
-  $("#crumb").innerHTML = `Centered on <b>${esc(fp.name)}</b> ${flagOf(fp)} — ${sibs.length} sibling${sibs.length===1?"":"s"}, ${kids.length} child${kids.length===1?"":"ren"}. Click a card for the profile, then “Center tree”.`;
+  $("#crumb").innerHTML = LANG === "ko"
+    ? `<b>${esc(nmOf(fp))}</b> ${flagOf(fp)} 중심 — 형제자매 ${sibs.length}명, 자녀 ${kids.length}명. 카드를 클릭하면 상세 정보가 열립니다.`
+    : `Centered on <b>${esc(fp.name)}</b> ${flagOf(fp)} — ${sibs.length} sibling${sibs.length===1?"":"s"}, ${kids.length} child${kids.length===1?"":"ren"}. Click a card for the profile, then “Center tree”.`;
 }
 
 $("#btn-home").onclick = () => { FOCUS = ROOT; renderTree(); };
@@ -798,8 +828,8 @@ function lifeEvents(pid){
   famsOf(pid).forEach(f => {
     const sp = f.husband === pid ? f.wife : f.husband;
     if (f.marriage && (f.marriage.date || f.marriage.place))
-      evs.push({y: f.marriage.year, t: T("Married") + " " + (sp && P[sp] ? P[sp].name : ""), d: f.marriage.date, pl: f.marriage.place, major: 1});
-    f.children.forEach(c => { const cb = P[c] && P[c].birth; if (cb && cb.year) evs.push({y: cb.year, t: T("Child born:") + " " + P[c].name, d: cb.date}); });
+      evs.push({y: f.marriage.year, t: T("Married") + " " + (sp && P[sp] ? nmOf(P[sp]) : ""), d: f.marriage.date, pl: f.marriage.place, major: 1});
+    f.children.forEach(c => { const cb = P[c] && P[c].birth; if (cb && cb.year) evs.push({y: cb.year, t: T("Child born:") + " " + nmOf(P[c]), d: cb.date}); });
   });
   if (p.death && (p.death.date || p.death.place)) evs.push({y: p.death.year, t: T("Died"), d: p.death.date, pl: p.death.place, major: 1});
   (p.events||[]).forEach(e => { if (e.type === "burial") evs.push({y: e.year, t: T("Buried"), d: e.date, pl: e.place}); });
@@ -810,14 +840,14 @@ function openProfile(pid){
   const evs = lifeEvents(pid);
   const photos = PHOTOS[pid] || [];
   const pars = parentsOf(pid), spo = spousesOf(pid), kids = childrenOf(pid), sibs = siblingsOf(pid), halfs = halfSiblingsOf(pid);
-  const linkList = ids => ids.length ? ids.map(i => `<span class="plink" data-p="${i}">${esc(P[i] ? P[i].name : i)}</span>${P[i] && yrs(P[i]) ? ` <span style="color:var(--ink2);font-size:12px">(${yrs(P[i])})</span>` : ""}`).join("<br>") : `<span style="color:var(--ink2)">—</span>`;
+  const linkList = ids => ids.length ? ids.map(i => `<span class="plink" data-p="${i}">${esc(P[i] ? nmOf(P[i]) : i)}</span>${P[i] && yrs(P[i]) ? ` <span style="color:var(--ink2);font-size:12px">(${yrs(P[i])})</span>` : ""}`).join("<br>") : `<span style="color:var(--ink2)">—</span>`;
   const badges = [];
   if (pid === ROOT) badges.push(`<span class="bdg gold">${T("★ Root of this tree")}</span>`);
   else if (p.directAncestor && p.generation) badges.push(`<span class="bdg gold">${LANG==="ko" ? "직계 조상 — " + p.generation + "세대 위" : "Direct ancestor — generation " + p.generation}</span>`);
   if (p.military) badges.push(`<span class="bdg red">🎖 ${T("Military service")}</span>`);
   if (DOCUMENTED.has(pid)) badges.push(`<span class="bdg">${T("📷 Documents in family archive")}</span>`);
   if (!p.connected) badges.push(`<span class="bdg warn">${T("⚠ Detached / unproven line")}</span>`);
-  if (p.country) badges.push(`<span class="bdg">${flagOf(p)} ${T("Born in")} ${esc(p.country)}</span>`);
+  if (p.country) badges.push(`<span class="bdg">${flagOf(p)} ${T("Born in")} ${esc(cName(p.country))}</span>`);
   const nSrc = (p.sourceIds||[]).length;
   badges.push(nSrc ? `<span class="bdg">${LANG==="ko" ? "기록 출처 " + nSrc + "건" : nSrc + " record citation" + (nSrc>1?"s":"")}</span>` : `<span class="bdg warn">${T("No record citations — treat as unverified")}</span>`);
   const web = (p.webEnrichment||[]).map(w => `<div class="webfact">🌐 ${esc(w.fact)}<br><a href="${w.source.url}" target="_blank">Source: ${esc(w.source.title)}</a> <span style="color:var(--ink2);font-size:11px">· added ${w.added} · confidence: ${esc(w.confidence)}</span></div>`).join("");
@@ -826,14 +856,14 @@ function openProfile(pid){
   $("#drawer").innerHTML = `
     <div class="d-head">
       <button class="d-close" id="dclose">✕</button>
-      <h2>${flagOf(p)} ${esc(p.name)}</h2>
+      <h2>${flagOf(p)} ${esc(nmOf(p))}</h2>${LANG === "ko" ? `<div style="font-size:12.5px;opacity:.7">${esc(p.name)}</div>` : ""}
       <div class="yrs">${yrs(p)}${p.occupations ? " · " + esc(p.occupations.join(", ")) : ""}</div>
       <div class="d-badges">${badges.join("")}</div>
     </div>
     <div class="d-body">
       ${photos.length ? `<div class="d-sec"><h3>${T("Family archive")}</h3><div class="d-photos">${photos.map(([f,t]) => `<img src="${f}" title="${esc(t)}" alt="${esc(t)}" loading="lazy">`).join("")}</div></div>` : ""}
       <div class="d-sec"><h3>${T("Life timeline")}</h3>
-        ${evs.length ? `<div class="tl">${evs.map(e => `<div class="ev${e.major ? " major" : ""}"><div class="ey">${e.d ? esc(e.d) : (e.y || T("date unknown"))}</div><div class="et">${esc(e.t)}</div>${e.pl ? `<div class="ep">${esc(e.pl)}</div>` : ""}${e.note ? `<div class="ep">${esc(e.note)}</div>` : ""}${e.src ? `<div class="srcnote">✓ ${e.src} source citation${e.src>1?"s":""}</div>` : ""}</div>`).join("")}</div>` : `<span style="color:var(--ink2)">${T("No dated events recorded.")}</span>`}
+        ${evs.length ? `<div class="tl">${evs.map(e => `<div class="ev${e.major ? " major" : ""}"><div class="ey">${e.d ? esc(fmtDate(e.d)) : (e.y ? (LANG === "ko" ? e.y + "년" : e.y) : T("date unknown"))}</div><div class="et">${esc(e.t)}</div>${e.pl ? `<div class="ep">${esc(e.pl)}</div>` : ""}${e.note ? `<div class="ep">${esc(e.note)}</div>` : ""}${e.src ? `<div class="srcnote">✓ ${e.src} source citation${e.src>1?"s":""}</div>` : ""}</div>`).join("")}</div>` : `<span style="color:var(--ink2)">${T("No dated events recorded.")}</span>`}
       </div>
       ${web ? `<div class="d-sec"><h3>${T("From public records &amp; web research")}</h3>${web}</div>` : ""}
       <div class="d-sec"><h3>${T("Immediate family")}</h3>
@@ -865,7 +895,7 @@ $("#lightbox").onclick = () => $("#lightbox").classList.remove("on");
 document.addEventListener("keydown", e => { if (e.key === "Escape") { closeProfile(); $("#lightbox").classList.remove("on"); } });
 
 /* ---------- SEARCH ---------- */
-const INDEX = Object.values(P).map(p => ({pid: p.id, s: (p.name + " " + (p.birth && p.birth.place || "") + " " + (p.birth && p.birth.year || "")).toLowerCase(), p}));
+const INDEX = Object.values(P).map(p => ({pid: p.id, s: (p.name + " " + (p._ko || "") + " " + (p.birth && p.birth.place || "") + " " + (p.birth && p.birth.year || "")).toLowerCase(), p}));
 function doSearch(q, cb){
   q = q.trim().toLowerCase();
   if (q.length < 2) return [];
@@ -876,7 +906,7 @@ $("#search").addEventListener("input", e => {
   const hits = doSearch(e.target.value);
   const el = $("#results");
   if (!hits.length) { el.style.display = "none"; return; }
-  el.innerHTML = hits.map(h => `<div class="r" data-p="${h.pid}"><span>${flagOf(h.p)}</span><span>${esc(h.p.name)}</span><span class="yrs">${yrs(h.p)}${h.p.directAncestor ? " ★" : ""}</span></div>`).join("");
+  el.innerHTML = hits.map(h => `<div class="r" data-p="${h.pid}"><span>${flagOf(h.p)}</span><span>${esc(nmOf(h.p))}</span><span class="yrs">${yrs(h.p)}${h.p.directAncestor ? " ★" : ""}</span></div>`).join("");
   el.style.display = "block";
 });
 $("#results").addEventListener("click", e => { const t = e.target.closest(".r"); if (t) { $("#results").style.display = "none"; $("#search").value = ""; openProfile(t.dataset.p); } });
@@ -933,9 +963,9 @@ function drawMap(){
     const c = g.dataset.c, y = +$("#mapslider").value;
     const ppl = Object.values(P).filter(p => p.country === c && p.birth && p.birth.year && p.birth.year <= y).sort((a,b) => a.birth.year - b.birth.year);
     $("#mapdetail").style.display = "block";
-    $("#mapdetail").innerHTML = `<h3>${esc(c)} — ${LANG === "ko" ? (y >= 2030 ? "현재까지" : y + "년까지") + " 출생 " + ppl.length + "명" : ppl.length + " relative" + (ppl.length===1?"":"s") + " born by " + (y >= 2030 ? "today" : y)}</h3>` +
-      ppl.slice(0, 60).map(p => `<span class="plink" data-p="${p.id}">${esc(p.name)}</span> <span style="color:var(--ink2);font-size:12px">(${p.birth.year})</span>`).join(" · ") +
-      (ppl.length > 60 ? ` <i>… and ${ppl.length - 60} more (use search)</i>` : "");
+    $("#mapdetail").innerHTML = `<h3>${esc(cName(c))} — ${LANG === "ko" ? (y >= 2030 ? "현재까지" : y + "년까지") + " 출생 " + ppl.length + "명" : ppl.length + " relative" + (ppl.length===1?"":"s") + " born by " + (y >= 2030 ? "today" : y)}</h3>` +
+      ppl.slice(0, 60).map(p => `<span class="plink" data-p="${p.id}">${esc(nmOf(p))}</span> <span style="color:var(--ink2);font-size:12px">(${p.birth.year})</span>`).join(" · ") +
+      (ppl.length > 60 ? (LANG === "ko" ? ` <i>… 외 ${ppl.length - 60}명 (검색을 이용하세요)</i>` : ` <i>… and ${ppl.length - 60} more (use search)</i>`) : "");
     $("#mapdetail").querySelectorAll(".plink").forEach(el => el.onclick = () => openProfile(el.dataset.p));
   });
 }
@@ -946,7 +976,7 @@ function updateMap(year){
   $("#bubbles").innerHTML = Object.entries(counts).map(([c, n]) => {
     const g = GEO[c]; if (!g) return "";
     const r = 4 + Math.sqrt(n) * 2.6;
-    return `<g class="cbub" data-c="${esc(c)}"><circle cx="${g[0]}" cy="${g[1]}" r="${r}"></circle><text x="${g[0]}" y="${g[1] - r - 5}" font-size="11">${esc(c)}</text><text class="cnt" x="${g[0]}" y="${g[1] + 3.5}">${n}</text></g>`;
+    return `<g class="cbub" data-c="${esc(c)}"><circle cx="${g[0]}" cy="${g[1]}" r="${r}"></circle><text x="${g[0]}" y="${g[1] - r - 5}" font-size="11">${esc(cName(c))}</text><text class="cnt" x="${g[0]}" y="${g[1] + 3.5}">${n}</text></g>`;
   }).join("");
 }
 const FLAGTXT = {"Canada":"🇨🇦","United States":"🇺🇸","England":"🏴󠁧󠁢󠁥󠁮󠁧󠁿","Scotland":"🏴󠁧󠁢󠁳󠁣󠁴󠁿","Wales":"🏴󠁧󠁢󠁷󠁬󠁳󠁿","Ireland":"🇮🇪","Northern Ireland":"🇬🇧","United Kingdom":"🇬🇧","Switzerland":"🇨🇭","Germany":"🇩🇪","France":"🇫🇷","Netherlands":"🇳🇱","Belgium":"🇧🇪","Luxembourg":"🇱🇺","Austria":"🇦🇹","Spain":"🇪🇸","Denmark":"🇩🇰","Norway":"🇳🇴","Jordan":"🇯🇴"};
@@ -961,9 +991,9 @@ function drawStats(){
   const ppl = Object.values(P);
   const st = DATA.meta.stats;
   const MONTHS = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
-  const MONTH_FULL = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  const MONTH_FULL = LANG === "ko" ? ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"] : ["January","February","March","April","May","June","July","August","September","October","November","December"];
   const monthOf = d => { if (!d) return -1; const m = d.toUpperCase().match(/\b(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)/); return m ? MONTHS.indexOf(m[1]) : -1; };
-  const link = p => `<span class="plink" data-p="${p.id}">${esc(p.name)}</span>`;
+  const link = p => `<span class="plink" data-p="${p.id}">${esc(nmOf(p))}</span>`;
 
   /* completeness by generation */
   let genRows = "";
@@ -1018,7 +1048,7 @@ function drawStats(){
   let migrants = 0;
   ppl.forEach(p => {
     const bc = p.birth && p.birth.country, dc = p.death && p.death.country;
-    if (bc && dc && bc !== dc) { migrants++; const k = bc + " → " + dc; routes[k] = (routes[k]||0) + 1; }
+    if (bc && dc && bc !== dc) { migrants++; const k = cName(bc) + " → " + cName(dc); routes[k] = (routes[k]||0) + 1; }
   });
   const topRoutes = Object.entries(routes).sort((a,b) => b[1]-a[1]).slice(0, 9);
 
@@ -1068,7 +1098,7 @@ function drawStats(){
   ].map(([l, a, b]) => `<div class="bar"><div class="bl">${l}</div><div class="bt"><div class="bf" style="width:${pct(a,b)}%"></div></div><div class="bv">${pct(a,b)}%</div></div>`).join("");
 
   const supRow = (label, html) => `<div style="display:flex;gap:10px;margin-bottom:9px;font-size:14px;align-items:baseline"><span style="min-width:170px;color:var(--gold);font-size:11px;text-transform:uppercase;letter-spacing:1.2px">${label}</span><span>${html}</span></div>`;
-  const bigFamPar = bigFam ? [bigFam.husband, bigFam.wife].filter(Boolean).map(x => P[x] ? P[x].name : "?").join(" & ") : "";
+  const bigFamPar = bigFam ? [bigFam.husband, bigFam.wife].filter(Boolean).map(x => P[x] ? nmOf(P[x]) : "?").join(" & ") : "";
 
   $("#statsgrid").innerHTML = `
     <div class="panelcard" style="grid-column:1/-1"><div class="statrow">
@@ -1083,24 +1113,24 @@ function drawStats(){
     </div></div>
 
     <div class="panelcard" style="grid-column:1/-1"><h3>${T("🏆 Family records")}</h3>
-      ${oldest ? supRow(T("Longest life"), link(oldest) + ` — <b>${oldest.death.year - oldest.birth.year} years</b> (${oldest.birth.year}–${oldest.death.year})`) : ""}
-      ${bigFam ? supRow(T("Biggest family"), esc(bigFamPar) + ` — <b>${bigFam.children.length} children</b>`) : ""}
-      ${mostMarried && mostMarried.fams.length > 1 ? supRow(T("Most marriages"), link(mostMarried) + ` — <b>${mostMarried.fams.length}</b>`) : ""}
-      ${mostDoc ? supRow(T("Best documented"), link(mostDoc) + ` — <b>${mostDoc.sourceIds.length} record citations</b>`) : ""}
-      ${deepP ? supRow(T("Deepest direct line"), link(deepP) + ` — generation <b>${deepest}</b> (${(deepP.birth && deepP.birth.year) || "?"})`) : ""}
-      ${earliest ? supRow(T("Earliest connected person"), link(earliest) + ` — born <b>${earliest.birth.year}</b>${earliest.birth.place ? ", " + esc(earliest.birth.place.split(",").slice(-1)[0].trim()) : ""}`) : ""}
+      ${oldest ? supRow(T("Longest life"), link(oldest) + ` — <b>${oldest.death.year - oldest.birth.year}${LANG === "ko" ? "세" : " years"}</b> (${oldest.birth.year}–${oldest.death.year})`) : ""}
+      ${bigFam ? supRow(T("Biggest family"), esc(bigFamPar) + ` — <b>${LANG === "ko" ? "자녀 " + bigFam.children.length + "명" : bigFam.children.length + " children"}</b>`) : ""}
+      ${mostMarried && mostMarried.fams.length > 1 ? supRow(T("Most marriages"), link(mostMarried) + ` — <b>${mostMarried.fams.length}${LANG === "ko" ? "회" : ""}</b>`) : ""}
+      ${mostDoc ? supRow(T("Best documented"), link(mostDoc) + ` — <b>${LANG === "ko" ? "기록 출처 " + mostDoc.sourceIds.length + "건" : mostDoc.sourceIds.length + " record citations"}</b>`) : ""}
+      ${deepP ? supRow(T("Deepest direct line"), link(deepP) + ` — ${LANG === "ko" ? "<b>" + deepest + "</b>세대 위" : "generation <b>" + deepest + "</b>"} (${(deepP.birth && deepP.birth.year) || "?"})`) : ""}
+      ${earliest ? supRow(T("Earliest connected person"), link(earliest) + ` — ${LANG === "ko" ? "<b>" + earliest.birth.year + "년</b> 출생" : "born <b>" + earliest.birth.year + "</b>"}${earliest.birth.place ? ", " + esc(earliest.birth.place.split(",").slice(-1)[0].trim()) : ""}`) : ""}
       <div style="font-size:12px;color:var(--ink2);font-style:italic;margin-top:6px">Records consider only plausible, dated entries; detached/unproven branches excluded from "earliest".</div>
     </div>
 
-    <div class="panelcard"><h3>${T("Ancestor completeness by generation")}</h3>${genRows}<div style="font-size:12px;color:var(--ink2);margin-top:8px;font-style:italic">Share of each generation's possible ancestors identified.</div></div>
-    <div class="panelcard"><h3>${T("Most frequent surnames")}</h3>${bars(topSurn, topSurn[0][1])}</div>
-    <div class="panelcard"><h3>${T("Birth countries")}</h3>${bars(Object.entries(st.countries).slice(0, 12).map(([c, n]) => [flagSVG(c, 15, 10) + " " + c, n]), Math.max(...Object.values(st.countries)))}</div>
+    <div class="panelcard"><h3>${T("Ancestor completeness by generation")}</h3>${genRows}<div style="font-size:12px;color:var(--ink2);margin-top:8px;font-style:italic">${LANG === "ko" ? "각 세대에서 확인된 조상의 비율입니다." : "Share of each generation's possible ancestors identified."}</div></div>
+    <div class="panelcard"><h3>${T("Most frequent surnames")}</h3>${bars(LANG === "ko" ? topSurn.map(([s, c]) => [esc(KO_NAMES[s] || s), c]) : topSurn, topSurn[0][1])}</div>
+    <div class="panelcard"><h3>${T("Birth countries")}</h3>${bars(Object.entries(st.countries).slice(0, 12).map(([c, n]) => [flagSVG(c, 15, 10) + " " + cName(c), n]), Math.max(...Object.values(st.countries)))}</div>
     <div class="panelcard"><h3>${T("Most common given names")}</h3>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 18px">
-        <div><div class="statlbl" style="margin-bottom:6px">${T("Men")}</div>${bars(topM, topM[0] ? topM[0][1] : 1)}</div>
-        <div><div class="statlbl" style="margin-bottom:6px">${T("Women")}</div>${bars(topF, topF[0] ? topF[0][1] : 1)}</div>
+        <div><div class="statlbl" style="margin-bottom:6px">${T("Men")}</div>${bars(LANG === "ko" ? topM.map(([s, c]) => [esc(KO_NAMES[s] || s), c]) : topM, topM[0] ? topM[0][1] : 1)}</div>
+        <div><div class="statlbl" style="margin-bottom:6px">${T("Women")}</div>${bars(LANG === "ko" ? topF.map(([s, c]) => [esc(KO_NAMES[s] || s), c]) : topF, topF[0] ? topF[0][1] : 1)}</div>
       </div></div>
-    <div class="panelcard"><h3>${T("Migration routes (born → died)")}</h3>${topRoutes.length ? bars(topRoutes, topRoutes[0][1]) : "—"}<div style="font-size:12px;color:var(--ink2);margin-top:8px;font-style:italic">${migrants} relatives died in a different country than they were born in.</div></div>
+    <div class="panelcard"><h3>${T("Migration routes (born → died)")}</h3>${topRoutes.length ? bars(topRoutes, topRoutes[0][1]) : "—"}<div style="font-size:12px;color:var(--ink2);margin-top:8px;font-style:italic">${LANG === "ko" ? migrants + "명이 태어난 나라와 다른 나라에서 생을 마감했습니다." : migrants + " relatives died in a different country than they were born in."}</div></div>
     <div class="panelcard"><h3>${T("Birthday months")}</h3>${bars(bmonths.map((n, i) => [MONTH_FULL[i], n]), Math.max(...bmonths))}<div style="font-size:12px;color:var(--ink2);margin-top:8px;font-style:italic">Across everyone with a full birth date.</div></div>
     <div class="panelcard"><h3>${T("Average lifespan by birth century")}</h3>${bars(lspRows, 90)}<div style="font-size:12px;color:var(--ink2);margin-top:8px;font-style:italic">Both dates required; early-century infant deaths under-recorded.</div></div>
     <div class="panelcard"><h3>${T("Average age at marriage")}</h3>${bars(mageRows, 40)}<div style="font-size:12px;color:var(--ink2);margin-top:8px;font-style:italic">By century of the wedding, both spouses counted.</div></div>
@@ -1111,18 +1141,127 @@ function drawStats(){
   $("#statsgrid").querySelectorAll(".plink").forEach(el => el.onclick = () => openProfile(el.dataset.p));
 }
 
+
+/* ---------- Korean translations: stories + military prose ---------- */
+const STORIES_KO = [
+ {t:"집을 떠난 소년", e:"몬트리올 → 뉴웨스트민스터 → 플랑드르, 1896–1959",
+  b:[`존 고든 "잭" 번햄은 1896년 몬트리올에서 존 아서 번햄과 제시 베이커의 아들로 태어났습니다. 가족들은 그가 아주 어린 나이에 집을 떠났다고 기억하는데, 기록도 이를 뒷받침합니다. 1911년 인구조사에서 열다섯 살의 잭은 이미 고향에서 대륙 하나만큼 떨어진 브리티시컬럼비아 주 뉴웨스트민스터에 살고 있었습니다.`,
+   `그리고 그는 더 멀리 떠났습니다. 제1차 세계 대전에 자원입대한 것입니다. 가족 기록물에는 참전길에 오른 그의 사진, 1916년 고향 신문 기사 두 건, 전역 보고서, 그리고 말년의 병리 보고서까지 보존되어 있습니다. 그의 군 복무 기록은 1940년까지 이어집니다. 1920년 에벌린 메이 롤린슨과 결혼해 존, 해럴드, 에드워드, 이디스를 키웠고, 1959년 — 소년 시절 달려갔던 바로 그 도시 뉴웨스트민스터에서 — 눈을 감았습니다.`]},
+ {t:"부활절 월요일 아침, 비미 능선", e:"노섬벌랜드 카운티 → 비미 능선, 1895–1917",
+  b:[`존 워즈워스 벨라미는 1895년 온타리오 주 노섬벌랜드 카운티 해밀턴 타운십에서 조지 프랭클린 벨라미와 마거릿 앨리스 포터의 장남으로 태어났습니다. 션의 증조할머니인 메리 엘시의 오빠입니다.`,
+   `1917년 4월 9일 부활절 월요일, 캐나다 군단의 4개 사단 전체가 사상 처음으로 함께 진눈깨비와 포화를 뚫고 비미 능선을 향해 진격했습니다. 캐나다가 가장 자랑스럽게 기억하는 전투이자, 가장 많은 피를 흘린 하루였습니다. 존은 그날, 비미에서, 스물한 살의 나이로 전사했습니다.`,
+   `한 세기가 지난 지금도 그의 이름은 가족들의 입에 오르내립니다. 그것이 또 하나의 기념비입니다.`]},
+ {t:"빅토리아 시대 군인의 긴 행군", e:"포턴 → 올더숏 → 몬트리올, 1844–1899",
+  b:[`리처드 휘팅엄 번햄은 1844년 5월 24일 잉글랜드 베드퍼드셔 포턴에서 태어났습니다 — 140년 뒤 션이 태어난 바로 그 날짜입니다. 젊은 나이에 영국 육군에 입대했고, 그의 복무 기록은 영국 국립기록보관소의 첼시 왕립병원 병사 문서(WO 97)에 남아 있습니다. 연금을 받을 만큼 오래 복무한 군인의 서류입니다.`,
+   `군대는 그를 빅토리아 시대 영국의 주둔지 곳곳으로 보냈습니다. 1863년 와이트 섬 뉴포트에서 결혼했고, 그곳에서 태어난 첫아들을 잃었으며, 이후 자녀들은 육군의 대본영 올더숏과 요크셔에서 태어났습니다. 1870년대 초 가족을 이끌고 대서양을 건너 몬트리올에 정착했고, 1881년 인구조사에 그 가족이 기록되어 있습니다. 그곳에서 태어난 아들 존 아서가 바로 잭의 아버지입니다.`,
+   `이 가계에서 세 세대가 군복을 입었습니다 — 빅토리아 시대 육군의 리처드, 캐나다 원정군의 손자 잭, 그리고 제2차 세계 대전의 후손들까지.`]},
+ {t:"다음 전쟁: 조지와 존", e:"캘거리 & 런던(온타리오) → 1939–1945",
+  b:[`잭 번햄과 존 벨라미가 제1차 세계 대전에 나간 지 한 세대 뒤, 이 가족은 다시 아들들을 전쟁터로 보냈습니다. 레드의 형 조지 프레더릭 맥널티(1920년 캘거리 출생)는 캐나다군에서 복무했고, 에드워드의 형 존 하워드 번햄(1921년 온타리오 주 런던 출생)은 가족의 기억에 따르면 캐나다 왕립공군(RCAF)에서 복무했습니다.`,
+   `정확한 부대와 참전 기록은 아직 찾는 중입니다. 캐나다의 제2차 세계 대전 복무 기록은 캐나다 도서기록관(LAC)에 보관되어 있으며 유족이 신청할 수 있습니다. 두 개의 서류철, 읽히기를 기다리는 두 개의 이야기입니다.`]},
+ {t:"할머니의 이름을 가진 스노드롭", e:"버나비, BC, 1960년대",
+  b:[`1960년대, 브리티시컬럼비아 주 버나비의 버려진 옛 정원에서 션의 외할머니 로즈메리 말라 이브 애덤스(1935–2008)는 세상에 없던 스노드롭 한 송이를 발견했습니다. 하얀 꽃잎 전체가 옥빛 초록으로 물든 꽃이었습니다.`,
+   `돈 암스트롱이 그녀의 이름을 따 갈란투스 엘위시 '로즈메리 번햄'이라 명명한 이 품종은, 지금까지도 가장 아름다운 초록 스노드롭으로 꼽히며 영국 왕립원예협회(RHS)에 등재되어 영국과 유럽의 전문 종묘상에서 판매되고 있습니다. 60년이 지난 지금도, 우리 가족을 전혀 모르는 수집가들이 매년 2월 로즈메리의 정원 한 조각을 피워 냅니다.`]},
+ {t:"포목점 점원에서 목사가 된 사람", e:"더블린 → 아클로 → 캐나다, 1882–1965",
+  b:[`프레더릭 알렉산더 맥널티는 1882년 2월 27일 더블린에서 태어났습니다. 아버지 로런스 조지프 맥널티는 1868년 섣달그믐에 더블린에서 결혼식을 올렸습니다. 1901년 인구조사에서 열여덟 살의 프레더릭은 위클로 카운티 아클로의 포목상 로버트 필포트의 집에 기숙하며 일하는 점원이었습니다.`,
+   `1910년경 그는 캐나다로 이주했습니다. 1921년 캘거리, 1924–25년 시애틀을 거쳐 마침내 온타리오 주 브랜트퍼드와 해밀턴에 정착했고, 아일랜드 성공회 신자였던 포목점 점원은 침례교 목사가 되었습니다. 노섬벌랜드 카운티의 메리 엘시 벨라미와 결혼했으며, 브랜트퍼드의 패링던 묘지에 잠들어 있습니다. 아들의 부고는 그를 그저 "프레더릭 맥널티 목사"로 기억합니다.`]},
+ {t:"픽업트럭 한 대와 연장 몇 개", e:"빅토리아, BC, 1981–현재",
+  b:[`1981년, 윌리엄 브라이언 "레드" 맥널티(1927–2007)와 두 아들 웨인, 크레이그는 픽업트럭 한 대와 연장 몇 개, 빌린 덤프트럭으로 파이브 스타 페이빙(Five Star Paving)을 창업했습니다. 첫 일감은 빅토리아 곳곳의 집 문을 두드려 따냈습니다.`,
+   `프레더릭 맥널티 목사와 엘시 벨라미의 여섯 자녀 중 다섯째였던 레드는, 펀과 55년을 해로했으며, 1969년 서부로 이주하기 전 온타리오 주 앵캐스터에서 자신의 건설회사를 운영했습니다. 그가 공동 창업한 회사는 이제 포장·벽돌·콘크리트·토목 부문을 아우르며, 회사 홈페이지는 3대째인 제임스와 (혼인으로 가족이 된) 애슐리를 회사의 미래로 소개하고 있습니다.`]},
+ {t:"에멘탈에서 나이아가라까지: 메노나이트의 여정", e:"스위스 베른 → 펜실베이니아 → 온타리오, 1650년대–1800년대",
+  b:[`이 가계도에 있는 약 300명이 스위스에서 태어났으며, 대부분 베른 칸톤 수미스발트 인근 에멘탈 계곡 출신입니다. 그들은 스위스 형제단 — 신앙 때문에 고향에서 추방자가 된 재세례파였습니다.`,
+   `셔치(훗날 셔크), 베버, 이비, 바르, 스와르 같은 성씨의 가족들은 베른을 떠나 독일 팔츠로, 다시 배를 타고 펜실베이니아로, 그리고 마침내 충성파 이주 시대에 어퍼캐나다의 나이아가라 반도까지 북상했습니다. 그곳에서 벅 가와 빔 가의 혼인이 그들의 이야기를 우리 가족의 이야기로 만들었고, 지금도 이 가계도의 6분의 1이 베른 사투리로 말하고 있는 셈입니다.`]},
+ {t:"갈리치아의 말라", e:"고르키, 오스트리아-헝가리 → 브리티시컬럼비아, 1883–1948",
+  b:[`말라 진 브롬펠트 — 옛 기록에는 몰리 말라 나케미아로 남아 있는 — 는 1883년 "오스트리아 고르키"에서 태어났습니다. 오스트리아 제국에서 가장 가난하고 유대인이 많던 갈리치아 지방의 작은 마을이었을 것입니다. 맥스 브롬펠트와 베시 로트의 딸인 그녀는 이 가계도의 유일한 유대계 혈통의 어머니입니다.`,
+   `그 세대의 수많은 갈리치아 사람들처럼 그녀도 고향을 떠났고, 그 길은 지도가 허락하는 한 갈리치아에서 가장 먼 곳 — 브리티시컬럼비아에서 끝났습니다. 가족 기록물에 보존된 그녀의 혼인 등록부가 이 혈통을 캐나다에 단단히 묶어 주며, 그 후손은 애덤스 가를 거쳐 로즈메리, 로잔나, 그리고 션에게 이어집니다.`]},
+];
+const MIL_KO = {
+ P7:{c:"제1차 세계 대전 — 캐나다 원정군(CEF)",
+  r:"입대 사병으로, 거의 확실히 CEF 보병이었습니다. 1916년 브리티시컬럼비아에서 입대했으며(고향 신문 기사 두 건이 모두 그해 여름 날짜입니다), 군 기록상 복무 연관은 1914년부터 1940년까지 이어져 전후에도 민병대 또는 예비역으로 오래 복무했음을 시사합니다.",
+  b:"1916년 도착 시점을 고려하면 솜 전투 후반(1916년 가을), 비미 능선(1917년 4월), 70고지(1917년 8월), 파스샹달(1917년 가을)이 모두 그의 부대가 닿을 수 있는 범위였습니다. 정확한 참전 기록은 캐나다 도서기록관(LAC)에 무료로 디지털화되어 있는 복무 서류에서 확인할 수 있습니다. 남아 있는 전역 보고서는 그의 전쟁이 종전이 아니라 의병 전역으로 끝났음을 암시합니다."},
+ P295:{c:"제1차 세계 대전 — 캐나다 원정군 · 전사",
+  r:"캐나다 군단의 보병이었습니다. 노섬벌랜드 카운티의 농가 출신으로, 캐나다와 영국에서 훈련을 받은 뒤 전선의 대대에 배속되었을 것입니다.",
+  b:"확인된 전투: 비미 능선. 그는 4개 캐나다 사단이 사상 처음 함께 공격한 1917년 4월 9일, 공세 첫날 비미에서 전사했습니다. 캐나다는 나흘간 10,602명의 사상자를 냈고, 스물한 살의 존은 3,598명의 전사자 중 한 명이었습니다. 프랑스 도착 시기에 따라 솜 전투(1916)에도 참전했을 수 있습니다. 그의 부대명은 아래 링크의 CEF 서류와 1917년 4월 9–12일 공식 전사자 명단에서 확인할 수 있으며, 유해가 확인되지 않았다면 비미 기념비에 이름이 새겨져 있을 가능성이 큽니다."},
+ P9300:{c:"빅토리아 시대 영국 육군 — 장기 복무 정규군",
+  r:"사병(부사관 이하)으로 복무했습니다. 그의 서류가 첼시 왕립병원 병사 문서(WO 97)에 있다는 것은 정규 복무 기간을 모두 마치고 연금 전역했다는 뜻입니다. 기록 속 주둔지의 흔적(1863–64년 와이트 섬, 1871년 올더숏, 1870년 요크셔)은 빅토리아 시대 보병 가족의 전형적인 삶을 보여줍니다.",
+  b:"아직 확인된 전투는 없습니다. 그의 복무 시기(약 1862–1875)는 크림 전쟁과 후기 식민 전쟁 사이 — 전투보다는 제국 주둔 임무의 시대였습니다. 해외 파견 여부는 WO 97 서류에 기재되어 있습니다."},
+ P52:{c:"제2차 세계 대전 — 캐나다군 (가족 확인)",
+  r:"병과 미상 — 1920년 캘거리 출생으로, 캐나다가 참전을 선언한 1939년에 열아홉 살, 자원입대 세대의 한가운데였습니다. 가족이 복무를 확인했으며 부대와 병과는 아직 확인 중입니다.",
+  b:"복무 기록 확인 전까지는 미상입니다. 해외 파병 육군이었다면 캐나다군의 길은 이탈리아(1943년 시칠리아, 오르토나) 또는 북서유럽(1944년 노르망디 주노 해변, 스헬더, 1945년 네덜란드 해방)으로 이어졌습니다."},
+ P21:{c:"제2차 세계 대전 — 캐나다 왕립공군(RCAF) 추정",
+  r:"가족의 기억에 따르면 RCAF 소속이었습니다(미확인). 사실이라면 캐나다를 '민주주의의 비행장'으로 만든 영연방 항공 훈련 계획(BCATP)을 거쳤을 것이며, 유럽 상공의 폭격기·해안 사령부 승무원이었거나 그들을 띄운 지상 요원이었을 것입니다.",
+  b:"미확인. 그의 또래(1941년에 스무 살) RCAF 승무원들은 독일 상공의 폭격 작전, 대서양 초계, 노르망디 상륙 후의 전술 항공 지원을 수행했습니다."},
+ I270048035230:{c:"나폴레옹 전쟁 — 영국군 복무, 1815년 6월 3일자 기록",
+  r:"웨스트미스 카운티 킬베간 출신의 아일랜드인으로, 당시 영국 육군의 수십만 아일랜드 병사 중 한 명이었습니다. 기록 날짜는 워털루 전투 15일 전입니다.",
+  b:"그의 부대가 그달 벨기에의 워털루 전역에 도착했는지, 후방에 남았는지는 아직 확인되지 않았습니다. 그러나 기록이 폭풍의 한가운데에 이보다 가까이 있기는 어렵습니다."},
+ I270048035307:{c:"나폴레옹 전쟁 — 1808년 5월 1일자 복무 기록",
+  r:"반도 전쟁이 시작되던 해(그해 여름 영국 원정군이 포르투갈로 출항)에 복무 연령이던 앤트림 카운티 사람입니다. 정규군의 인력 공급원이던 아일랜드 민병대 또는 의용 기병대였을 가능성이 큽니다.",
+  b:"확인된 전투 없음. 1808년의 신병이 정규군으로 전속되었다면 웰링턴 휘하의 포르투갈·스페인 전선으로 갔을 가능성이 있습니다."},
+ I270069368464:{c:"나폴레옹 전쟁 — 복무 해에 사망, 1809년",
+  r:"1788년 캐번 출생. 군 기록은 1809년 5월 26일자이며, 같은 해 스물한 살로 사망했습니다.",
+  b:"1809년은 발헤런 원정의 해였습니다 — 전투가 아닌 열병으로 영국군 4,000명이 죽은 (전사자는 106명뿐) 재앙의 원정, 그리고 스페인 탈라베라 전투의 해이기도 합니다. 그해 복무 중 사망은 프랑스군의 총탄보다 열병이었을 가능성이 훨씬 큽니다."},
+ I270069371448:{c:"나폴레옹 전쟁 — 1803년 입대, 1824년 기록",
+  r:"퍼매너 출신. 첫 기록(1803년 7월 13일)은 영국이 나폴레옹에게 다시 선전포고한 시점과 일치하고, 두 번째 기록(1824년)은 21년 복무를 마친 전역 또는 연금 수령으로 읽힙니다 — 한 군인의 온전한 생애입니다.",
+  b:"미확인. 1803–1824년의 정규군이라면 이베리아 반도, 워털루, 식민지까지 모두 가능합니다."},
+ I270048796883:{c:"미국 독립 전쟁 — 버몬트 민병대, 1781–82",
+  r:"1748년 코네티컷 서필드 출생. 1781년 10월과 1782년 5월 버몬트에서 복무한 기록이 있습니다. 전쟁 말기 캐나다 방면의 습격에 맞서 챔플레인 호수 회랑을 지키던 변경 민병 근무였습니다.",
+  b:"1781년 무렵의 북부 전선은 대규모 회전보다 끊임없는 소규모 전투의 땅이었습니다. 이 가족이 훗날 어퍼캐나다로 이주한 것은 전후의 거대한 충성 재편의 일부입니다."},
+ I270049686312:{c:"미국 독립 전쟁 — 뉴욕 민병대",
+  r:"1755년 웨스트체스터 출생으로, 웨스트체스터와 더치스 카운티 양쪽에 복무 기록이 있습니다. 영국령 뉴욕과 대륙군 전선 사이, 7년간 양측의 약탈대가 휩쓸던 악명 높은 '중립지대'였습니다.",
+  b:"중립지대의 복무는 이름 있는 전투보다 정찰과 소규모 충돌, 가축 약탈전의 연속이었습니다. 그의 후손들은 훗날 온타리오에 정착했습니다."},
+ I270050046618:{c:"식민지 뉴욕 민병대",
+  r:"태리타운의 네덜란드계 허드슨 밸리 농부(1715년생)로, 프렌치-인디언 전쟁 시대 모든 성인 남성의 의무였던 식민지 민병대에 등록되어 있었습니다.",
+  b:"기록된 전투 없음. 식민지 민병대는 대개 소집과 훈련, 변경 경계가 임무였습니다."},
+ I270048035349:{c:"식민지 민병대 — 버지니아",
+  r:"1727년 펜실베이니아 벅스 카운티의 퀘이커 가정에서 태어났으나 버지니아에서 군 복무 기록이 남아 있습니다. 퀘이커는 평화주의자로 무기를 들면 교단에서 제명되던 시대였기에 이는 주목할 만합니다. 변경의 현실은 때로 교리를 앞질렀습니다.",
+  b:"1750년대 프렌치-인디언 전쟁 시기의 변경 방어 임무였을 가능성이 큽니다."},
+ I270049531836:{c:"1812년 전쟁 — 미국 측 복무",
+  r:"1753년 펜실베이니아 출생, 메노나이트 집안. 1812년 거의 예순의 나이로 미국 측 복무 기록이 있습니다 — 평화교회 신자들의 전통적 타협이었던 지역 민병대나 수송·보급 임무였을 것입니다.",
+  b:"기록된 전투 없음."},
+ I270066878333:{c:"미국 남북 전쟁 — 북군 입대, 1862년 5월 27일",
+  r:"라우스 카운티 터먼페킨 출신의 아일랜드 이민자로, 1862년 봄 북군에 입대했습니다. 연방군에서 싸운 약 15만 아일랜드 태생 병사 중 한 명입니다.",
+  b:"연대는 아직 확인되지 않았습니다. 1862년 입대병의 길은 앤티텀, 프레더릭스버그, 게티즈버그 혹은 서부 전선으로 이어질 수 있었습니다. 미국 국립공원관리청(NPS) 병사 데이터베이스에서 추적할 수 있습니다."},
+ I270054858620:{c:"뉴욕 주 민병대 — 평시 소집, 1828년",
+  r:"올버니 카운티의 농부로, 건국 초기 공화국의 표준적인 민병 등록 의무를 이행했습니다.",b:"없음 — 훈련일 소집 복무였습니다."},
+ I270069368372:{c:"영국 육군 — 1826년 입대",
+  r:"웩스퍼드 출신으로 나폴레옹 전쟁 이후의 정규군이었습니다. 유럽이 평화롭던 시절, 영국 병사들은 제국의 주둔지를 지켰습니다.",
+  b:"확인된 전투 없음. 인도, 케이프, 캐나다 등 식민지 주둔 가능성이 있습니다."},
+ I270048035776:{c:"미군 — 평시 입대, 1903년 8월 19일",
+  r:"1882년 브루클린 출생. 미국-스페인 전쟁 이후 군 확장기의 입대였습니다.",b:"기록된 전투 없음."},
+ I270076644553:{c:"제2차 세계 대전 — 캐나다군",
+  r:"온타리오 주 프런티낙 카운티 출신(1920년생). 기록 날짜가 1945년 9월 22일 — 대일 전승 직후 대규모 동원 해제 기간이므로 전시 복무자였음이 거의 확실합니다.",
+  b:"부대와 전선은 아직 확인되지 않았습니다."},
+ I270076634798:{c:"한국 전쟁기 — 미군, 1952년 8월 25일",
+  r:"1929년 로스앤젤레스 출생. 기록 날짜는 전쟁이 한창이던 시기로, 한국 전쟁 복무 연령에 정확히 해당합니다.",b:"미확인."},
+ I270076635786:{c:"미군 냉전기 복무, 1954년",
+  r:"한국 휴전 직후인 1954년 8월자 입대 기록입니다.",b:"없음."},
+};
+const ERA_INTRO_KO = {
+ "Colonial & frontier service (before 1775)":"이곳에 나라가 생기기 전부터 소집은 있었습니다. 식민지 뉴욕과 펜실베이니아의 모든 성인 남성은 민병 복무 의무를 졌습니다. 두 명의 조상이 그 세계를 대표합니다 — 그중 한 명은 무기를 든 퀘이커였습니다.",
+ "American Revolution (1775–1783)":"독립 전쟁은 이 가족의 세계를 갈라놓았습니다. 어떤 조상들은 뉴욕과 버몬트 민병대에 소집되었고, 한 세대 안에 여러 갈래가 어퍼캐나다로 넘어갔습니다 — 이 가족을 캐나다인으로 만든 충성파의 대이동입니다.",
+ "Napoleonic Wars (1793–1815)":"네 명의 아일랜드 조상과 친척이 영국의 22년 전쟁에 휩쓸렸습니다. 한 명은 전쟁이 재개된 그해 여름 입대했고, 한 명의 기록은 워털루 15일 전 날짜이며, 한 명은 열병이 가장 많은 목숨을 앗아간 해에 죽었습니다.",
+ "War of 1812":"전쟁이 나이아가라 변경에 닥쳤을 때, 이 가족의 메노나이트 정착민들은 평화주의 신앙과 두 군대의 요구 사이에 끼었습니다.",
+ "US Civil War (1861–1865)":"아일랜드 태생의 친척 한 명이 1862년 링컨의 부름에 응해, 북군에서 싸운 15만 아일랜드 이민자의 대열에 합류했습니다.",
+ "Victorian & peacetime service (1816–1913)":"긴 제국의 평화에도 군인은 필요했습니다. 리처드 휘팅엄 번햄의 20년 복무 — 와이트 섬에서 올더숏을 거쳐 몬트리올로 — 가 이 장의 중심이자, 번햄 가계 그 자체의 중심입니다.",
+ "First World War (1914–1918)":"대전쟁이 가장 깊은 상처를 남겼습니다. 잭 번햄은 변한 모습으로 돌아와 수십 년을 군에 몸담았고, 존 워즈워스 벨라미는 돌아오지 못했습니다 — 캐나다가 가장 기리는 전투, 비미 능선의 첫날 아침 스물한 살로 전사했습니다.",
+ "Second World War (1939–1945)":"한 세대 뒤 가족은 다시 전쟁터로 갔습니다. 조지 프레더릭 맥널티는 캐나다군에서, 존 하워드 번햄은 — 가족의 기억으로는 — RCAF에서. 두 사람의 복무 서류는 캐나다 도서기록관에서 유족의 신청을 기다리고 있습니다.",
+ "Korea & Cold War (1946–1960)":"미국의 사촌 세대는 한국 전쟁과 그 뒤의 주둔 시대를 복무했습니다.",
+ "Other & undated service":"복무 사실은 증명하지만 언제 어디서였는지는 아직 말해 주지 않는 기록들입니다.",
+};
+
 /* ---------- STORIES ---------- */
 let storiesDrawn = false;
 function drawStories(){
   storiesDrawn = true;
-  $("#v-stories").innerHTML = (LANG === "ko" ? `<div class="eraintro">아래 가족 이야기는 영어로 제공됩니다. 각 인물의 상세 정보는 이름을 클릭해 확인할 수 있습니다.</div>` : "") + STORIES.map((s, i) => `
+  $("#v-stories").innerHTML = STORIES.map((s, i) => {
+    const k = LANG === "ko" ? STORIES_KO[i] : null;
+    return `
     <div class="story">
-      <div class="s-head"><h3>${s.title}</h3><span class="s-era">${s.era}</span></div>
-      <div class="s-body">${s.body.map(p => `<p>${p}</p>`).join("")}</div>
+      <div class="s-head"><h3>${k ? k.t : s.title}</h3><span class="s-era">${k ? k.e : s.era}</span></div>
+      <div class="s-body">${(k ? k.b : s.body).map(p => `<p>${p}</p>`).join("")}</div>
       ${s.imgs.length ? `<div class="s-imgs">${s.imgs.map(([f, t]) => `<img src="${f}" alt="${esc(t)}" title="${esc(t)}" loading="lazy">`).join("")}</div>` : ""}
-      ${s.pid ? `<div class="s-people">👤 <span class="plink" data-p="${s.pid}">Open ${esc(P[s.pid].name)}'s full profile →</span></div>` : ""}
-      <div class="s-src">Sources: ${esc(s.src)}</div>
-    </div>`).join("");
+      ${s.pid ? `<div class="s-people">👤 <span class="plink" data-p="${s.pid}">${LANG === "ko" ? esc(nmOf(P[s.pid])) + " 상세 정보 →" : "Open " + esc(P[s.pid].name) + "'s full profile →"}</span></div>` : ""}
+      <div class="s-src">${LANG === "ko" ? "출처" : "Sources"}: ${esc(s.src)}</div>
+    </div>`;}).join("");
   $("#v-stories").querySelectorAll(".plink").forEach(el => el.onclick = () => openProfile(el.dataset.p));
   $("#v-stories").querySelectorAll(".s-imgs img").forEach(img => img.onclick = () => { $("#lbimg").src = img.src; $("#lightbox").classList.add("on"); });
 }
@@ -1258,22 +1397,23 @@ function drawMilitary(){
   entries.forEach(e => { const g = milEra(e); (groups[g] = groups[g] || []).push(e); });
   const card = e => {
     const p = e.p, det = MIL_DETAIL[p.id];
+    const kd = LANG === "ko" ? MIL_KO[p.id] : null;
     const ph = (PHOTOS[p.id]||[]).slice(0, 5);
     const recs = e.evid.map(v => `<div>• ${esc(v.txt)}${v.d ? ` <span style="color:var(--gold)">(${esc(v.d)})</span>` : ""}${v.pl ? ` <i style="color:var(--ink2)">— ${esc(v.pl)}</i>` : ""}${v.note ? `<div style="color:var(--ink2);font-size:12.5px;margin-left:12px">${esc(v.note)}</div>` : ""}</div>`).join("");
     const links = det && det.links.length ? `<div class="mc-links">📂 ${det.links.map(k => { const L = Array.isArray(k) ? k : LNK[k]; return `<a href="${L[1]}" target="_blank">${L[0]} ↗</a>`; }).join("")}</div>` : "";
     return `<div class="panelcard milcard" style="margin-bottom:14px">
       <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
         <span style="font-size:18px">🎖</span>
-        <span class="plink" data-p="${p.id}" style="font-size:17px">${esc(p.name)}</span>
-        <span style="color:var(--ink2);font-size:13px">${yrs(p)}${p.birth && p.birth.place ? " · b. " + esc(p.birth.place.split(",")[0]) : ""}</span>
+        <span class="plink" data-p="${p.id}" style="font-size:17px">${esc(nmOf(p))}</span>
+        <span style="color:var(--ink2);font-size:13px">${yrs(p)}${p.birth && p.birth.place ? (LANG === "ko" ? " · " + esc(p.birth.place.split(",")[0]) + " 출생" : " · b. " + esc(p.birth.place.split(",")[0])) : ""}</span>
         ${p.country ? flagSVG(p.country, 17, 11.5) : ""}
-        ${p.directAncestor ? '<span style="font-size:11px;background:var(--gold);color:#fff;border-radius:9px;padding:2px 8px">direct ancestor</span>' : ""}
-        ${(p.sourceIds||[]).length ? `<span style="font-size:11px;color:var(--green2)">✓ ${(p.sourceIds||[]).length} record citations</span>` : ""}
+        ${p.directAncestor ? `<span style="font-size:11px;background:var(--gold);color:#fff;border-radius:9px;padding:2px 8px">${LANG === "ko" ? "직계 조상" : "direct ancestor"}</span>` : ""}
+        ${(p.sourceIds||[]).length ? `<span style="font-size:11px;color:var(--green2)">✓ ${LANG === "ko" ? "기록 출처 " + (p.sourceIds||[]).length + "건" : (p.sourceIds||[]).length + " record citations"}</span>` : ""}
       </div>
       ${det ? `<div class="mc-grid">
-        <div class="k">${T("Conflict")}</div><div><b>${esc(det.conflict)}</b></div>
-        <div class="k">${T("Likely role")}</div><div>${esc(det.role)}</div>
-        <div class="k">${T("Key battles")}</div><div>${esc(det.battles)}</div>
+        <div class="k">${T("Conflict")}</div><div><b>${esc(kd ? kd.c : det.conflict)}</b></div>
+        <div class="k">${T("Likely role")}</div><div>${esc(kd ? kd.r : det.role)}</div>
+        <div class="k">${T("Key battles")}</div><div>${esc(kd ? kd.b : det.battles)}</div>
         ${recs ? `<div class="k">${T("In the records")}</div><div>${recs}</div>` : ""}
       </div>` : (recs ? `<div style="margin:8px 0 0 28px;font-size:13.5px">${recs}</div>` : "")}
       ${links}
@@ -1282,26 +1422,26 @@ function drawMilitary(){
   };
   $("#v-mil").innerHTML = `
     <div class="panelcard" style="margin-bottom:18px">
-      <h3>${LANG === "ko" ? "🎖 군복을 입은 가족 — 기록된 복무자 " + entries.length + "명" : "🎖 The family in uniform — " + entries.length + " documented service members"}</h3>${LANG === "ko" ? `<div style="font-size:12px;color:var(--ink2)">상세 설명은 영어로 제공됩니다.</div>` : ""}
-      <div style="font-size:14.5px;line-height:1.7">From colonial musters on the Hudson to the RCAF over Europe, this tree carries nine generations of service. The thread runs: colonial militia → Revolutionary frontier → four Napoleonic-era Irishmen → an 1862 Union volunteer → <span class="plink" data-p="P9300">Richard Whittingham Burnham</span>'s Victorian regulars → <span class="plink" data-p="P7">Jack Burnham</span> and <span class="plink" data-p="P295">John Wordsworth Bellamy</span> in the Great War → <span class="plink" data-p="P52">George</span> and <span class="plink" data-p="P21">John</span> in the Second. Each entry shows the conflict, the likely role, and the battles within reach of the records — with links to the archives that hold the full files.</div>
+      <h3>${LANG === "ko" ? "🎖 군복을 입은 가족 — 기록된 복무자 " + entries.length + "명" : "🎖 The family in uniform — " + entries.length + " documented service members"}</h3>
+      <div style="font-size:14.5px;line-height:1.7">${LANG === "ko" ? `허드슨 강가의 식민지 소집에서 유럽 상공의 RCAF까지, 이 가계도에는 아홉 세대의 군 복무가 새겨져 있습니다. 그 흐름은 식민지 민병대 → 독립 전쟁의 변경 → 나폴레옹 시대의 아일랜드인 네 명 → 1862년의 북군 지원병 → <span class="plink" data-p="P9300">리처드 휘팅엄 번햄</span>의 빅토리아 시대 정규군 → 대전쟁의 <span class="plink" data-p="P7">잭 번햄</span>과 <span class="plink" data-p="P295">존 워즈워스 벨라미</span> → 제2차 세계 대전의 <span class="plink" data-p="P52">조지</span>와 <span class="plink" data-p="P21">존</span>으로 이어집니다. 각 항목은 참전 전쟁, 추정 역할, 기록이 닿는 범위의 주요 전투를 보여 주며, 전체 서류를 보관한 기록관 링크가 함께 제공됩니다.` : `From colonial musters on the Hudson to the RCAF over Europe, this tree carries nine generations of service. The thread runs: colonial militia → Revolutionary frontier → four Napoleonic-era Irishmen → an 1862 Union volunteer → <span class="plink" data-p="P9300">Richard Whittingham Burnham</span>'s Victorian regulars → <span class="plink" data-p="P7">Jack Burnham</span> and <span class="plink" data-p="P295">John Wordsworth Bellamy</span> in the Great War → <span class="plink" data-p="P52">George</span> and <span class="plink" data-p="P21">John</span> in the Second. Each entry shows the conflict, the likely role, and the battles within reach of the records — with links to the archives that hold the full files.`}</div>
     </div>
     ${ERA_ORDER.filter(g => groups[g]).map(g => `
-      <h3 style="font-weight:normal;color:var(--green);font-size:20px;margin:22px 0 8px">${T(g)} <span style="color:var(--ink2);font-size:13px">· ${groups[g].length} ${groups[g].length === 1 ? "person" : "people"}</span></h3>
-      <div class="eraintro">${ERA_INTRO[g] || ""}</div>
+      <h3 style="font-weight:normal;color:var(--green);font-size:20px;margin:22px 0 8px">${T(g)} <span style="color:var(--ink2);font-size:13px">· ${LANG === "ko" ? groups[g].length + "명" : groups[g].length + " " + (groups[g].length === 1 ? "person" : "people")}</span></h3>
+      <div class="eraintro">${(LANG === "ko" ? ERA_INTRO_KO[g] : ERA_INTRO[g]) || ""}</div>
       ${groups[g].sort((a,b) => ((a.p.birth&&a.p.birth.year)||9999) - ((b.p.birth&&b.p.birth.year)||9999)).map(card).join("")}`).join("")}
-    <div style="font-size:12.5px;color:var(--ink2);font-style:italic;margin-top:10px">"Likely role" and "key battles" combine the family's records with the military history of each person's time, place and age — possibilities, not proof, until each service file is retrieved. Family-provided service (George, John Howard) is marked as such in their profiles.</div>`;
+    <div style="font-size:12.5px;color:var(--ink2);font-style:italic;margin-top:10px">${LANG === "ko" ? `"추정 역할"과 "주요 전투"는 가족의 기록과 각 인물의 시대·장소·나이에 대한 군사사를 결합한 것입니다 — 복무 서류가 확보되기 전까지는 가능성이지 증명이 아닙니다. 가족 증언에 따른 복무(조지, 존 하워드)는 프로필에 그렇게 표시되어 있습니다.` : `"Likely role" and "key battles" combine the family's records with the military history of each person's time, place and age — possibilities, not proof, until each service file is retrieved. Family-provided service (George, John Howard) is marked as such in their profiles.`}</div>`;
   $("#v-mil").querySelectorAll(".plink").forEach(el => el.onclick = () => openProfile(el.dataset.p));
   $("#v-mil").querySelectorAll("img").forEach(img => img.onclick = () => { $("#lbimg").src = img.src; $("#lightbox").classList.add("on"); });
 }
 /* ---------- RELATIONSHIP CALCULATOR ---------- */
 const relSel = {A: null, B: null};
-function setRel(which, pid){ relSel[which] = pid; $("#rel" + which).value = P[pid].name + " (" + yrs(P[pid]) + ")"; $("#relgo").disabled = !(relSel.A && relSel.B); }
+function setRel(which, pid){ relSel[which] = pid; $("#rel" + which).value = nmOf(P[pid]) + " (" + yrs(P[pid]) + ")"; $("#relgo").disabled = !(relSel.A && relSel.B); }
 ["A","B"].forEach(w => {
   const inp = $("#rel" + w), res = $("#rel" + w + "res");
   inp.addEventListener("input", () => {
     relSel[w] = null; $("#relgo").disabled = true;
     const hits = doSearch(inp.value);
-    res.innerHTML = hits.map(h => `<div class="r" data-p="${h.pid}">${flagOf(h.p)} ${esc(h.p.name)} <span style="color:var(--ink2);font-size:12px">(${yrs(h.p)})</span></div>`).join("");
+    res.innerHTML = hits.map(h => `<div class="r" data-p="${h.pid}">${flagOf(h.p)} ${esc(nmOf(h.p))} <span style="color:var(--ink2);font-size:12px">(${yrs(h.p)})</span></div>`).join("");
     res.style.display = hits.length ? "block" : "none";
   });
   res.addEventListener("click", e => { const t = e.target.closest(".r"); if (t) { setRel(w, t.dataset.p); res.style.display = "none"; } });
@@ -1366,22 +1506,34 @@ function calcRel(){
     return;
   }
   const cA = chainTo(A, best.anc, mA), cB = chainTo(B, best.anc, mB);
-  const fmt = pid => `<span class="plink" data-p="${pid}">${esc(P[pid].name)}</span>`;
+  const fmt = pid => `<span class="plink" data-p="${pid}">${esc(nmOf(P[pid]))}</span>`;
   const chainHtml = cA.map(fmt).join(" → ") + "<br>" + cB.map(fmt).join(" → ");
   const fA = esc(P[A].name.split(" ")[0]), fB = esc(P[B].name.split(" ")[0]);
   const direct = best.a === 0 || best.b === 0;
   let relTxt;
   if (LANG === "ko") {
     const chon = best.a + best.b;
-    const fAk = esc(P[A].name.split(" ")[0]), fBk = esc(P[B].name.split(" ")[0]);
+    const fAk = esc(nmOf(P[A]).split(" ")[0]), fBk = esc(nmOf(P[B]).split(" ")[0]);
     let lbl;
-    if (direct) { const d = Math.max(best.a, best.b); lbl = "직계 " + d + "세대 (" + (d === 1 ? (best.b === 1 ? "부모" : "자녀") : d + "촌 직계") + ")"; }
+    if (direct) {
+      const d = Math.max(best.a, best.b);
+      const ANC = d === 1 ? "부모" : d === 2 ? "조부모" : d === 3 ? "증조부모" : d === 4 ? "고조부모" : d + "대조";
+      const DESC = d === 1 ? "자녀" : d === 2 ? "손주" : d === 3 ? "증손" : d === 4 ? "고손" : d + "세손";
+      const aIsAnc = best.a === 0;
+      out.innerHTML = headRel(A, B) +
+        `<div class="big">${aIsAnc ? fAk + "님은 " + fBk + "님의 <b>" + ANC + "</b>입니다" : fAk + "님은 " + fBk + "님의 <b>" + DESC + "</b>입니다"}</div>` +
+        `<div class="via">직계 관계 — ${d}세대 차이</div>` +
+        `<div class="chain">${cA.map(fmt).join(" → ")}<br>${cB.map(fmt).join(" → ")}</div>`;
+      out.querySelectorAll(".plink").forEach(el => el.onclick = () => openProfile(el.dataset.p));
+      return;
+    }
+    
     else if (best.a === 1 && best.b === 1) lbl = (P[A].famc && P[A].famc === P[B].famc) ? "형제자매 (2촌)" : "이복 형제자매";
     else if (best.a === 1 || best.b === 1) lbl = chon + "촌 (삼촌·조카 계열)";
     else lbl = chon + "촌" + (best.a === 2 && best.b === 2 ? " (사촌)" : "");
     out.innerHTML = headRel(A, B) +
       `<div class="big">${fAk}님과 ${fBk}님은 <b>${lbl}</b>입니다</div>` +
-      `<div class="via">${direct ? "직계 관계 — " + Math.max(best.a, best.b) + "세대 차이" : "공통 조상: <b>" + esc(P[best.anc].name) + "</b> (" + yrs(P[best.anc]) + ")"}</div>` +
+      `<div class="via">${direct ? "직계 관계 — " + Math.max(best.a, best.b) + "세대 차이" : "공통 조상: <b>" + esc(nmOf(P[best.anc])) + "</b> (" + yrs(P[best.anc]) + ")"}</div>` +
       `<div class="chain">${cA.map(fmt).join(" → ")}<br>${cB.map(fmt).join(" → ")}</div>`;
     out.querySelectorAll(".plink").forEach(el => el.onclick = () => openProfile(el.dataset.p));
     return;
@@ -1403,7 +1555,7 @@ function calcRel(){
     `<div class="chain">${chainHtml}</div>`;
   out.querySelectorAll(".plink").forEach(el => el.onclick = () => openProfile(el.dataset.p));
 }
-function headRel(A, B){ return `<div style="font-size:13px;color:var(--ink2)">${flagOf(P[A])} ${esc(P[A].name)} &nbsp;⟷&nbsp; ${flagOf(P[B])} ${esc(P[B].name)}</div>`; }
+function headRel(A, B){ return `<div style="font-size:13px;color:var(--ink2)">${flagOf(P[A])} ${esc(nmOf(P[A]))} &nbsp;⟷&nbsp; ${flagOf(P[B])} ${esc(nmOf(P[B]))}</div>`; }
 $("#relgo").onclick = calcRel;
 
 /* ---------- boot ---------- */
