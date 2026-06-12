@@ -182,6 +182,22 @@ table.ltable{width:100%;border-collapse:collapse;background:var(--panel);font-si
 
 footer{max-width:1380px;margin:0 auto;padding:8px 26px 30px;font-size:12px;color:var(--ink2);font-style:italic}
 @media(max-width:760px){ main{padding:14px} header{padding:14px 14px 0} .searchwrap{min-width:100%} }
+@media print{ body *{visibility:hidden} #treewrap,#treewrap *{visibility:visible} #treewrap{position:absolute;top:0;left:0;width:100%;border:none;box-shadow:none} .repctl{display:none!important} }
+.repctl{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px;font-size:13px}
+.repctl select,.repctl button{padding:7px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);font-size:13px;cursor:pointer}
+.repctl button.pri{background:var(--green);color:#fff;border-color:var(--green)}
+.report{font-size:13.5px;line-height:1.65;padding:10px 14px}
+.report h2{font-weight:normal;color:var(--green);font-size:20px;margin-bottom:4px}
+.report .gh{color:var(--gold);font-size:12px;text-transform:uppercase;letter-spacing:1.4px;margin:14px 0 6px;border-bottom:1px solid var(--line)}
+.report .pe{margin-bottom:7px}
+.report .anum{display:inline-block;min-width:34px;color:var(--gold);font-weight:bold}
+.report .dts{color:var(--ink2);font-size:12.5px}
+.report table{border-collapse:collapse;width:100%;margin:8px 0}
+.report td,.report th{border:1px solid var(--line);padding:6px 9px;text-align:left;font-size:13px}
+.report th{background:#f3edda;color:var(--green)}
+.mpin{cursor:pointer}
+.mpin circle{stroke:#fffdf7;stroke-width:1.2}
+.mpin text{font-family:Georgia;font-size:9.5px;fill:#fdf6e0;pointer-events:none}
 </style>
 </head>
 <body>
@@ -214,7 +230,7 @@ footer{max-width:1380px;margin:0 auto;padding:8px 26px 30px;font-size:12px;color
   <section class="view on" id="v-tree">
     <div class="treebar">
       <span class="vswitch">
-        <button data-tv="h" class="on">⇥ Horizontal</button><button data-tv="v">⇩ Vertical</button><button data-tv="fan">◠ Fan</button><button data-tv="list">☰ List</button>
+        <button data-tv="h" class="on">⇥ Horizontal</button><button data-tv="v">⇩ Vertical</button><button data-tv="fan">◠ Fan</button><button data-tv="list">☰ List</button><button data-tv="charts">📄 Charts &amp; Reports</button><button data-tv="mapper">📍 Tree Mapper</button>
       </span>
       <button id="btn-home">⌂ Back to Sean</button>
       <span class="crumb" id="crumb"></span>
@@ -289,7 +305,8 @@ const P = DATA.people, F = DATA.families, S = DATA.sources, ROOT = DATA.meta.roo
 let LANG = (function(){ try { return localStorage.getItem("ftlang") || "en"; } catch(e) { return "en"; } })();
 const KO = {
  "🌳 Tree":"🌳 가계도","🗺️ Origins & Migration":"🗺️ 출신지와 이주","📊 Statistics":"📊 통계","📖 Family Stories":"📖 가족 이야기","🎖 Military Service":"🎖 군 복무","🧮 How are we related?":"🧮 우리는 어떤 사이?",
- "⇥ Horizontal":"⇥ 가로형","⇩ Vertical":"⇩ 세로형","◠ Fan":"◠ 부채꼴","☰ List":"☰ 목록",
+ "⇥ Horizontal":"⇥ 가로형","⇩ Vertical":"⇩ 세로형","◠ Fan":"◠ 부채꼴","☰ List":"☰ 목록","📄 Charts & Reports":"📄 차트·보고서","📍 Tree Mapper":"📍 지도 보기",
+ "Ahnentafel (ancestor list)":"조상 일람표 (Ahnentafel)","Descendant report":"후손 보고서","Family group sheet":"가족 기록표","🖨 Print":"🖨 인쇄","⬇ Download":"⬇ 다운로드","Generations:":"세대 수:","Report:":"보고서:","Ancestor birthplaces":"조상 출생지","Life journey of focus person":"중심 인물의 생애 여정","World":"세계","North America":"북미","British Isles":"영국·아일랜드","Europe":"유럽","approximate":"대략적 위치","unmapped":"좌표 미상",
  "⌂ Back to Sean":"⌂ 션에게 돌아가기","Ancestor generations:":"조상 세대 수:",
  "Family archive":"가족 기록물","Life timeline":"생애 연표","From public records &amp; web research":"공공 기록·웹 조사 자료","Immediate family":"직계 가족","Notes &amp; anecdotes":"메모와 일화","Record sources":"출처 기록",
  "Parents":"부모","Siblings":"형제자매","Half-siblings":"이복 형제자매","Children":"자녀","Spouse":"배우자","Spouses":"배우자",
@@ -341,7 +358,7 @@ function genLabel(g){
 function applyStaticLang(){
   const t = (sel, txt) => { try { const e = document.querySelector(sel); if (e) e.textContent = txt; } catch(e){} };
   try { document.querySelectorAll("nav button").forEach(b => { const en = {tree:"🌳 Tree",map:"🗺️ Origins & Migration",stats:"📊 Statistics",stories:"📖 Family Stories",mil:"🎖 Military Service",rel:"🧮 How are we related?"}[b.dataset.v]; if (en) b.textContent = T(en); }); } catch(e){}
-  try { document.querySelectorAll(".vswitch button").forEach(b => { const en = {h:"⇥ Horizontal",v:"⇩ Vertical",fan:"◠ Fan",list:"☰ List"}[b.dataset.tv]; if (en) b.textContent = T(en); }); } catch(e){}
+  try { document.querySelectorAll(".vswitch button").forEach(b => { const en = {h:"⇥ Horizontal",v:"⇩ Vertical",fan:"◠ Fan",list:"☰ List",charts:"📄 Charts & Reports",mapper:"📍 Tree Mapper"}[b.dataset.tv]; if (en) b.textContent = T(en); }); } catch(e){}
   t("#btn-home", T("⌂ Back to Sean"));
   t("#genslabel", T("Ancestor generations:"));
   t("#langbtn", LANG === "ko" ? "🇬🇧 English" : "🇰🇷 한국어");
@@ -627,6 +644,8 @@ function renderTree(){
   if (TREEVIEW === "h") renderHorizontal();
   else if (TREEVIEW === "v") renderVertical();
   else if (TREEVIEW === "fan") renderFan();
+  else if (TREEVIEW === "charts") renderCharts();
+  else if (TREEVIEW === "mapper") renderMapper();
   else renderList();
 }
 document.querySelectorAll(".vswitch button").forEach(b => b.onclick = () => {
@@ -803,6 +822,237 @@ function renderList(){
     ? `전체 ${Object.keys(P).length.toLocaleString()}명 목록. ★ = 직계 조상(숫자는 세대 수), 🎖 = 군 복무, 📷 = 기록 보유, ⚠ = 미입증.`
     : `Browsing all ${Object.keys(P).length.toLocaleString()} people. ★ = direct ancestor (number = generations back), 🎖 = military, 📷 = documents, ⚠ = detached/unproven.`;
 }
+
+/* ---------- CHARTS & REPORTS ---------- */
+let REPORT = "ahnen";
+function renderCharts(){
+  const maxGen = +$("#gensel").value + 2;
+  $("#treewrap").innerHTML = `
+    <div class="repctl">
+      <label>${T("Report:")} <select id="reptype">
+        <option value="ahnen"${REPORT==="ahnen"?" selected":""}>${T("Ahnentafel (ancestor list)")}</option>
+        <option value="desc"${REPORT==="desc"?" selected":""}>${T("Descendant report")}</option>
+        <option value="fgs"${REPORT==="fgs"?" selected":""}>${T("Family group sheet")}</option>
+      </select></label>
+      <button class="pri" id="repprint">${T("🖨 Print")}</button>
+      <button id="repdl">${T("⬇ Download")}</button>
+      <span style="color:var(--ink2)">${LANG==="ko" ? "대상: " + esc(nmOf(P[FOCUS])) + " — 가계도 화면에서 다른 인물을 중심으로 지정하면 보고서 대상이 바뀝니다." : "Subject: " + esc(nmOf(P[FOCUS])) + " — center the tree on someone else to change the subject."}</span>
+    </div>
+    <div class="report" id="repbody"></div>`;
+  const body = $("#repbody");
+  if (REPORT === "ahnen") body.innerHTML = ahnenReport(FOCUS, maxGen);
+  else if (REPORT === "desc") body.innerHTML = descReport(FOCUS, Math.min(maxGen, 6));
+  else body.innerHTML = fgsReport(FOCUS);
+  $("#reptype").onchange = e => { REPORT = e.target.value; renderCharts(); };
+  $("#repprint").onclick = () => window.print();
+  $("#repdl").onclick = () => {
+    const blob = new Blob([`<!DOCTYPE html><html><head><meta charset="utf-8"><title>${esc(nmOf(P[FOCUS]))} — report</title><style>body{font:14px Georgia,serif;color:#2b2620;max-width:800px;margin:30px auto;line-height:1.6}h2{color:#2e5339}table{border-collapse:collapse;width:100%}td,th{border:1px solid #ccc;padding:6px 9px;text-align:left}.gh{color:#b08d3e;letter-spacing:1.4px;text-transform:uppercase;font-size:12px;margin:14px 0 6px;border-bottom:1px solid #ddd}.anum{display:inline-block;min-width:34px;color:#b08d3e;font-weight:bold}.dts{color:#6b6051;font-size:12.5px}.pe{margin-bottom:7px}</style></head><body>${body.innerHTML.replace(/<span class="plink"[^>]*>/g,"<b>").replace(/<\/span>/g,"</b>")}</body></html>`], {type:"text/html"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = (P[FOCUS].name.replace(/\s+/g,"_")) + "_" + REPORT + ".html";
+    a.click();
+  };
+  body.querySelectorAll(".plink").forEach(el => el.onclick = () => openProfile(el.dataset.p));
+  $("#crumb").innerHTML = LANG==="ko" ? "인쇄하거나 HTML 파일로 내려받아 친척들과 공유하세요." : "Print it, or download as an HTML file to share.";
+}
+function pline(p, num){
+  const b = p.birth ? `${LANG==="ko"?"출생":"b."} ${p.birth.date ? fmtDate(p.birth.date) : (p.birth.year||"?")}${p.birth.place ? ", " + esc(p.birth.place) : ""}` : "";
+  const d2 = p.death ? ` · ${LANG==="ko"?"사망":"d."} ${p.death.date ? fmtDate(p.death.date) : (p.death.year||"?")}${p.death.place ? ", " + esc(p.death.place) : ""}` : "";
+  return `<div class="pe">${num !== undefined ? `<span class="anum">${num}</span>` : ""}<span class="plink" data-p="${p.id}"><b>${esc(nmOf(p))}</b></span> <span class="dts">${b}${d2}</span></div>`;
+}
+function ahnenReport(pid, maxGen){
+  let html = `<h2>${T("Ahnentafel (ancestor list)")} — ${esc(nmOf(P[pid]))}</h2>`;
+  const slots = {1: pid};
+  let any = true;
+  for (let g = 0; g < maxGen && any; g++) {
+    any = false;
+    const lo = Math.pow(2, g), hi = Math.pow(2, g+1);
+    let sec = "";
+    for (let i = lo; i < hi; i++) {
+      const id = slots[i]; if (!id || !P[id]) continue;
+      sec += pline(P[id], i);
+      const f = F[P[id].famc];
+      if (f) { if (f.husband) { slots[i*2] = f.husband; any = true; } if (f.wife) { slots[i*2+1] = f.wife; any = true; } }
+    }
+    if (sec) html += `<div class="gh">${genLabel(g)}</div>` + sec;
+  }
+  return html;
+}
+function descReport(pid, maxDepth){
+  let html = `<h2>${T("Descendant report")} — ${esc(nmOf(P[pid]))}</h2>`;
+  let count = 0;
+  function walk(id, depth){
+    if (depth > maxDepth || count > 800) return "";
+    const p = P[id]; if (!p) return "";
+    count++;
+    let s = `<div style="margin-left:${depth*22}px">` + pline(p).replace('class="pe"','class="pe" style="margin-bottom:4px"') + "</div>";
+    famsOf(id).forEach(f => {
+      const sp = f.husband === id ? f.wife : f.husband;
+      if (sp && P[sp]) s += `<div style="margin-left:${depth*22 + 14}px;color:var(--ink2);font-size:12.5px">⚭ ${esc(nmOf(P[sp]))}${f.marriage && f.marriage.date ? " (" + fmtDate(f.marriage.date) + ")" : ""}</div>`;
+      f.children.forEach(c => { s += walk(c, depth + 1); });
+    });
+    return s;
+  }
+  return html + walk(pid, 0);
+}
+function fgsReport(pid){
+  const p = P[pid];
+  let html = `<h2>${T("Family group sheet")} — ${esc(nmOf(p))}</h2>`;
+  const row = (label, q) => q ? `<tr><th style="width:130px">${label}</th><td>${q}</td></tr>` : "";
+  const vit = x => { const b = x.birth, d2 = x.death;
+    return `${esc(nmOf(x))} <span class="dts">${b ? (LANG==="ko"?"출생 ":"b. ") + (b.date ? fmtDate(b.date) : b.year || "?") + (b.place ? ", " + esc(b.place) : "") : ""}${d2 ? " · " + (LANG==="ko"?"사망 ":"d. ") + (d2.date ? fmtDate(d2.date) : d2.year || "?") : ""}</span>`; };
+  const fams = famsOf(pid);
+  if (!fams.length) html += `<p>${LANG==="ko" ? "기록된 가족이 없습니다." : "No family units recorded."}</p>`;
+  fams.forEach((f, i) => {
+    const h = f.husband && P[f.husband], w = f.wife && P[f.wife];
+    html += `<div class="gh">${LANG==="ko" ? "가족 " + (i+1) : "Family " + (i+1)}</div><table>
+      ${row(LANG==="ko"?"남편":"Husband", h ? vit(h) : "")}
+      ${row(LANG==="ko"?"아내":"Wife", w ? vit(w) : "")}
+      ${row(LANG==="ko"?"혼인":"Married", f.marriage ? `${f.marriage.date ? fmtDate(f.marriage.date) : f.marriage.year || ""}${f.marriage.place ? ", " + esc(f.marriage.place) : ""}` : "")}
+      </table>`;
+    if (f.children.length) {
+      html += `<table><tr><th>#</th><th>${LANG==="ko"?"자녀":"Children"}</th></tr>` +
+        f.children.map((c, j) => `<tr><td>${j+1}</td><td>${P[c] ? vit(P[c]) : c}</td></tr>`).join("") + "</table>";
+    }
+  });
+  const pf = F[p.famc];
+  if (pf) {
+    html += `<div class="gh">${T("Parents")}</div><table>
+      ${row(LANG==="ko"?"아버지":"Father", pf.husband && P[pf.husband] ? vit(P[pf.husband]) : "")}
+      ${row(LANG==="ko"?"어머니":"Mother", pf.wife && P[pf.wife] ? vit(P[pf.wife]) : "")}</table>`;
+  }
+  return html;
+}
+
+/* ---------- TREE MAPPER ---------- */
+const TOWN_LL = {
+ "victoria":[48.43,-123.36],"burnaby":[49.25,-122.95],"new westminster":[49.21,-122.91],"vancouver":[49.26,-123.11],"saanich":[48.48,-123.36],"saanichton":[48.59,-123.42],
+ "montreal":[45.50,-73.57],"montréal":[45.50,-73.57],"hamilton":[43.26,-79.87],"brantford":[43.14,-80.26],"ancaster":[43.22,-79.98],"calgary":[51.05,-114.07],
+ "london":[51.51,-0.13],"kingston":[44.23,-76.49],"toronto":[43.65,-79.38],"cloyne":[44.82,-77.18],"cobourg":[43.96,-78.17],"belleville":[44.16,-77.38],
+ "napanee":[44.25,-76.95],"picton":[44.00,-77.14],"stevensville":[42.95,-79.06],"welland":[43.00,-79.25],"niagara":[43.09,-79.08],"st. catharines":[43.16,-79.25],
+ "woodstock":[43.13,-80.75],"burford":[43.10,-80.43],"camden":[44.40,-77.00],"ernestown":[44.30,-76.70],"amherst island":[44.15,-76.72],"sydenham":[44.41,-76.59],
+ "plevna":[44.97,-76.99],"ottawa":[45.42,-75.70],"perth":[44.90,-76.25],"bedford township":[44.55,-76.65],"portland township":[44.65,-76.55],"frontenac":[44.50,-76.50],
+ "wentworth county":[43.26,-79.87],"hamilton township":[44.05,-78.20],"haldimand":[42.95,-79.85],"willoughby":[43.02,-79.00],"bertie":[42.91,-79.03],
+ "dublin":[53.35,-6.26],"dublin north":[53.36,-6.26],"arklow":[52.79,-6.16],"belfast":[54.60,-5.93],"cork":[51.90,-8.47],"kilbeggan":[53.37,-7.50],
+ "termonfeckin":[53.76,-6.27],"wicklow":[52.98,-6.03],"cavan":[53.99,-7.36],"antrim":[54.71,-6.21],"tyrone":[54.60,-7.30],"kerry":[52.15,-9.57],
+ "westmeath":[53.53,-7.35],"louth":[53.92,-6.49],"fermanagh":[54.35,-7.64],"wexford":[52.34,-6.46],"devenish":[54.42,-7.70],"castle macadam":[52.93,-6.10],
+ "poplar":[51.51,-0.02],"potton":[52.13,-0.21],"bedford":[52.14,-0.47],"aldershot":[51.25,-0.76],"newport":[50.70,-1.29],"shoreditch":[51.53,-0.08],
+ "whitechapel":[51.52,-0.06],"yorkshire":[53.96,-1.08],"norfolk":[52.61,0.89],"nottingham":[52.95,-1.15],"exeter":[50.72,-3.53],"kenton":[50.64,-3.47],
+ "newport pagnell":[52.09,-0.72],"cambridge":[52.21,0.12],"boston":[52.98,-0.03],"wallingford":[51.60,-1.13],"bucklebury":[51.43,-1.20],"cannock":[52.69,-2.03],
+ "shalbourne":[51.36,-1.55],"wivenhoe":[51.86,0.96],"potton bedfordshire":[52.13,-0.21],"okehampton":[50.74,-4.00],"falmouth":[50.15,-5.07],"sherborne":[50.95,-2.52],
+ "sumiswald":[47.03,7.74],"bern":[46.95,7.45],"berne":[46.95,7.45],"zurich":[47.37,8.54],"zürich":[47.37,8.54],"schaffhausen":[47.70,8.63],"walterswil":[47.16,7.76],
+ "lancaster":[40.04,-76.31],"bucks county":[40.34,-75.11],"bucks":[40.34,-75.11],"philadelphia":[39.95,-75.17],"conestoga":[39.94,-76.36],"plumstead":[40.39,-75.12],
+ "brooklyn":[40.68,-73.94],"bronx":[40.84,-73.87],"new york":[40.71,-74.01],"tarrytown":[41.08,-73.86],"westchester":[41.12,-73.79],"phillipsburgh":[41.01,-73.87],
+ "dutchess":[41.77,-73.74],"albany":[42.65,-73.75],"berne town":[42.62,-74.13],"schaghticoke":[42.90,-73.58],"suffield":[41.98,-72.65],"rehoboth":[41.84,-71.25],
+ "new haven":[41.31,-72.92],"hartford":[41.76,-72.67],"los angeles":[34.05,-118.24],"hollywood":[34.10,-118.33],"seattle":[47.61,-122.33],"oso":[44.78,-76.85],
+ "masan":[35.20,128.58],"singapore":[1.35,103.82],"gorki":[49.80,21.50],"vimy":[50.37,2.81],"st-joseph-de-beauce":[46.30,-70.88],"st. gabriel de valcartier":[46.94,-71.46],
+ "wiltz":[49.97,5.93],"amman":[31.95,35.93],"stuttgart":[48.78,9.18],"peebles":[55.65,-3.19],"oxford":[42.95,-80.75],
+};
+const REGION_LL = {"british columbia":[50.5,-122.5],"ontario":[44.4,-78.3],"quebec":[46.8,-71.2],"alberta":[51.5,-114.0],"manitoba":[49.9,-97.1],"upper canada":[44.4,-78.3],
+ "pennsylvania":[40.9,-77.8],"new york":[42.9,-75.5],"connecticut":[41.6,-72.7],"massachusetts":[42.4,-71.4],"vermont":[44.0,-72.7],"virginia":[37.5,-78.5],"maryland":[39.4,-77.0],"new jersey":[40.1,-74.5],"california":[36.7,-119.4],
+ "bedfordshire":[52.1,-0.4],"hampshire":[51.05,-1.3],"kent":[51.2,0.7],"berkshire":[51.4,-1.1],"devon":[50.7,-3.7],"devonshire":[50.7,-3.7],"staffordshire":[52.8,-2.0],"lincolnshire":[53.1,-0.2],"nottinghamshire":[53.1,-1.0],"northumberland":[44.05,-78.2],"essex":[51.8,0.5],"wiltshire":[51.3,-1.9],"worcestershire":[52.2,-2.2],"derbyshire":[53.1,-1.6]};
+const COUNTRY_LL = {"Canada":[50.0,-95.0],"United States":[39.8,-98.6],"England":[52.5,-1.5],"Ireland":[53.4,-7.9],"Northern Ireland":[54.6,-6.7],"Scotland":[56.5,-4.0],"Wales":[52.4,-3.4],"United Kingdom":[52.5,-1.5],"Switzerland":[46.8,8.2],"Germany":[51.1,10.4],"Netherlands":[52.2,5.3],"France":[46.6,2.4],"Belgium":[50.6,4.5],"Luxembourg":[49.8,6.1],"Austria":[47.6,14.1],"Spain":[40.3,-3.7],"Denmark":[56.0,9.5],"Norway":[61.0,8.5],"Sweden":[62.0,15.0],"Poland":[52.1,19.4],"Ukraine":[49.0,31.0],"Russia":[58.0,40.0],"Hungary":[47.2,19.5],"Jordan":[31.3,36.4],"South Korea":[36.5,127.9],"Singapore":[1.35,103.82],"India":[22.0,79.0],"Australia":[-25.0,134.0],"New Zealand":[-41.0,173.0],"Czechia":[49.8,15.5],"Portugal":[39.6,-8.0],"Israel":[31.4,35.0]};
+function placeLL(place, country){
+  if (place) {
+    const segs = place.toLowerCase().split(",").map(s => s.trim().replace(/\./g, ""));
+    for (const s of segs) { if (TOWN_LL[s]) return {ll: TOWN_LL[s], approx: false}; }
+    for (const s of segs) { for (const k in TOWN_LL) { if (s.includes(k) && k.length > 4) return {ll: TOWN_LL[k], approx: false}; } }
+    for (const s of segs) { if (REGION_LL[s]) return {ll: REGION_LL[s], approx: true}; }
+  }
+  if (country && COUNTRY_LL[country]) return {ll: COUNTRY_LL[country], approx: true};
+  return null;
+}
+let MAPPER_MODE = "anc", MAPPER_ZOOM = "world";
+const ZOOMS = {world:[-170,75,190,-55], na:[-132,60,-52,24], gb:[-11.5,59.5,2.5,49.5], eu:[-6,56,18,42]};
+function renderMapper(){
+  const W = 1000, H = 520;
+  const z = ZOOMS[MAPPER_ZOOM];
+  const px = (lon, lat) => [ (lon - z[0]) / (z[2] - z[0]) * W, (lat - z[1]) / (z[3] - z[1]) * H ];
+  let pins = [], misses = 0;
+  if (MAPPER_MODE === "anc") {
+    const groups = {};
+    Object.values(P).forEach(p => {
+      if (!p.directAncestor || !p.birth) return;
+      const r = placeLL(p.birth.place, p.birth.country);
+      if (!r) { misses++; return; }
+      const key = r.ll.join(",");
+      (groups[key] = groups[key] || {ll: r.ll, approx: r.approx, ppl: []}).ppl.push(p);
+    });
+    pins = Object.values(groups);
+  } else {
+    const p = P[FOCUS];
+    const evs = [];
+    if (p.birth) evs.push({t: T("Born"), d: p.birth.date, y: p.birth.year, pl: p.birth.place, c: p.birth.country});
+    (p.events||[]).forEach(e => { if (e.place) evs.push({t: e.type, d: e.date, y: e.year, pl: e.place, c: e.country}); });
+    famsOf(FOCUS).forEach(f => { if (f.marriage && f.marriage.place) evs.push({t: T("Married"), d: f.marriage.date, y: f.marriage.year, pl: f.marriage.place, c: f.marriage.country}); });
+    if (p.death) evs.push({t: T("Died"), d: p.death.date, y: p.death.year, pl: p.death.place, c: p.death.country});
+    evs.sort((a,b) => (a.y||0) - (b.y||0));
+    let seq = 0;
+    evs.forEach(e => {
+      const r = placeLL(e.pl, e.c);
+      if (!r) { misses++; return; }
+      pins.push({ll: r.ll, approx: r.approx, ev: e, n: ++seq});
+    });
+  }
+  // graticule + pins
+  let g = "";
+  for (let lon = -160; lon <= 180; lon += 20) { const [x] = px(lon, 0); if (x > 0 && x < W) g += `<line x1="${x}" y1="0" x2="${x}" y2="${H}" stroke="rgba(255,255,255,.06)"/>`; }
+  for (let lat = -40; lat <= 70; lat += 10) { const [, y] = px(0, lat); if (y > 0 && y < H) g += `<line x1="0" y1="${y}" x2="${W}" y2="${y}" stroke="rgba(255,255,255,.06)"/>`; }
+  let pinSvg = "", lines = "";
+  if (MAPPER_MODE === "anc") {
+    pins.forEach((pin, i) => {
+      const [x, y] = px(pin.ll[1], pin.ll[0]);
+      if (x < -20 || x > W + 20 || y < -20 || y > H + 20) return;
+      const r = 4 + Math.sqrt(pin.ppl.length) * 2.2;
+      const minGen = Math.min(...pin.ppl.map(p => p.generation || 12));
+      const hue = Math.max(20, 140 - minGen * 11);
+      pinSvg += `<g class="mpin" data-i="${i}"><circle cx="${x}" cy="${y}" r="${r}" fill="hsla(${hue},45%,52%,.85)"${pin.approx ? ' stroke-dasharray="2 2"' : ""}></circle><text x="${x}" y="${y + 3}" text-anchor="middle">${pin.ppl.length}</text></g>`;
+    });
+  } else {
+    let prev = null;
+    pins.forEach((pin, i) => {
+      const [x, y] = px(pin.ll[1], pin.ll[0]);
+      if (prev) lines += `<path d="M${prev[0]},${prev[1]} Q${(prev[0]+x)/2},${Math.min(prev[1],y)-40} ${x},${y}" fill="none" stroke="rgba(214,178,90,.7)" stroke-width="1.6" stroke-dasharray="5 3"/>`;
+      prev = [x, y];
+      pinSvg += `<g class="mpin" data-i="${i}"><circle cx="${x}" cy="${y}" r="11" fill="rgba(176,141,62,.92)"${pin.approx ? ' stroke-dasharray="2 2"' : ""}></circle><text x="${x}" y="${y + 3.5}" text-anchor="middle" font-weight="bold">${pin.n}</text></g>`;
+    });
+  }
+  const zb = Object.keys(ZOOMS).map(k => `<button data-z="${k}"${k === MAPPER_ZOOM ? ' class="pri"' : ""}>${T({world:"World",na:"North America",gb:"British Isles",eu:"Europe"}[k])}</button>`).join("");
+  $("#treewrap").innerHTML = `
+    <div class="repctl">
+      <select id="mmode">
+        <option value="anc"${MAPPER_MODE==="anc"?" selected":""}>${T("Ancestor birthplaces")}</option>
+        <option value="life"${MAPPER_MODE==="life"?" selected":""}>${T("Life journey of focus person")} (${esc(nmOf(P[FOCUS]))})</option>
+      </select>
+      ${zb}
+      <span style="color:var(--ink2)">${misses ? misses + " " + T("unmapped") : ""}</span>
+    </div>
+    <div style="background:linear-gradient(180deg,#11253a,#1b3a55 70%,#23476a);border-radius:14px;overflow:hidden">
+      <svg id="mapper" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%">${g}${lines}${pinSvg}</svg>
+    </div>
+    <div id="mapperdetail" style="margin-top:12px"></div>
+    <div style="font-size:12px;color:var(--ink2);font-style:italic;margin-top:6px">${LANG==="ko" ? "원을 클릭하면 명단이 표시됩니다. 점선 원은 대략적 위치(지역/국가 중심)입니다. 색: 초록=가까운 세대 → 주황=먼 세대." : "Click a pin to list its people. Dashed pins are approximate (region/country centroid). Colour: green = recent generations → amber = distant."}</div>`;
+  $("#mmode").onchange = e => { MAPPER_MODE = e.target.value; renderMapper(); };
+  document.querySelectorAll(".repctl [data-z]").forEach(b => b.onclick = () => { MAPPER_ZOOM = b.dataset.z; renderMapper(); });
+  $("#mapper").addEventListener("click", e => {
+    const t = e.target.closest(".mpin"); if (!t) return;
+    const i = +t.dataset.i;
+    const det = $("#mapperdetail");
+    if (MAPPER_MODE === "anc") {
+      const pin = pins[i];
+      det.innerHTML = `<div class="panelcard"><b>${esc(pin.ppl[0].birth.place || cName(pin.ppl[0].birth.country))}</b> — ` +
+        pin.ppl.sort((a,b) => (a.birth.year||0) - (b.birth.year||0)).slice(0, 50).map(p => `<span class="plink" data-p="${p.id}">${esc(nmOf(p))}</span> <span style="color:var(--ink2);font-size:12px">(${p.birth.year||"?"})</span>`).join(" · ") + "</div>";
+    } else {
+      const pin = pins[i];
+      det.innerHTML = `<div class="panelcard"><b>${pin.n}. ${esc(pin.ev.t)}</b> — ${pin.ev.d ? fmtDate(pin.ev.d) : pin.ev.y || ""}, ${esc(pin.ev.pl || "")}</div>`;
+    }
+    det.querySelectorAll(".plink").forEach(el => el.onclick = () => openProfile(el.dataset.p));
+  });
+  $("#crumb").innerHTML = LANG==="ko"
+    ? (MAPPER_MODE === "anc" ? "직계 조상들의 출생지를 지도에 표시했습니다." : esc(nmOf(P[FOCUS])) + "님의 생애 이동 경로입니다 — 번호 순서대로 이어집니다.")
+    : (MAPPER_MODE === "anc" ? "Birthplaces of every direct ancestor, pinned to the map." : "Life journey of " + esc(nmOf(P[FOCUS])) + " — follow the numbers.");
+}
+
 function hookTreeClicks(){
   const s = $("#treesvg");
   if (s) s.addEventListener("click", e => { const t = e.target.closest(".pcard"); if (t) openProfile(t.dataset.p); });
