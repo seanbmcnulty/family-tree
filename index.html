@@ -1072,11 +1072,12 @@ function renderMapper(){
   // cluster ancestor pins that collide at this zoom
   if (MAPPER_MODE === "anc") {
     const merged = [];
+    const RCAP = r => Math.min(26, 4 + Math.sqrt(r) * 2.0);
     pins.forEach(pin => {
       const [x, y] = px(pin.ll[1], pin.ll[0]);
-      const r = 4 + Math.sqrt(pin.ppl.length) * 2.2;
-      const hit = merged.find(m => { const dx = m.x - x, dy = m.y - y; return Math.sqrt(dx*dx + dy*dy) < (m.r + r) * 0.75; });
-      if (hit) { hit.ppl = hit.ppl.concat(pin.ppl); hit.approx = hit.approx && pin.approx; hit.r = 4 + Math.sqrt(hit.ppl.length) * 2.2; hit.places.push(pin.ppl[0].birth.place || ""); }
+      const r = RCAP(pin.ppl.length);
+      const hit = merged.find(m => { const dx = m.x - x, dy = m.y - y; return Math.sqrt(dx*dx + dy*dy) < (m.r + r) * 0.6; });
+      if (hit) { hit.ppl = hit.ppl.concat(pin.ppl); hit.approx = hit.approx && pin.approx; hit.r = RCAP(hit.ppl.length); hit.places.push(pin.ppl[0].birth.place || ""); }
       else merged.push({x, y, r, ppl: pin.ppl.slice(), approx: pin.approx, ll: pin.ll, places: [pin.ppl[0].birth.place || ""]});
     });
     pins = merged;
@@ -1093,7 +1094,7 @@ function renderMapper(){
       const minGen = Math.min(...pin.ppl.map(p => p.generation || 12));
       const hue = Math.max(20, 140 - minGen * 11);
       const placeName = pin.places.filter(Boolean).slice(0, 3).map(s => s.split(",")[0]).join(" · ");
-      pinSvg += `<g class="mpin" data-i="${i}"><circle cx="${pin.x}" cy="${pin.y}" r="${pin.r}" fill="hsla(${hue},45%,52%,.88)"${pin.approx ? ' stroke-dasharray="2 2"' : ""}><title>${esc(placeName)}: ${pin.ppl.length}</title></circle>${pin.r >= 8 ? `<text x="${pin.x}" y="${pin.y + 3}" text-anchor="middle">${pin.ppl.length}</text>` : ""}</g>`;
+      pinSvg += `<g class="mpin" data-i="${i}"><circle cx="${pin.x}" cy="${pin.y}" r="${pin.r}" fill="hsla(${hue},45%,50%,.78)"${pin.approx ? ' stroke-dasharray="2 2"' : ""}><title>${esc(placeName)}: ${pin.ppl.length}</title></circle>${pin.r >= 8 ? `<text x="${pin.x}" y="${pin.y + 3}" text-anchor="middle">${pin.ppl.length}</text>` : ""}</g>`;
     });
     labeled.forEach(l => { if (l.lx !== null) pinSvg += `<text x="${l.lx}" y="${l.ly}" font-size="10.5" text-anchor="middle" fill="#fdf6e0" style="paint-order:stroke;stroke:rgba(17,37,58,.85);stroke-width:3px;pointer-events:none">${esc(l.text)}</text>`; });
   } else {
