@@ -181,7 +181,39 @@ table.ltable{width:100%;border-collapse:collapse;background:var(--panel);font-si
 .relbtn:disabled{opacity:.4;cursor:default}
 
 footer{max-width:1380px;margin:0 auto;padding:8px 26px 30px;font-size:12px;color:var(--ink2);font-style:italic}
-@media(max-width:760px){ main{padding:14px} header{padding:14px 14px 0} .searchwrap{min-width:100%} }
+@media(max-width:760px){
+  main{padding:12px} header{padding:12px 12px 0} .searchwrap{min-width:100%;max-width:100%;margin-left:0;order:3}
+  h1{font-size:19px} .h-sub{font-size:11px} .h-top{gap:8px}
+  #langbtn{order:2;padding:6px 11px;font-size:12px}
+  nav{margin-top:10px;overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  nav::-webkit-scrollbar{display:none}
+  nav button{padding:9px 13px;font-size:13px;white-space:nowrap;flex:0 0 auto}
+  .treebar{gap:7px} .vswitch{width:100%;overflow-x:auto} .vswitch button{padding:8px 11px;font-size:12px}
+  #treewrap{padding:4px;border-radius:10px} #drawer{width:100vw}
+  .d-head{padding:18px 18px 14px} .d-body{padding:16px 16px 50px}
+  .famgrid{grid-template-columns:1fr} .grid2{grid-template-columns:1fr}
+  .statrow{gap:14px} .statnum{font-size:24px}
+  .bar .bl{width:96px;font-size:12px} .milcard .mc-grid{grid-template-columns:1fr;gap:2px 0}
+  .milcard .mc-grid .k{margin-top:8px} .story .s-body{font-size:14px}
+  .repctl{font-size:12px} .ltable{font-size:12px} .ltable td,.ltable th{padding:5px 6px}
+  #otd{font-size:13px;padding:10px 13px}
+}
+/* ---- welcome overlay ---- */
+#welcome{position:fixed;inset:0;background:rgba(30,24,12,.55);display:none;align-items:center;justify-content:center;z-index:300;padding:18px}
+#welcome.on{display:flex}
+.wcard{background:var(--panel);border-radius:16px;max-width:560px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.35);overflow:hidden;max-height:92vh;overflow-y:auto}
+.wcard .wh{background:linear-gradient(135deg,#243f2c,#39634a);color:#f5efdf;padding:22px 26px}
+.wcard .wh h2{font-weight:normal;font-size:22px} .wcard .wh p{opacity:.85;font-size:13.5px;margin-top:4px}
+.wcard .wb{padding:20px 26px 22px;font-size:14px;line-height:1.6}
+.wcard .wb .wrow{display:flex;gap:11px;margin-bottom:11px;align-items:flex-start}
+.wcard .wb .wrow .we{font-size:19px;flex:0 0 26px;text-align:center}
+.wcard .wf{display:flex;gap:10px;padding:0 26px 22px}
+.wcard .wf button{flex:1;padding:11px;border-radius:10px;border:none;font-size:14px;cursor:pointer}
+.wcard .wf .go{background:var(--green);color:#fff} .wcard .wf .lang{background:var(--panel);border:1px solid var(--line);color:var(--green)}
+#helpbtn{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#f5efdf;width:30px;height:30px;border-radius:50%;font-size:15px;cursor:pointer;flex:0 0 auto}
+#helpbtn:hover{background:rgba(255,255,255,.28)}
+.copied{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;padding:10px 20px;border-radius:22px;font-size:13.5px;z-index:320;box-shadow:var(--shadow);opacity:0;transition:.2s}
+.copied.on{opacity:1}
 @media print{ body *{visibility:hidden} #treewrap,#treewrap *{visibility:visible} #treewrap{position:absolute;top:0;left:0;width:100%;border:none;box-shadow:none} .repctl{display:none!important} }
 .repctl{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px;font-size:13px}
 .repctl select,.repctl button{padding:7px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);font-size:13px;cursor:pointer}
@@ -207,7 +239,7 @@ footer{max-width:1380px;margin:0 auto;padding:8px 26px 30px;font-size:12px;color
       <h1 id="apptitle">McNulty <span class="amp">&amp;</span> Jeon Family Tree</h1>
       <div class="h-sub" id="subtitle">Eight centuries, four lineages, one family</div>
     </div>
-    <button id="langbtn">🇰🇷 한국어</button>
+    <button id="helpbtn" title="Help / 도움말">?</button><button id="langbtn">🇰🇷 한국어</button>
     <div class="searchwrap">
       <input id="search" placeholder="🔍 Search 3,200+ relatives — name, place, year…" autocomplete="off">
       <div id="results"></div>
@@ -297,6 +329,12 @@ footer{max-width:1380px;margin:0 auto;padding:8px 26px 30px;font-size:12px;color
   Built from <span id="f-stats"></span> · Source: Sean_Family_Tree_CLEANED.ged (Ancestry export, cleaned &amp; source-verified June 2026) · Web-research additions are marked with citations in each profile · Generated 12 June 2026
 </footer>
 
+<div id="welcome"><div class="wcard">
+  <div class="wh"><h2 id="w-title">Welcome to the family tree</h2><p id="w-sub"></p></div>
+  <div class="wb" id="w-body"></div>
+  <div class="wf"><button class="lang" id="w-lang">🇰🇷 한국어</button><button class="go" id="w-go">Explore →</button></div>
+</div></div>
+<div class="copied" id="copied"></div>
 <div id="overlay"></div>
 <aside id="drawer"></aside>
 <div id="lightbox"><img id="lbimg" src="" alt=""></div>
@@ -1313,17 +1351,24 @@ function openProfile(pid){
       <div class="d-actions">
         <button id="dfocus">${T("🌳 Center tree here")}</button>
         <button class="sec" id="drel">${T("🧮 Relate to Sean")}</button>
+        <button class="sec" id="dshare">${LANG === "ko" ? "🔗 링크 복사" : "🔗 Share"}</button>
       </div>
     </div>`;
   $("#drawer").classList.add("on"); $("#overlay").classList.add("on");
+  try { history.replaceState(null, "", "#p=" + pid); } catch(e){}
   $("#dclose").onclick = closeProfile;
+  const sb = $("#dshare"); if (sb) sb.onclick = () => {
+    const url = location.href.split("#")[0] + "#p=" + pid;
+    const done = () => { const c = $("#copied"); c.textContent = LANG === "ko" ? "링크가 복사되었습니다" : "Link copied!"; c.classList.add("on"); setTimeout(() => c.classList.remove("on"), 1600); };
+    if (navigator.clipboard) navigator.clipboard.writeText(url).then(done, done); else done();
+  };
   $("#dfocus").onclick = () => { FOCUS = pid; closeProfile(); showView("tree"); renderTree(); };
   $("#drel").onclick = () => { closeProfile(); showView("rel"); setRel("A", ROOT); setRel("B", pid); calcRel(); };
   $("#drawer").querySelectorAll(".plink").forEach(el => el.onclick = () => openProfile(el.dataset.p));
   $("#drawer").querySelectorAll("[data-doc]").forEach(el => el.onclick = () => openDoc(el.dataset.doc));
   $("#drawer").querySelectorAll(".d-photos img").forEach(img => img.onclick = () => { $("#lbimg").src = img.src; $("#lightbox").classList.add("on"); });
 }
-function closeProfile(){ $("#drawer").classList.remove("on"); $("#overlay").classList.remove("on"); }
+function closeProfile(){ $("#drawer").classList.remove("on"); $("#overlay").classList.remove("on"); try { history.replaceState(null, "", location.pathname + location.search); } catch(e){} }
 $("#overlay").onclick = closeProfile;
 $("#lightbox").onclick = () => $("#lightbox").classList.remove("on");
 document.addEventListener("keydown", e => { if (e.key === "Escape") { closeProfile(); $("#lightbox").classList.remove("on"); } });
@@ -2085,6 +2130,45 @@ $("#f-stats").textContent = `${DATA.meta.stats.individuals.toLocaleString()} peo
 try { document.querySelector("#langbtn").onclick = () => { LANG = LANG === "ko" ? "en" : "ko"; try { localStorage.setItem("ftlang", LANG); } catch(e){}; refreshUI(); }; } catch(e){}
 applyStaticLang();
 drawOTD();
+
+/* ---- welcome overlay (first visit) ---- */
+function renderWelcome(){
+  const ko = LANG === "ko";
+  $("#w-title").textContent = ko ? "가족 가계도에 오신 것을 환영합니다" : "Welcome to the family tree";
+  $("#w-sub").textContent = ko ? `${DATA.meta.stats.individuals.toLocaleString()}명의 친척, 8세기의 역사` : `${DATA.meta.stats.individuals.toLocaleString()} relatives across eight centuries`;
+  const rows = ko ? [
+    ["🌳","<b>가계도</b> — 카드를 누르면 그 사람의 상세 정보가 열립니다. 가로·세로·부채꼴·목록 등 보기 방식을 바꿀 수 있어요."],
+    ["🔍","<b>검색</b> — 위쪽 칸에 이름을 입력하세요. 한글로도 검색됩니다."],
+    ["📖","<b>가족 이야기</b>와 <b>🎖 군 복무</b> — 잘 기록된 조상들의 이야기를 읽어 보세요."],
+    ["🗺️","<b>지도·통계·자료실</b> — 출신지 지도, 통계, 그리고 376건의 원본 문서."],
+  ] : [
+    ["🌳","<b>Tree</b> — tap any card to open that person. Switch between Horizontal, Vertical, Fan, List, Charts and Map views up top."],
+    ["🔍","<b>Search</b> the box up top by name, place or year to jump to anyone."],
+    ["📖","<b>Family Stories</b> & <b>🎖 Military Service</b> — the best-documented lives, written up."],
+    ["🗺️","<b>Map, Statistics & 📚 Library</b> — where everyone was born, the numbers, and 376 original documents."],
+  ];
+  $("#w-body").innerHTML = rows.map(([e,t]) => `<div class="wrow"><div class="we">${e}</div><div>${t}</div></div>`).join("")
+    + `<div style="font-size:12.5px;color:var(--ink2);margin-top:6px">${ko ? "언제든 오른쪽 위 ? 버튼으로 이 안내를 다시 볼 수 있어요." : "You can reopen this guide anytime with the ? button, top-right."}</div>`;
+  $("#w-lang").textContent = ko ? "🇬🇧 English" : "🇰🇷 한국어";
+  $("#w-go").textContent = ko ? "둘러보기 →" : "Explore →";
+}
+function openWelcome(){ renderWelcome(); $("#welcome").classList.add("on"); }
+function closeWelcome(){ $("#welcome").classList.remove("on"); try { localStorage.setItem("ft_seen", "1"); } catch(e){} }
+$("#helpbtn").onclick = openWelcome;
+$("#w-go").onclick = closeWelcome;
+$("#w-lang").onclick = () => { LANG = LANG === "ko" ? "en" : "ko"; try { localStorage.setItem("ftlang", LANG); } catch(e){}; renderWelcome(); refreshUI(); };
+$("#welcome").onclick = e => { if (e.target.id === "welcome") closeWelcome(); };
+
+/* ---- deep-link routing: open ?#p=<id> on load ---- */
+function routeHash(){
+  const m = (location.hash || "").match(/p=([A-Za-z0-9]+)/);
+  if (m && P[m[1]]) { openProfile(m[1]); return true; }
+  return false;
+}
+window.addEventListener("hashchange", () => { const m = (location.hash||"").match(/p=([A-Za-z0-9]+)/); if (m && P[m[1]]) openProfile(m[1]); });
+let seen = false; try { seen = localStorage.getItem("ft_seen"); } catch(e){}
+const routed = routeHash();
+if (!seen && !routed) setTimeout(openWelcome, 350);
 $("#subtitle").textContent = `${DATA.meta.stats.individuals.toLocaleString()} relatives across ${Object.keys(DATA.meta.stats.countries).length} countries \u2014 from medieval parchment to the Pacific coast`;
 renderTree();
 </script>
