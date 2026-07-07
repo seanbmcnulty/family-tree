@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jeon Family Heritage · 담양 전씨</title>
+<style>
+:root{--green:#2e5339;--green2:#3f7050;--gold:#b08d3e;--ink:#2b2620;--ink2:#7b7264;
+--cream:#faf7f0;--card:#fffdf8;--line:#e6ddc9;--red:#9c4a3c;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.6 Georgia,"Nanum Myeongjo",serif}
+header{background:linear-gradient(135deg,#22412c,#2e5339 60%,#3f7050);color:#fff;padding:30px 20px 22px;text-align:center}
+header h1{margin:0 0 4px;font-size:27px;letter-spacing:.5px}
+header .sub{color:#e7dcc0;font-size:15px}
+header .founder{margin-top:8px;font-size:13.5px;color:#cde0cf}
+.wrap{max-width:1000px;margin:0 auto;padding:0 16px 60px}
+nav{position:sticky;top:0;z-index:5;background:rgba(250,247,240,.96);backdrop-filter:blur(4px);
+border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:4px;padding:8px;justify-content:center}
+nav button{background:none;border:1px solid transparent;color:var(--green);font:600 14px Georgia,serif;
+padding:8px 14px;border-radius:20px;cursor:pointer}
+nav button.on{background:var(--green);color:#fff}
+.langtoggle{position:fixed;top:10px;right:12px;z-index:9}
+.langtoggle button{background:#fff;color:var(--green);border:1px solid var(--gold);border-radius:16px;
+padding:5px 12px;font:600 13px Georgia,serif;cursor:pointer}
+section{display:none;padding-top:26px}
+section.on{display:block;animation:fade .4s}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+h2{color:var(--green);font-size:22px;border-bottom:2px solid var(--gold);padding-bottom:6px;display:inline-block}
+.intro{color:var(--ink2);font-size:14.5px;margin:6px 0 20px;max-width:720px}
+/* lineage scroll */
+.scroll{position:relative;margin:0 auto;max-width:560px}
+.gline{position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(var(--gold),var(--line));transform:translateX(-50%)}
+.gen{position:relative;display:flex;align-items:center;gap:14px;padding:7px 0}
+.gen .dot{position:absolute;left:50%;transform:translateX(-50%);width:13px;height:13px;border-radius:50%;
+background:#fff;border:2px solid var(--gold);z-index:2}
+.card{width:calc(50% - 26px);background:var(--card);border:1px solid var(--line);border-radius:10px;
+padding:8px 12px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.gen.left .card{margin-right:auto;text-align:right}
+.gen.right .card{margin-left:auto}
+.gen .gnum{position:absolute;left:50%;transform:translateX(-50%);top:-9px;font-size:10px;color:var(--ink2)}
+.card .nm{font-size:17px;font-weight:700;color:var(--green)}
+.card .hanja{font-size:15px;color:var(--ink);margin-left:5px;font-family:"Noto Serif KR",serif}
+.card .meta{font-size:12px;color:var(--ink2)}
+.card.founder{border:2px solid var(--gold);background:#fbf4e2}
+.card.self{border:2px solid var(--red);background:#fbeeec}
+.card .hl{display:inline-block;background:#eef3ea;border:1px solid #cfe0d0;border-radius:5px;
+padding:0 5px;font-size:11px;color:var(--green2);margin-top:3px}
+/* timeline */
+.tl{position:relative;border-left:3px solid var(--gold);margin-left:8px;padding-left:0}
+.era{position:relative;margin:0 0 4px;padding:10px 0 10px 20px}
+.era h3{margin:0;color:var(--green);font-size:16px}
+.era .yrs{color:var(--gold);font-size:12.5px;font-weight:700}
+.era p{margin:3px 0 0;font-size:13.5px;color:var(--ink2)}
+.era::before{content:"";position:absolute;left:-9px;top:14px;width:14px;height:14px;border-radius:50%;background:var(--gold);border:3px solid var(--cream)}
+.era .gens{font-size:12px;color:var(--green2);margin-top:4px}
+.era.modern::before{background:var(--red)}
+/* map */
+.maprow{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start}
+.mapbox{flex:1 1 320px;min-width:300px}
+.legend{flex:1 1 240px;font-size:13.5px}
+.legend .pin{display:flex;gap:8px;align-items:flex-start;margin:9px 0}
+.legend .sw{width:13px;height:13px;border-radius:50%;margin-top:4px;flex:0 0 auto}
+svg text{font-family:Georgia,serif}
+.seatdot{cursor:pointer}
+/* hangryeol */
+.hgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.hcard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center}
+.hcard .big{font-size:40px;color:var(--gold);font-family:"Noto Serif KR",serif;line-height:1}
+.hcard .g{font-size:12px;color:var(--ink2);margin-top:6px}
+.hcard .who{font-size:13px;color:var(--green);margin-top:2px}
+.foot{text-align:center;color:var(--ink2);font-size:12px;margin-top:30px}
+.en .ko-only{display:none}.ko .en-only{display:none}
+</style>
+</head>
+<body class="en">
+<div class="langtoggle"><button onclick="toggleLang()" id="langbtn">한국어</button></div>
+<header>
+  <h1><span class="en-only">The Jeon Family of Damyang</span><span class="ko-only">담양 전씨 (潭陽 田氏)</span></h1>
+  <div class="sub"><span class="en-only">Yumi's paternal lineage · 30 generations</span><span class="ko-only">유미의 직계 · 30세</span></div>
+  <div class="founder"><span class="en-only">Founding ancestor 田得時 (Jeon Deuk-si) → 30th generation 惟美 (Yumi)</span><span class="ko-only">시조 전득시(田得時) → 30세 유미(惟美)</span></div>
+</header>
+<nav>
+  <button class="on" data-s="lineage"><span class="en-only">Lineage Scroll</span><span class="ko-only">직계도</span></button>
+  <button data-s="timeline"><span class="en-only">800-Year Timeline</span><span class="ko-only">800년 연대표</span></button>
+  <button data-s="map"><span class="en-only">Clan Map</span><span class="ko-only">본관 지도</span></button>
+  <button data-s="hangryeol"><span class="en-only">Generation Names 항렬</span><span class="ko-only">항렬자</span></button>
+</nav>
+<div class="wrap">
+  <section id="lineage" class="on">
+    <h2><span class="en-only">The Direct Line</span><span class="ko-only">직계도</span></h2>
+    <div class="intro"><span class="en-only">Thirty unbroken generations of the Damyang Jeon clan, from the founding ancestor down to Yumi. Dates survive for the most recent three generations; the elder names come from the clan register (jokbo).</span><span class="ko-only">시조부터 유미까지 담양 전씨 30대 직계. 최근 3대는 생몰년이 전하며, 윗대는 족보에 이름으로 전합니다.</span></div>
+    <div class="scroll" id="scroll"><div class="gline"></div></div>
+  </section>
+  <section id="timeline">
+    <h2><span class="en-only">Eight Centuries of Korean History</span><span class="ko-only">800년의 한국사</span></h2>
+    <div class="intro"><span class="en-only">The lineage spans from the Goryeo dynasty to today. Placements for the elder generations are estimated at ~27 years each; the last three generations are dated from the jokbo.</span><span class="ko-only">이 가계는 고려시대부터 오늘날까지 이어집니다. 윗대는 1대 약 27년으로 추정했고, 최근 3대는 족보의 실제 연도입니다.</span></div>
+    <div class="tl" id="tl"></div>
+  </section>
+  <section id="map">
+    <h2><span class="en-only">Roots Across Korea</span><span class="ko-only">본관과 뿌리</span></h2>
+    <div class="intro"><span class="en-only">The clan's ancestral seat (본관) is Damyang in South Jeolla. The map also marks the modern family's places and the ancestral seats of the clans that married in. (Stylised map.)</span><span class="ko-only">본관은 전라남도 담양입니다. 근래 가족의 연고지와 혼인으로 맺어진 가문의 본관도 함께 표시했습니다. (도식 지도)</span></div>
+    <div class="maprow">
+      <div class="mapbox" id="mapbox"></div>
+      <div class="legend" id="legend"></div>
+    </div>
+  </section>
+  <section id="hangryeol">
+    <h2><span class="en-only">Generation Names (항렬자)</span><span class="ko-only">항렬자</span></h2>
+    <div class="intro"><span class="en-only">In a Korean clan, everyone of the same generation shares one character in their given name — the 항렬자. It lets any two Jeon tell instantly how they are related. These are the shared characters visible in Yumi's line.</span><span class="ko-only">같은 세대는 이름 한 글자를 공유합니다 — 이것이 항렬자입니다. 유미 직계에서 확인되는 항렬자입니다.</span></div>
+    <div class="hgrid" id="hgrid"></div>
+  </section>
+  <div class="foot"><span class="en-only">Compiled from the Damyang Jeon clan jokbo · part of the McNulty &amp; Jeon Family Tree</span><span class="ko-only">담양 전씨 족보에서 정리 · 맥널티·전 가계도의 일부</span></div>
+</div>
+<script>
+const DL = [{"gen": 1, "hanja": "田得時", "ko": "전득시", "rom": "Jeon Deuk-si", "role": "Founding ancestor (시조)"}, {"gen": 2, "hanja": "子存", "ko": "자존", "rom": "Ja-jon"}, {"gen": 3, "hanja": "勝允", "ko": "승윤", "rom": "Seung-yun"}, {"gen": 4, "hanja": "公逸", "ko": "공일", "rom": "Gong-il"}, {"gen": 5, "hanja": "永", "ko": "영", "rom": "Yeong"}, {"gen": 6, "hanja": "希慶", "ko": "희경", "rom": "Hui-gyeong"}, {"gen": 7, "hanja": "祖生", "ko": "조생", "rom": "Jo-saeng", "hangryeol": "生"}, {"gen": 8, "hanja": "順", "ko": "순", "rom": "Sun"}, {"gen": 9, "hanja": "子壽", "ko": "자수", "rom": "Ja-su"}, {"gen": 10, "hanja": "柔", "ko": "유", "rom": "Yu"}, {"gen": 11, "hanja": "甫原", "ko": "보원", "rom": "Bo-won"}, {"gen": 12, "hanja": "勳", "ko": "훈", "rom": "Hun"}, {"gen": 13, "hanja": "自耘", "ko": "자운", "rom": "Ja-un", "hangryeol": "自"}, {"gen": 14, "hanja": "希舜", "ko": "희순", "rom": "Hui-sun", "hangryeol": "希"}, {"gen": 15, "hanja": "大起", "ko": "대기", "rom": "Dae-gi"}, {"gen": 16, "hanja": "好雨", "ko": "호우", "rom": "Ho-u", "hangryeol": "雨"}, {"gen": 17, "hanja": "尙疇", "ko": "상주", "rom": "Sang-ju"}, {"gen": 18, "hanja": "夏成", "ko": "하성", "rom": "Ha-seong", "hangryeol": "成"}, {"gen": 19, "hanja": "孟轍", "ko": "맹철", "rom": "Maeng-cheol"}, {"gen": 20, "hanja": "東奭", "ko": "동석", "rom": "Dong-seok"}, {"gen": 21, "hanja": "國春", "ko": "국춘", "rom": "Guk-chun", "hangryeol": "春"}, {"gen": 22, "hanja": "泰曄", "ko": "태엽", "rom": "Tae-yeop"}, {"gen": 23, "hanja": "啓昌", "ko": "계창", "rom": "Gye-chang", "hangryeol": "啓"}, {"gen": 24, "hanja": "瀚奎", "ko": "한규", "rom": "Han-gyu"}, {"gen": 25, "hanja": "萬鎭", "ko": "만진", "rom": "Man-jin"}, {"gen": 26, "hanja": "溶海", "ko": "용해", "rom": "Yong-hae", "hangryeol": "溶"}, {"gen": 27, "hanja": "乙秀", "ko": "을수", "rom": "Eul-su", "hangryeol": "秀"}, {"gen": 28, "hanja": "炳文", "ko": "병문", "rom": "Byeong-mun", "hangryeol": "炳", "born": "1934-10-26", "died": "1988-11-14", "buried": "Haman-gun, Gaya-eup, Jangmyeong-ri", "spouse": {"rom": "Kim (Gwangsan clan)", "ko": "광산 김씨", "born": "1936"}}, {"gen": 29, "hanja": "坪烈", "ko": "호열", "rom": "Ho-yeol", "born": "1963-10-15", "spouse": {"rom": "Park Ye-sun (Miryang clan)", "ko": "밀양 박예선", "born": "1963-07-30"}}, {"gen": 30, "hanja": "惟美", "ko": "유미", "rom": "Yumi", "born": "1990-12-27", "role": "This lineage's descendant"}];
+const MOD = [{"rel": "brother of Yumi", "gen": 30, "hanja": "晸瀚", "ko": "정한", "rom": "Jeong-han", "born": "2000-05-15", "father": "Ho-yeol"}, {"rel": "sister of Yumi", "gen": 30, "hanja": "惠琳", "ko": "혜림", "rom": "Hye-rim", "born": "1993-05-23", "father": "Ho-yeol"}, {"rel": "uncle of Yumi (father's brother)", "gen": 29, "hanja": "永吉", "ko": "영길", "rom": "Yeong-gil", "born": "1967-07-27", "spouse": {"rom": "Han Seung-hee (Cheongju clan)", "ko": "청주 한승희", "born": "1968"}}, {"rel": "cousin of Yumi", "gen": 30, "hanja": "政玹", "ko": "정현", "rom": "Jeong-hyeon", "born": "1999-07-09", "father": "Yeong-gil"}, {"rel": "cousin of Yumi", "gen": 30, "hanja": "持譓", "ko": "지혜", "rom": "Ji-hye", "born": "2007-02-09", "father": "Yeong-gil"}];
+let lang="en";
+function toggleLang(){lang=lang==="en"?"ko":"en";document.body.className=lang;
+  document.getElementById("langbtn").textContent=lang==="en"?"한국어":"English";}
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll("nav button").forEach(x=>x.classList.remove("on"));
+  document.querySelectorAll("section").forEach(x=>x.classList.remove("on"));
+  b.classList.add("on");document.getElementById(b.dataset.s).classList.add("on");});
+
+/* ---- lineage scroll ---- */
+const sc=document.getElementById("scroll");
+DL.forEach((p,i)=>{
+  const side=i%2===0?"left":"right";
+  const cls=p.gen===1?"founder":(p.gen===30?"self":"");
+  const metaEn=(p.born?"b. "+p.born:"")+(p.died?" · d. "+p.died:"");
+  const sp=p.spouse?`<div class="meta">⚭ ${p.spouse.rom} <span class="ko-only">${p.spouse.ko||""}</span></div>`:"";
+  const hl=p.hangryeol?`<span class="hl">항렬 ${p.hangryeol}</span>`:"";
+  const row=document.createElement("div");
+  row.className="gen "+side;
+  row.innerHTML=`<div class="gnum">${p.gen}세</div><div class="dot"></div>
+    <div class="card ${cls}">
+      <div class="nm">${p.rom}<span class="hanja">${p.hanja}</span></div>
+      <div class="meta"><span class="en-only">${p.role||""}</span><span class="ko-only">${p.ko}</span> ${metaEn}</div>
+      ${sp}${hl}
+    </div>`;
+  sc.appendChild(row);
+});
+
+/* ---- timeline ---- */
+const eras=[
+ {en:"Goryeo Dynasty",ko:"고려",yrs:"918–1392",g:"Gen 1–9",
+  pEn:"The founding ancestor 田得時 establishes the Damyang Jeon line during Korea's Goryeo era — the age of celadon, Buddhism, and the first movable metal type.",
+  pKo:"시조 전득시가 고려시대에 담양 전씨의 뿌리를 세웁니다 — 청자와 불교, 금속활자의 시대."},
+ {en:"Early Joseon",ko:"조선 전기",yrs:"1392–1600",g:"Gen 10–17",
+  pEn:"The line continues through the founding of Joseon, the invention of Hangeul under King Sejong, and the Imjin War with Japan.",
+  pKo:"조선 건국과 세종의 한글 창제, 임진왜란을 거치며 가계가 이어집니다."},
+ {en:"Late Joseon",ko:"조선 후기",yrs:"1600–1897",g:"Gen 18–25",
+  pEn:"Eight generations through the long late-Joseon peace, a Confucian society ordered by exactly the kind of clan genealogy this record comes from.",
+  pKo:"조선 후기의 오랜 세월 — 바로 이 족보와 같은 문중 기록으로 질서 잡힌 유교 사회."},
+ {en:"Empire & Colonial Korea",ko:"대한제국·일제강점기",yrs:"1897–1945",g:"Gen 26–27",
+  pEn:"The Korean Empire, then Japanese colonial rule. Yumi's great-grandfather 乙秀 (Eul-su) lives through this turbulent age.",
+  pKo:"대한제국과 일제강점기. 유미의 증조부 을수(乙秀)가 이 격동의 시대를 살아갑니다."},
+ {en:"Modern Korea",ko:"현대",yrs:"1934–present",g:"Gen 28–30",cls:"modern",
+  pEn:"Grandfather 炳文 (b.1934), father 坪烈 (b.1963), and Yumi (b.1990) — the first generations with recorded dates, through liberation, war, and Korea's rise.",
+  pKo:"조부 병문(1934), 부친 호열(1963), 그리고 유미(1990) — 광복과 전쟁, 대한민국의 성장을 지나 실제 연도가 남은 세대."}
+];
+document.getElementById("tl").innerHTML=eras.map(e=>`
+  <div class="era ${e.cls||''}">
+    <div class="yrs">${e.yrs}</div>
+    <h3><span class="en-only">${e.en}</span><span class="ko-only">${e.ko}</span></h3>
+    <div class="gens">${e.g}</div>
+    <p><span class="en-only">${e.pEn}</span><span class="ko-only">${e.pKo}</span></p>
+  </div>`).join("");
+
+/* ---- map ---- */
+const places=[
+ {ko:"담양",en:"Damyang",role:{en:"Jeon clan ancestral seat (본관)",ko:"전씨 본관"},x:150,y:372,c:"#b08d3e",big:1},
+ {ko:"함안",en:"Haman",role:{en:"Grandfather's resting place",ko:"조부 안장지"},x:262,y:366,c:"#9c4a3c"},
+ {ko:"밀양",en:"Miryang",role:{en:"Mother's Park clan seat",ko:"모친 밀양 박씨 본관"},x:286,y:352,c:"#3f7050"},
+ {ko:"청주",en:"Cheongju",role:{en:"Aunt's Han clan seat",ko:"숙모 청주 한씨 본관"},x:214,y:250,c:"#3f7050"},
+ {ko:"광산",en:"Gwangsan",role:{en:"Grandmother's Kim clan seat",ko:"조모 광산 김씨 본관"},x:150,y:392,c:"#3f7050"},
+ {ko:"서울",en:"Seoul",role:{en:"(for reference)",ko:"(참고)"},x:188,y:168,c:"#bbb",small:1}
+];
+const korea="M175,70 L205,60 L225,80 L215,110 L240,120 L235,150 L262,150 L300,175 L305,205 L278,215 "+
+ "L300,250 L292,300 L305,330 L292,372 L262,395 L235,410 L210,405 L200,420 L172,415 L150,400 "+
+ "L130,405 L120,380 L135,352 L120,320 L132,285 L120,250 L140,225 L128,195 L150,170 L145,120 L160,95 Z";
+document.getElementById("mapbox").innerHTML=`
+<svg viewBox="0 0 340 460" width="100%" style="max-width:360px">
+  <path d="${korea}" fill="#eef3ea" stroke="#9db89f" stroke-width="1.5"/>
+  ${places.map((p,i)=>`<g class="seatdot"><circle cx="${p.x}" cy="${p.y}" r="${p.big?8:(p.small?4:6)}" fill="${p.c}" stroke="#fff" stroke-width="1.5"/>
+   <text x="${p.x+ (p.x>240?-8:11)}" y="${p.y+4}" text-anchor="${p.x>240?'end':'start'}" font-size="12" fill="#2b2620"><tspan class="en-only">${p.en}</tspan><tspan class="ko-only">${p.ko}</tspan></text></g>`).join("")}
+</svg>`;
+document.getElementById("legend").innerHTML=places.filter(p=>!p.small).map(p=>`
+  <div class="pin"><span class="sw" style="background:${p.c}"></span>
+   <div><b>${p.en} <span class="ko-only">· ${p.ko}</span></b><br>
+   <span style="color:#7b7264;font-size:12.5px"><span class="en-only">${p.role.en}</span><span class="ko-only">${p.role.ko}</span></span></div></div>`).join("");
+
+/* ---- hangryeol ---- */
+const hg=DL.filter(p=>p.hangryeol);
+document.getElementById("hgrid").innerHTML=hg.map(p=>`
+  <div class="hcard"><div class="big">${p.hangryeol}</div>
+   <div class="g">${p.gen}세 · Generation ${p.gen}</div>
+   <div class="who">${p.rom} <span class="hanja">${p.hanja}</span></div></div>`).join("");
+</script>
+</body>
+</html>
