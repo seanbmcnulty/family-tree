@@ -84,6 +84,8 @@ svg text{font-family:Georgia,serif}
   <button data-s="timeline"><span class="en-only">800-Year Timeline</span><span class="ko-only">800년 연대표</span></button>
   <button data-s="map"><span class="en-only">Clan Map</span><span class="ko-only">본관 지도</span></button>
   <button data-s="hangryeol"><span class="en-only">Generation Names 항렬</span><span class="ko-only">항렬자</span></button>
+  <button data-s="migration"><span class="en-only">Migration</span><span class="ko-only">이주 경로</span></button>
+  <button data-s="charts"><span class="en-only">Charts</span><span class="ko-only">차트</span></button>
 </nav>
 <div class="wrap">
   <section id="lineage" class="on">
@@ -109,6 +111,35 @@ svg text{font-family:Georgia,serif}
     <div class="intro"><span class="en-only">In a Korean clan, everyone of the same generation shares one character in their given name — the 항렬자. It lets any two Jeon tell instantly how they are related. These are the shared characters visible in Yumi's line.</span><span class="ko-only">같은 세대는 이름 한 글자를 공유합니다 — 이것이 항렬자입니다. 유미 직계에서 확인되는 항렬자입니다.</span></div>
     <div class="hgrid" id="hgrid"></div>
   </section>
+  <section id="migration">
+    <h2><span class="en-only">Migration Across Korea</span><span class="ko-only">한국 속 이주</span></h2>
+    <div class="intro"><span class="en-only">Drag the slider — or press Play — to trace the clan from its founding seat at Damyang (southwest) to the modern family's home in the Gyeongsang southeast. Only the two ends are documented in the jokbo (the Damyang 본관 and the modern Haman/Miryang area); the centuries between are shown as an illustrative path, not a recorded route.</span><span class="ko-only">슬라이더를 움직이거나 재생을 눌러, 본관 담양(남서)에서 근래 가족의 터전인 경상도(남동)까지의 흐름을 살펴보세요. 족보에 남은 것은 양 끝(담양 본관과 근래 함안·밀양)뿐이며, 그 사이 경로는 기록이 아닌 도식적 표현입니다.</span></div>
+    <div class="maprow">
+      <div class="mapbox"><div id="migbox"></div></div>
+      <div class="legend">
+        <div id="migera" style="font-weight:700;color:var(--green);font-size:16px"></div>
+        <div id="migcap" style="color:var(--ink2);font-size:13.5px;margin:6px 0 14px"></div>
+        <input id="migslider" type="range" min="1180" max="1990" value="1180" style="width:100%">
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--ink2)"><span>1180</span><span id="migyear" style="font-weight:700;color:var(--gold)">1180</span><span>1990</span></div>
+        <button id="migplay" style="margin-top:12px;background:var(--green);color:#fff;border:none;padding:8px 18px;border-radius:8px;cursor:pointer;font:600 14px Georgia,serif">▶ <span class="en-only">Play</span><span class="ko-only">재생</span></button>
+      </div>
+    </div>
+    <div class="intro" style="margin-top:18px;background:#fbf4e2;border-left:4px solid var(--gold);padding:12px 14px">
+      <b><span class="en-only">Why might they have moved?</span><span class="ko-only">왜 이주했을까?</span></b><br>
+      <span class="en-only">The jokbo doesn't record when or why the family left Damyang, so this is informed speculation, not fact. But their documented southeastern home by the mid-20th century lines up with the great uprootings of modern Korea: colonial-era land loss that drove Jeolla farmers off their fields, the mass displacement of the Korean War, and the industrial boom that pulled workers toward the southeastern cities (Busan, Ulsan, Changwon). Marriage into a Gyeongsang clan — Yumi's mother is a Miryang Park — suggests the family was well settled in the southeast by then. Any of these forces, or a combination, could explain the journey from Jeolla to Gyeongsang.</span>
+      <span class="ko-only">가족이 언제·왜 담양을 떠났는지는 족보에 기록이 없어, 이는 사실이 아닌 추정입니다. 다만 20세기 중반 동남부 정착은 현대 한국의 큰 이동들과 맞물립니다: 식민지 토지 상실로 전라도 농민이 땅을 떠난 일, 6·25 전쟁의 대규모 피란, 부산·울산·창원 등 동남부 도시로의 산업화 이주. 유미의 어머니가 밀양 박씨인 점도 그 무렵 가족이 경상도에 자리 잡았음을 시사합니다.</span>
+    </div>
+  </section>
+  <section id="charts">
+    <h2><span class="en-only">By the Numbers</span><span class="ko-only">숫자로 보는 가계</span></h2>
+    <div class="intro"><span class="en-only">A few patterns drawn from the 30 generations. Only the three most recent are dated in the jokbo; older figures use the ~30-years-per-generation estimate and are labelled as such.</span><span class="ko-only">30대에서 뽑아낸 몇 가지 패턴입니다. 족보에 연도가 있는 세대는 최근 3대뿐이며, 윗대는 1대 약 30년 추정치입니다.</span></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px">
+      <div><h3 style="color:var(--green);font-size:15px;margin:0 0 8px"><span class="en-only">Generations by dynasty</span><span class="ko-only">왕조별 세대 수</span></h3><div id="ch-dyn"></div></div>
+      <div><h3 style="color:var(--green);font-size:15px;margin:0 0 8px"><span class="en-only">Given-name length</span><span class="ko-only">이름 글자 수</span></h3><div id="ch-name"></div><div style="font-size:12px;color:var(--ink2);margin-top:6px"><span class="en-only">Single-character given names — an older, more aristocratic style — cluster in the middle generations.</span><span class="ko-only">외자 이름은 더 오래된 상류층 방식으로, 중간 세대에 몰려 있습니다.</span></div></div>
+      <div><h3 style="color:var(--green);font-size:15px;margin:0 0 8px"><span class="en-only">Recorded vs estimated dates</span><span class="ko-only">기록 vs 추정</span></h3><div id="ch-doc"></div></div>
+      <div style="grid-column:1/-1"><h3 style="color:var(--green);font-size:15px;margin:0 0 8px"><span class="en-only">The modern family, by birth year</span><span class="ko-only">근래 가족의 출생 연도</span></h3><div id="ch-mod"></div></div>
+    </div>
+  </section>
   <div class="foot"><span class="en-only">Compiled from the Damyang Jeon clan jokbo · part of the McNulty &amp; Jeon Family Tree</span><span class="ko-only">담양 전씨 족보에서 정리 · 맥널티·전 가계도의 일부</span></div>
 </div>
 <script>
@@ -127,7 +158,8 @@ const sc=document.getElementById("scroll");
 DL.forEach((p,i)=>{
   const side=i%2===0?"left":"right";
   const cls=p.gen===1?"founder":(p.gen===30?"self":"");
-  const metaEn=(p.born?"b. "+p.born:"")+(p.died?" · d. "+p.died:"");
+  const est=(!p.born && p.gen<=27)?(1934-(28-p.gen)*30):null;
+  const metaEn=(p.born?"b. "+p.born:(est?"c. "+est+" (est.)":""))+(p.died?" · d. "+p.died:"");
   const sp=p.spouse?`<div class="meta">⚭ ${p.spouse.rom} <span class="ko-only">${p.spouse.ko||""}</span></div>`:"";
   const hl=p.hangryeol?`<span class="hl">항렬 ${p.hangryeol}</span>`:"";
   const row=document.createElement("div");
@@ -144,20 +176,20 @@ DL.forEach((p,i)=>{
 /* ---- timeline ---- */
 const eras=[
  {en:"Goryeo Dynasty",ko:"고려",yrs:"918–1392",g:"Gen 1–9",
-  pEn:"The founding ancestor 田得時 establishes the Damyang Jeon line during Korea's Goryeo era — the age of celadon, Buddhism, and the first movable metal type.",
-  pKo:"시조 전득시가 고려시대에 담양 전씨의 뿌리를 세웁니다 — 청자와 불교, 금속활자의 시대."},
+  pEn:"The founding ancestor 田得時 roots the Damyang Jeon line in the fertile southwest — Damyang, in Jeolla, was famed for its bamboo and sat in Korea's richest rice country. This was Goryeo's golden age of celadon, Buddhism and the world's first metal movable type (1234) — but the later generations here would also have endured the Mongol invasions that ravaged Korea for decades and the pirate raids that battered the Jeolla coast.",
+  pKo:"시조 전득시가 비옥한 남서부 담양에 뿌리를 내립니다 — 대나무와 쌀의 고장 전라도. 청자와 불교, 세계 최초 금속활자(1234)의 고려 전성기이자, 뒤이은 몽골 침입과 왜구의 약탈을 견딘 시대이기도 합니다."},
  {en:"Early Joseon",ko:"조선 전기",yrs:"1392–1600",g:"Gen 10–17",
-  pEn:"The line continues through the founding of Joseon, the invention of Hangeul under King Sejong, and the Imjin War with Japan.",
-  pKo:"조선 건국과 세종의 한글 창제, 임진왜란을 거치며 가계가 이어집니다."},
+  pEn:"Under the new Confucian kingdom of Joseon, clan genealogies like this one became the backbone of society, and King Sejong gave Korea its own alphabet, Hangeul (1443). Then came the Imjin War (1592–98): Jeolla was the granary that fed the whole country, and Admiral Yi Sun-sin's navy — operating off these southern coasts — kept it from falling. The Jeon of Damyang lived at the strategic heart of Korea's survival.",
+  pKo:"유교 국가 조선에서 이와 같은 족보가 사회의 근간이 되고, 세종이 한글을 창제합니다(1443). 이어진 임진왜란(1592–98) 때 전라도는 나라를 먹여 살린 곡창이었고, 이순신의 수군이 이 남해에서 그 땅을 지켜냈습니다."},
  {en:"Late Joseon",ko:"조선 후기",yrs:"1600–1897",g:"Gen 18–25",
-  pEn:"Eight generations through the long late-Joseon peace, a Confucian society ordered by exactly the kind of clan genealogy this record comes from.",
-  pKo:"조선 후기의 오랜 세월 — 바로 이 족보와 같은 문중 기록으로 질서 잡힌 유교 사회."},
+  pEn:"Eight generations through a long Confucian peace — the very world that produced this jokbo. Yet Jeolla (Honam) was increasingly shut out of central power and burdened with heavy taxes, breeding deep grievance. That resentment finally erupted right in the clan's home province, as the Donghak Peasant Revolution of 1894 — a rising against corruption and foreign encroachment that began in Jeolla.",
+  pKo:"이 족보를 낳은 조선 후기의 긴 유교적 평화. 그러나 전라도(호남)는 중앙 권력에서 소외되고 무거운 세 부담에 시달렸고, 그 불만은 1894년 동학농민혁명으로 폭발합니다 — 바로 이 가문의 고향 전라도에서 시작된 봉기."},
  {en:"Empire & Colonial Korea",ko:"대한제국·일제강점기",yrs:"1897–1945",g:"Gen 26–27",
-  pEn:"The Korean Empire, then Japanese colonial rule. Yumi's great-grandfather 乙秀 (Eul-su) lives through this turbulent age.",
-  pKo:"대한제국과 일제강점기. 유미의 증조부 을수(乙秀)가 이 격동의 시대를 살아갑니다."},
+  pEn:"The short-lived Korean Empire, then Japanese colonial rule (1910–45). Colonial land surveys stripped many Korean farmers of their fields, and Jeolla's rice was shipped to Japan while tenancy soared. Hardship pushed rural families off the land — to the cities, to Manchuria and Japan, and across the country. Yumi's great-grandfather 乙秀 (Eul-su) came of age in this uprooting.",
+  pKo:"짧은 대한제국을 지나 일제강점기(1910–45). 토지조사로 많은 농민이 땅을 잃고, 전라도의 쌀은 일본으로 반출되며 소작이 급증합니다. 가난은 농촌 가족을 뿌리째 흔들어 도시와 만주·일본으로 흩어지게 했습니다. 증조부 을수가 이 격동 속에 자랍니다."},
  {en:"Modern Korea",ko:"현대",yrs:"1934–present",g:"Gen 28–30",cls:"modern",
-  pEn:"Grandfather 炳文 (b.1934), father 坪烈 (b.1963), and Yumi (b.1990) — the first generations with recorded dates, through liberation, war, and Korea's rise.",
-  pKo:"조부 병문(1934), 부친 호열(1963), 그리고 유미(1990) — 광복과 전쟁, 대한민국의 성장을 지나 실제 연도가 남은 세대."}
+  pEn:"Grandfather 炳文 was born in 1934 under occupation; he lived through liberation (1945), the division of Korea, and the Korean War (1950–53), which uprooted millions and scrambled the map of who lived where. Then the industrial boom pulled families toward the southeastern cities. By his death in 1988 the family was settled in Haman, in the Gyeongsang southeast — where father 坪烈 (b.1963) and Yumi (b.1990) belong.",
+  pKo:"조부 병문은 1934년 식민지에서 태어나 광복(1945), 분단, 6·25 전쟁(1950–53)을 겪습니다 — 수백만이 터전을 잃고 인구 지도가 뒤바뀐 시대. 이어진 산업화는 가족을 동남부 도시로 이끌었고, 1988년 조부 별세 무렵 가족은 경상도 함안에 자리 잡습니다 — 부친 호열(1963)과 유미(1990)의 고향."}
 ];
 document.getElementById("tl").innerHTML=eras.map(e=>`
   <div class="era ${e.cls||''}">
@@ -196,6 +228,75 @@ document.getElementById("hgrid").innerHTML=hg.map(p=>`
   <div class="hcard"><div class="big">${p.hangryeol}</div>
    <div class="g">${p.gen}세 · Generation ${p.gen}</div>
    <div class="who">${p.rom} <span class="hanja">${p.hanja}</span></div></div>`).join("");
+
+/* ---- migration (time series) ---- */
+const DAM=[150,372], HAM=[262,366];
+function lerp(a,b,t){return [a[0]+(b[0]-a[0])*t, a[1]+(b[1]-a[1])*t];}
+function migPhase(y){
+  if(y<1897) return {eEn:"Goryeo → Joseon",eKo:"고려~조선",
+    cEn:"For centuries the clan is rooted at its ancestral seat, Damyang (담양) in Jeolla — the 본관 from which the Jeon name springs.",
+    cKo:"수백 년 동안 가문은 본관인 전라도 담양에 뿌리내립니다.",t:0};
+  return {eEn:"Modern Korea",eKo:"현대",
+    cEn:"By the 20th century Yumi's branch has settled in the Gyeongsang southeast — her grandfather is laid to rest at Haman-gun (함안), and the family's ties run to Miryang.",
+    cKo:"20세기에 이르러 유미 가계는 경상도 남동부에 자리 잡습니다 — 조부는 함안에 잠들고, 밀양과 인연이 이어집니다.",
+    t:Math.min(1,(y-1897)/(1990-1897))};
+}
+function drawMig(y){
+  const ph=migPhase(y), pos=lerp(DAM,HAM,ph.t);
+  const arc = ph.t>0 ? `<path d="M${DAM[0]},${DAM[1]} Q${(DAM[0]+pos[0])/2+10},${Math.min(DAM[1],pos[1])-30} ${pos[0]},${pos[1]}" fill="none" stroke="#9c4a3c" stroke-width="2.2" stroke-dasharray="5 5"/>` : "";
+  document.getElementById("migbox").innerHTML=`
+  <svg viewBox="0 0 340 460" width="100%" style="max-width:360px">
+    <path d="${korea}" fill="#eef3ea" stroke="#9db89f" stroke-width="1.5"/>
+    <circle cx="${DAM[0]}" cy="${DAM[1]}" r="7" fill="#b08d3e" stroke="#fff" stroke-width="1.5"/>
+    <text x="${DAM[0]-10}" y="${DAM[1]+4}" text-anchor="end" font-size="12"><tspan class="en-only">Damyang</tspan><tspan class="ko-only">담양</tspan></text>
+    ${ph.t>0?`<circle cx="${HAM[0]}" cy="${HAM[1]}" r="6" fill="#9c4a3c" stroke="#fff" stroke-width="1.5" opacity="${0.3+0.7*ph.t}"/><text x="${HAM[0]+9}" y="${HAM[1]+4}" font-size="12" opacity="${0.3+0.7*ph.t}"><tspan class="en-only">Haman</tspan><tspan class="ko-only">함안</tspan></text>`:""}
+    ${arc}
+    <circle cx="${pos[0]}" cy="${pos[1]}" r="9" fill="none" stroke="#2e5339" stroke-width="2"><animate attributeName="r" values="9;13;9" dur="1.6s" repeatCount="indefinite"/></circle>
+    <circle cx="${pos[0]}" cy="${pos[1]}" r="5" fill="#2e5339"/>
+  </svg>`;
+  document.getElementById("migera").innerHTML=`<span class="en-only">${ph.eEn}</span><span class="ko-only">${ph.eKo}</span>`;
+  document.getElementById("migcap").innerHTML=`<span class="en-only">${ph.cEn}</span><span class="ko-only">${ph.cKo}</span>`;
+  document.getElementById("migyear").textContent=y;
+}
+const mslider=document.getElementById("migslider");
+mslider.addEventListener("input",()=>drawMig(+mslider.value));
+let migTimer=null;
+document.getElementById("migplay").addEventListener("click",function(){
+  if(migTimer){clearInterval(migTimer);migTimer=null;return;}
+  let y=+mslider.value; if(y>=1990)y=1180;
+  migTimer=setInterval(()=>{ y+=8; if(y>=1990){y=1990;clearInterval(migTimer);migTimer=null;} mslider.value=y; drawMig(y); },60);
+});
+drawMig(1180);
+
+/* ---- charts ---- */
+function bars(el, rows, unit){
+  const max=Math.max(...rows.map(r=>r.v));
+  document.getElementById(el).innerHTML=rows.map(r=>`
+   <div style="display:flex;align-items:center;gap:8px;margin:5px 0">
+     <div style="width:118px;font-size:12.5px;text-align:right;color:var(--ink)"><span class="en-only">${r.en}</span><span class="ko-only">${r.ko}</span></div>
+     <div style="flex:1;background:#eef3ea;border-radius:5px"><div style="width:${Math.max(8,Math.round(r.v/max*100))}%;background:${r.c||'#3f7050'};color:#fff;font-size:11.5px;padding:3px 7px;border-radius:5px;white-space:nowrap">${r.v}${unit||''}</div></div>
+   </div>`).join("");
+}
+bars("ch-dyn",[
+ {en:"Goryeo",ko:"고려",v:9,c:"#8a6d3b"},
+ {en:"Early Joseon",ko:"조선 전기",v:8,c:"#b08d3e"},
+ {en:"Late Joseon",ko:"조선 후기",v:8,c:"#c9a24a"},
+ {en:"Empire & Colonial",ko:"대한제국·일제",v:2,c:"#9c4a3c"},
+ {en:"Modern",ko:"현대",v:3,c:"#2e5339"}]);
+let one=0,two=0;
+DL.forEach(p=>{ const g = p.gen===1 ? (p.ko.length-1) : p.ko.length; if(g<=1)one++; else two++; });
+bars("ch-name",[{en:"One character",ko:"외자",v:one,c:"#b08d3e"},{en:"Two characters",ko:"두 자",v:two,c:"#3f7050"}]);
+const rec=DL.filter(p=>p.born).length;
+bars("ch-doc",[{en:"Recorded",ko:"기록됨",v:rec,c:"#2e5339"},{en:"Estimated",ko:"추정",v:30-rec,c:"#c9a24a"}]);
+const mods=[];
+DL.forEach(p=>{ if(p.born) mods.push({y:+String(p.born).slice(0,4),rom:p.rom,ko:p.ko}); });
+MOD.forEach(p=>{ if(p.born) mods.push({y:+String(p.born).slice(0,4),rom:p.rom,ko:p.ko}); });
+mods.sort((a,b)=>a.y-b.y);
+const y0=1930,y1=2010,W=680,H=150;
+const mx=y=>40+(y-y0)/(y1-y0)*(W-70);
+let ticks="";for(let yy=1930;yy<=2010;yy+=20){ticks+=`<line x1="${mx(yy)}" y1="95" x2="${mx(yy)}" y2="101" stroke="#9db89f"/><text x="${mx(yy)}" y="116" font-size="11" text-anchor="middle" fill="#7b7264">${yy}</text>`;}
+const dots=mods.map((m,i)=>{const x=mx(m.y),up=i%2===0,ty=up?40:78;return `<line x1="${x}" y1="90" x2="${x}" y2="${up?ty+6:ty-10}" stroke="#d8ccb4"/><circle cx="${x}" cy="90" r="5" fill="#2e5339"/><text x="${x}" y="${ty}" font-size="10.5" text-anchor="middle" fill="#2b2620"><tspan class="en-only">${m.rom} ${m.y}</tspan><tspan class="ko-only">${m.ko} ${m.y}</tspan></text>`;}).join("");
+document.getElementById("ch-mod").innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%"><line x1="30" y1="90" x2="${W-20}" y2="90" stroke="#9db89f" stroke-width="1.5"/>${ticks}${dots}</svg>`;
 </script>
 </body>
 </html>
