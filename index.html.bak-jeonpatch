@@ -252,7 +252,7 @@ footer{max-width:1380px;margin:0 auto;padding:8px 26px 30px;font-size:12px;color
     <button data-v="stories">📖 Family Stories</button>
     <button data-v="mil">🎖 Military Service</button>
     <button data-v="lib">📚 Library</button>
-    <button data-v="rel" style="display:none">🧮 How are we related?</button>
+    <button data-v="rel">🧮 How are we related?</button>
       <button data-v="jeon">🇰🇷 Jeon Heritage 족보</button>
   </nav>
   <section class="view" id="v-jeon"><iframe src="jeon-heritage.html" title="Jeon Heritage" style="width:100%;height:82vh;border:none;background:#faf7f0;border-radius:8px"></iframe></section>
@@ -501,7 +501,7 @@ const FLAG_DRAW={
  "Singapore":()=>`<rect width="60" height="20" fill="#EF3340"/><rect y="20" width="60" height="20" fill="#fff"/><circle cx="14" cy="10" r="6" fill="#fff"/><circle cx="16.5" cy="10" r="5.4" fill="#EF3340"/>`,
 };
 FLAG_DRAW["Northern Ireland"]=FLAG_DRAW["United Kingdom"];
-FLAG_DRAW["South Korea"]=()=>`<rect width="60" height="40" fill="#fff"/><g transform="translate(30 20)"><circle r="9.6" fill="#0047a0"/><path d="M0 -9.6a9.6 9.6 0 0 1 0 19.2a4.8 4.8 0 0 1 0 -9.6a4.8 4.8 0 0 0 0 -9.6z" fill="#cd2e3a"/></g><g fill="#141414"><g transform="translate(13 8.5) rotate(33.7)"><rect x="-4.3" y="-2.5" width="8.6" height="1.2"/><rect x="-4.3" y="-0.6" width="8.6" height="1.2"/><rect x="-4.3" y="1.3" width="8.6" height="1.2"/></g><g transform="translate(47 8.5) rotate(-33.7)"><rect x="-4.3" y="-2.5" width="8.6" height="1.2"/><rect x="-4.3" y="-0.6" width="3.5" height="1.2"/><rect x="0.8" y="-0.6" width="3.5" height="1.2"/><rect x="-4.3" y="1.3" width="8.6" height="1.2"/></g><g transform="translate(13 31.5) rotate(-33.7)"><rect x="-4.3" y="-2.5" width="3.5" height="1.2"/><rect x="0.8" y="-2.5" width="3.5" height="1.2"/><rect x="-4.3" y="-0.6" width="8.6" height="1.2"/><rect x="-4.3" y="1.3" width="3.5" height="1.2"/><rect x="0.8" y="1.3" width="3.5" height="1.2"/></g><g transform="translate(47 31.5) rotate(33.7)"><rect x="-4.3" y="-2.5" width="3.5" height="1.2"/><rect x="0.8" y="-2.5" width="3.5" height="1.2"/><rect x="-4.3" y="-0.6" width="3.5" height="1.2"/><rect x="0.8" y="-0.6" width="3.5" height="1.2"/><rect x="-4.3" y="1.3" width="3.5" height="1.2"/><rect x="0.8" y="1.3" width="3.5" height="1.2"/></g></g>`;
+FLAG_DRAW["South Korea"]=()=>`<rect width="60" height="40" fill="#fff"/><path d="M20.5 20a9.5 9.5 0 0 1 19 0z" fill="#C60C30"/><path d="M39.5 20a9.5 9.5 0 0 1 -19 0z" fill="#003478"/><circle cx="25.25" cy="20" r="4.75" fill="#C60C30"/><circle cx="34.75" cy="20" r="4.75" fill="#003478"/>`;
 function flagSVG(c,w,h,x,y){
   if(!c)return "";
   const draw=FLAG_DRAW[c];

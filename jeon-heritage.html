@@ -70,6 +70,15 @@ svg text{font-family:Georgia,serif}
 .hcard .who{font-size:13px;color:var(--green);margin-top:2px}
 .foot{text-align:center;color:var(--ink2);font-size:12px;margin-top:30px}
 .en .ko-only{display:none}.ko .en-only{display:none}
+.card{transition:transform .15s,box-shadow .15s,border-color .15s;cursor:default}
+.card:hover{transform:translateY(-2px);box-shadow:0 5px 16px rgba(46,83,57,.16);border-color:var(--gold)}
+.hcard{transition:transform .15s,box-shadow .15s}
+.hcard:hover{transform:scale(1.06);box-shadow:0 4px 12px rgba(176,141,62,.25)}
+.era{transition:background .15s;border-radius:0 8px 8px 0}
+.era:hover{background:#f4f0e4}
+.gen .dot{transition:transform .15s}
+.gen:hover .dot{transform:translateX(-50%) scale(1.5);background:var(--gold)}
+.seatdot:hover circle{stroke:var(--gold);stroke-width:2.5}
 </style>
 </head>
 <body class="en">
