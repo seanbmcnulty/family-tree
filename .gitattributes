@@ -1,0 +1,10 @@
+# Generated, single-line build artifacts: never let git line-ending
+# normalization touch these, since that was causing full-file diffs
+# on every commit (2,181/2,181 line churn with zero content change)
+# and bloating .git history.
+index.html -text
+jeon-heritage.html -text
+push-update.bat -text
+*.bak -text
+*.bak-* binary
+assets/** binary
