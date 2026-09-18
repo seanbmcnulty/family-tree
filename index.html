@@ -39,6 +39,14 @@ h1 .amp{color:var(--gold);font-style:italic}
 #centerresults .r{padding:9px 14px;border-bottom:1px solid var(--line);cursor:pointer;display:flex;gap:9px;align-items:baseline;border-radius:6px}
 #centerresults .r:hover{background:#f3edda}
 #centerresults .r .yrs{color:var(--ink2);font-size:12.5px;margin-left:auto;white-space:nowrap}
+.libchip{background:var(--card);border:1px solid var(--line);color:var(--ink2);border-radius:16px;padding:5px 12px;font-size:12.5px;cursor:pointer}
+.libchip.on{background:var(--green);color:#fff;border-color:var(--green)}
+.libchip:hover{border-color:var(--gold)}
+#storynav{display:flex;flex-wrap:wrap;gap:6px 14px;margin-bottom:20px;padding:14px 18px;background:var(--panel);border:1px solid var(--line);border-radius:10px}
+#storynav a{font-size:12.5px;color:var(--green);text-decoration:none;border-bottom:1px dotted var(--green2)}
+#storynav a:hover{color:var(--gold);border-color:var(--gold)}
+.story-chapter{font-size:12px;color:var(--gold);text-transform:uppercase;letter-spacing:1.4px;margin:28px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.story-chapter:first-child{margin-top:0}
 nav{display:flex;gap:4px;margin-top:14px;flex-wrap:wrap}
 nav button{background:none;border:none;color:#e8e0c8;padding:10px 18px;font-size:14.5px;border-radius:10px 10px 0 0;opacity:.78}
 nav button:hover{opacity:1;background:rgba(255,255,255,.08)}
@@ -313,6 +321,8 @@ footer{max-width:1380px;margin:0 auto;padding:8px 26px 30px;font-size:12px;color
       <div class="maphint">Bubble size = number of relatives born in that country up to the selected year. Drag the slider — or press Play — to watch the family migrate from the British Isles, the Emmental and the Rhineland toward Ontario and British Columbia. Click a bubble to list its people.</div>
     </div>
     <div class="panelcard" id="mapdetail" style="display:none"></div>
+    <div class="panelcard" id="migchart" style="margin-top:16px"></div>
+    <div class="panelcard" id="migwaves" style="margin-top:16px"></div>
   </section>
 
   <!-- STATS -->
@@ -1458,6 +1468,7 @@ function drawMap(){
       (ppl.length > 60 ? (LANG === "ko" ? ` <i>… 외 ${ppl.length - 60}명</i>` : ` <i>… and ${ppl.length - 60} more (use search)</i>`) : "");
     $("#mapdetail").querySelectorAll(".plink").forEach(el => el.onclick = () => openProfile(el.dataset.p));
   });
+  drawMigrationExtras();
 }
 function __placeDots(year, px){
   const groups = {};
@@ -1500,6 +1511,90 @@ const FLAGTXT = {"Canada":"🇨🇦","United States":"🇺🇸","England":"🏴�
 let statsDrawn = false;
 function bars(entries, max){
   return entries.map(([l, v]) => `<div class="bar"><div class="bl">${String(l)}</div><div class="bt"><div class="bf" style="width:${Math.max(2, v/max*100)}%"></div></div><div class="bv">${v}</div></div>`).join("");
+}
+function svgLine(rows, opts){
+  opts = opts || {};
+  const w = opts.w || 640, h = opts.h || 190, pad = 32;
+  const vals = rows.map(r => r[1]);
+  const max = Math.max.apply(null, vals.concat([1]));
+  const n = rows.length;
+  const x = i => pad + (i/(Math.max(1,n-1))) * (w - pad*2);
+  const y = v => h - pad - (v/max) * (h - pad*1.7);
+  const pts = rows.map((r,i) => x(i).toFixed(1) + "," + y(r[1]).toFixed(1)).join(" ");
+  const area = pad.toFixed(1) + "," + (h-pad) + " " + pts + " " + (w-pad).toFixed(1) + "," + (h-pad);
+  const labelEvery = Math.max(1, Math.ceil(n / 9));
+  const labels = rows.map((r,i) => (i % labelEvery === 0 || i === n-1) ? `<text x="${x(i).toFixed(1)}" y="${h-8}" font-size="10" fill="var(--ink2)" text-anchor="middle">${esc(String(r[0]))}</text>` : "").join("");
+  return `<svg viewBox="0 0 ${w} ${h}" width="100%" style="max-width:${w}px;display:block;margin:0 auto;overflow:visible">
+    <polygon points="${area}" fill="var(--green2)" opacity=".16"/>
+    <polyline points="${pts}" fill="none" stroke="var(--green)" stroke-width="2.2"/>
+    ${rows.map((r,i) => `<circle cx="${x(i).toFixed(1)}" cy="${y(r[1]).toFixed(1)}" r="2.6" fill="var(--gold)"><title>${esc(String(r[0]))}: ${r[1]}</title></circle>`).join("")}
+    ${labels}
+  </svg>`;
+}
+function svgDonut(rows, opts){
+  opts = opts || {};
+  const size = opts.size || 168, r = size/2 - 16, cx = size/2, cy = size/2, cw = opts.cw || 22;
+  const total = rows.reduce((s,r0) => s + r0[1], 0) || 1;
+  const COLORS = opts.colors || ["var(--green)","var(--gold)","var(--blue)","var(--red)","var(--green2)","#9c8a5e"];
+  let ang = -Math.PI/2;
+  const segs = rows.map((row, i) => {
+    const frac = row[1]/total;
+    const a0 = ang, a1 = ang + frac * Math.PI * 2;
+    ang = a1;
+    const large = (a1-a0) > Math.PI ? 1 : 0;
+    const x0 = cx + r*Math.cos(a0), y0 = cy + r*Math.sin(a0);
+    const x1 = cx + r*Math.cos(a1), y1 = cy + r*Math.sin(a1);
+    const col = row[2] || COLORS[i % COLORS.length];
+    if (frac >= 0.999) return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${col}" stroke-width="${cw}"><title>${esc(String(row[0]))}: ${row[1]}</title></circle>`;
+    return `<path d="M${x0.toFixed(1)},${y0.toFixed(1)} A${r},${r} 0 ${large} 1 ${x1.toFixed(1)},${y1.toFixed(1)}" fill="none" stroke="${col}" stroke-width="${cw}"><title>${esc(String(row[0]))}: ${row[1]} (${Math.round(frac*1000)/10}%)</title></path>`;
+  }).join("");
+  return `<div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">
+    <svg viewBox="0 0 ${size} ${size}" width="${size}" height="${size}">${segs}<text x="${cx}" y="${cy-3}" text-anchor="middle" font-size="19" fill="var(--ink)" font-weight="700">${total.toLocaleString()}</text><text x="${cx}" y="${cy+14}" text-anchor="middle" font-size="9.5" fill="var(--ink2)">${esc(opts.centerLabel||"")}</text></svg>
+    <div style="display:flex;flex-direction:column;gap:5px">${rows.map((row,i) => `<div style="display:flex;align-items:center;gap:7px;font-size:12.5px"><span style="width:11px;height:11px;border-radius:3px;background:${row[2]||COLORS[i%COLORS.length]};display:inline-block;flex-shrink:0"></span>${esc(String(row[0]))} <span style="color:var(--ink2)">(${row[1]})</span></div>`).join("")}</div>
+  </div>`;
+}
+function popByDecade(){
+  const rows = [];
+  for (let d = 1500; d <= 2020; d += 10) {
+    const n = Object.values(P).filter(p => p.birth && p.birth.year && p.birth.year <= d + 9 && (!p.death || !p.death.year || p.death.year >= d)).length;
+    rows.push([d + "s", n]);
+  }
+  return rows;
+}
+function migrantsByBirthDecade(){
+  const cnt = {};
+  Object.values(P).forEach(p => {
+    const bc = p.birth && p.birth.country, dc = p.death && p.death.country, by = p.birth && p.birth.year;
+    if (bc && dc && bc !== dc && by && by >= 1550) { const d = Math.floor(by/10)*10; cnt[d] = (cnt[d]||0) + 1; }
+  });
+  return Object.keys(cnt).map(Number).sort((a,b) => a-b).map(d => [d + "s", cnt[d]]);
+}
+const MIGRATION_CONTEXT = {
+  "England|United States": ["17th-century Puritan settlement of New England — the ‘Great Migration’ of the 1620s–1640s that founded many of this tree's oldest confirmed American lines.", "17세기 청교도의 뉴쟉글랜드 정착 — 1620년대–1640년대의 ‘대이주’로, 이 가계도에서 가장 오래된 미국 계통의 다수가 여기서 시작된다."],
+  "Ireland|Canada": ["19th-century Irish emigration, including the Dublin McNulty line's own documented move to Canada around 1910.", "19세기 아일랜드 이민 — 더블린 맥널티 가계가 1910년만경 캐나다로 이주한 기록도 여기에 포함된다."],
+  "United States|Canada": ["United Empire Loyalists resettling in Upper Canada after the American Revolution, plus later cross-border economic migration.", "미국 독립 전쟁 이후 업퍼케나다로 재정착한 외야 대영제국 칭신파(Loyalists) 및 이후 국경을 오간 경제적 이주."],
+  "Canada|United States": ["The reverse flow along the same open 19th–early-20th-century border, driven mostly by work.", "같은 국경을 따라 반대 방향으로 이동한 흐름으로, 대부분 일자리가 이유였다."],
+  "Switzerland|United States": ["The Bernese Anabaptist/Mennonite exodus of the 1700s–1800s — fleeing religious persecution in the Emmental for Pennsylvania (see ‘From the Emmental to Niagara’ in Family Stories).", "1700년대–1800년대 베른 재세례파(멘노나이트) 이민 — 에멘탈 계곡의 종교 박해를 피해 펜실베이니아로 (가족 이야기의 ‘에멘탈에서 나이아가라로’ 참조)."],
+  "Switzerland|Germany": ["The same Emmental Mennonite community's earlier stop in the Palatinate before crossing to North America.", "같은 에멘탈 멘노나이트 공동체가 북미로 건너가기 전 팔츠네이트에 먼저 머물러던 단계."],
+  "Germany|United States": ["German Palatine and 19th-century emigration to Pennsylvania and the American Midwest.", "팔츠네이트 독일인들과 19세기 독일 이민자들의 펜실베이니아·미국 중서부 정착."],
+  "Netherlands|United States": ["17th-century Dutch settlement of New Netherland — New Amsterdam, later New York (see ‘Anneke of New Amsterdam’ in Family Stories).", "17세기 네덜란드인의 뉴네덜란트(뉴암스테르담, 후의 뉴욕) 정착 (가족 이야기의 ‘뉴암스테르담의 안네케’ 참조)."],
+  "England|Canada": ["Direct British emigration and military postings to Canada across the 18th–19th centuries.", "18–19세기에 걸친 영국에서 캐나다로의 직접 이민과 군 주둔지 발령."],
+  "Ireland|United States": ["19th-century Irish emigration to the United States, part of the same wave that sent other family lines to Canada.", "19세기 아일랜드인의 미국 이민 — 다른 가계가 캐나다로 향한 것과 같은 물결의 일부."]
+};
+function drawMigrationExtras(){
+  const rows = migrantsByBirthDecade();
+  const el = $("#migchart");
+  if (el) el.innerHTML = `<h3>${LANG === "ko" ? "이주자 출생 연대별 분포" : "Migrants by birth decade"}</h3>${rows.length ? svgLine(rows) : "—"}<div style="font-size:12px;color:var(--ink2);margin-top:8px;font-style:italic">${LANG === "ko" ? "출생국과 사망국이 다른 " + rows.reduce((s,r)=>s+r[1],0) + "명을 출생 연대별로 집계함 — 정확한 이주 연도가 아닌 출생 시점 기준입니다." : rows.reduce((s,r)=>s+r[1],0) + " people born in a different country than they died in, bucketed by birth decade (a proxy for generation, not the exact year they moved)."}</div>`;
+  const routes = {};
+  Object.values(P).forEach(p => {
+    const bc = p.birth && p.birth.country, dc = p.death && p.death.country;
+    if (bc && dc && bc !== dc) { const k = bc + "|" + dc; routes[k] = (routes[k]||0) + 1; }
+  });
+  const top = Object.entries(routes).sort((a,b) => b[1]-a[1]).slice(0, 8);
+  const wel = $("#migwaves");
+  if (wel) wel.innerHTML = `<h3>${LANG === "ko" ? "이주의 물결들" : "Migration waves"}</h3>
+    <div style="font-size:12px;color:var(--ink2);font-style:italic;margin-bottom:10px">${LANG === "ko" ? "아래는 이 이동 경로에 대한 일반적인 역사적 배경입니다 — 특정 인물의 이주 사실이 아니라, 해당 경로의 시대적 맥락입니다." : "General historical background for each route below — not a documented fact about any specific person's journey unless that person is named."}</div>
+    ${top.map(([k, n]) => { const [bc, dc] = k.split("|"); const ctx = MIGRATION_CONTEXT[k]; return `<div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--line)"><b style="color:var(--green)">${esc(cName(bc))} → ${esc(cName(dc))}</b> <span style="color:var(--ink2);font-size:12.5px">(${n})</span><br><span style="font-size:13.5px">${ctx ? esc(LANG === "ko" ? ctx[1] : ctx[0]) : (LANG === "ko" ? "이 경로에 대한 구체적인 배경은 아직 연구되지 않았습니다." : "Specific historical context for this route hasn't been researched yet.")}</span></div>`; }).join("")}`;
 }
 function drawStats(){
   statsDrawn = true;
@@ -1658,7 +1753,15 @@ function drawStats(){
       const rows = Object.entries(cnt).sort((a,b) => b[1]-a[1]).slice(0, 14).map(([s, n2]) => [(LANG === "ko" && REL_KO[s]) ? REL_KO[s] : s, n2]);
       return bars(rows, rows[0] ? rows[0][1] : 1);
     })()}<div style="font-size:12px;color:var(--ink2);margin-top:8px;font-style:italic">${LANG === "ko" ? "기록된 종교는 6건뿐이며, 나머지는 시대·지역·가문에 근거한 추정입니다 (프로필에 '추정' 표시). ✝ 가톨릭 · ✟ 개신교 · ✡ 유대교 · ☦ 정교회" : "Only 6 affiliations are recorded; the rest are educated inferences from era, place and family movement (marked 'inferred' on profiles). ✝ Catholic · ✟ Protestant · ✡ Jewish · ☦ Orthodox"}</div></div>
-    <div class="panelcard"><h3>${T("How complete is the tree?")}</h3>${compRows}<div style="font-size:12px;color:var(--ink2);margin-top:8px;font-style:italic">Data-quality dashboard — where future research will help most.</div></div>`;
+    <div class="panelcard"><h3>${T("How complete is the tree?")}</h3>${compRows}<div style="font-size:12px;color:var(--ink2);margin-top:8px;font-style:italic">Data-quality dashboard — where future research will help most.</div></div>
+    <div class="panelcard" style="grid-column:1/-1"><h3>${LANG === "ko" ? "연대별 생존 인구 추정" : "Estimated living population by decade"}</h3>${svgLine(popByDecade())}<div style="font-size:12px;color:var(--ink2);margin-top:8px;font-style:italic">${LANG === "ko" ? "해당 10년간 출생하여 생존하고 있었던 것으로 확인된 인원으로, 문서화 수준이 높은 최근 세대로 갈수록 과대평가될 수 있습니다." : "People confirmed born by that decade and not yet recorded as having died — rises toward the present partly because recent generations are far better documented, not only because the family grew."}</div></div>
+    <div class="panelcard"><h3>${LANG === "ko" ? "자료 신뢰도 (A–D 등급)" : "Source confidence (Tier A–D)"}</h3>${(function(){
+      const tc = {A:0,B:0,C:0,D:0};
+      Object.values(P).forEach(p => { if (p.confidenceTier && tc.hasOwnProperty(p.confidenceTier)) tc[p.confidenceTier]++; });
+      const labels = LANG === "ko" ? {A:"A — 1차 자료",B:"B — 2차 자료",C:"C — 추론",D:"D — 추정"} : {A:"A — primary-sourced",B:"B — secondary",C:"C — inferred",D:"D — estimated"};
+      const rows = ["A","B","C","D"].map(t => [labels[t], tc[t]]).filter(r => r[1] > 0);
+      return rows.length ? svgDonut(rows, {colors:["var(--green)","var(--gold)","var(--blue)","var(--red)"], centerLabel: LANG === "ko" ? "명" : "people"}) : "—";
+    })()}<div style="font-size:12px;color:var(--ink2);margin-top:8px;font-style:italic">${LANG === "ko" ? "A/B는 직접 기록에 근거하며, C/D는 정도가 다른 추론입니다." : "A and B rest on direct record citations; C and D are inference of varying strength, not documented fact."}</div></div>`;
   $("#statsgrid").querySelectorAll(".plink").forEach(el => el.onclick = () => openProfile(el.dataset.p));
 }
 
@@ -1796,19 +1899,37 @@ const ERA_INTRO_KO = {
 
 /* ---------- STORIES ---------- */
 let storiesDrawn = false;
+function storyYear(era){ const m = era.match(/\d{4}/); return m ? +m[0] : 9999; }
+const STORY_ERAS = [
+  {max: 1699, en:"Old World & early settlers", ko:"구대류와 초기 정착민"},
+  {max: 1849, en:"Frontier, migration & revolution", ko:"개척, 이주와 혁명"},
+  {max: 1913, en:"Ireland to Canada, the Victorian family", ko:"아일랜드에서 캐나다로, 빅토리아 시대"},
+  {max: 1945, en:"The World Wars", ko:"양차 세계대전"},
+  {max: 9999, en:"The modern family", ko:"현대의 가족"}
+];
+function eraBucket(y){ return STORY_ERAS.find(b => y <= b.max); }
 function drawStories(){
   storiesDrawn = true;
-  $("#v-stories").innerHTML = STORIES.map((s, i) => {
-    const k = LANG === "ko" ? STORIES_KO[i] : null;
-    return `
-    <div class="story">
+  const order = STORIES.map((s, i) => i).sort((a, b) => storyYear(STORIES[a].era) - storyYear(STORIES[b].era));
+  const navHtml = `<div id="storynav">${order.map(i => { const s = STORIES[i]; const k = LANG === "ko" ? STORIES_KO[i] : null; return `<a href="#story-${i}">${esc(k ? k.t : s.title)}</a>`; }).join("")}</div>`;
+  let lastBucket = null;
+  const cardsHtml = order.map(i => {
+    const s = STORIES[i], k = LANG === "ko" ? STORIES_KO[i] : null;
+    const b = eraBucket(storyYear(s.era));
+    let head = "";
+    if (b !== lastBucket) { head = `<div class="story-chapter">${LANG === "ko" ? b.ko : b.en}</div>`; lastBucket = b; }
+    return head + `
+    <div class="story" id="story-${i}">
       <div class="s-head"><h3>${k ? k.t : s.title}</h3><span class="s-era">${k ? k.e : s.era}</span></div>
       <div class="s-body">${(k ? k.b : s.body).map(p => `<p>${p}</p>`).join("")}</div>
       ${s.imgs.length ? `<div class="s-imgs">${s.imgs.map(([f, t]) => `<img src="${f}" alt="${esc(t)}" title="${esc(t)}" loading="lazy">`).join("")}</div>` : ""}
       ${s.pid ? `<div class="s-people">👤 <span class="plink" data-p="${s.pid}">${LANG === "ko" ? esc(nmOf(P[s.pid])) + " 상세 정보 →" : "Open " + esc(P[s.pid].name) + "'s full profile →"}</span></div>` : ""}
       ${s.docs && s.docs.length ? `<div class="s-people" style="padding-top:0">${s.docs.map(dt => { const doc = LIBRARY.find(x => x.t === dt); return doc ? `<span class="plink" data-doc="${doc.id}" style="margin-right:14px">📄 ${esc(dt)}</span>` : ""; }).join("")}</div>` : ""}
       <div class="s-src">${LANG === "ko" ? "출처" : "Sources"}: ${esc(s.src)}</div>
-    </div>`;}).join("");
+    </div>`;
+  }).join("");
+  $("#v-stories").innerHTML = navHtml + cardsHtml;
+  $("#storynav").querySelectorAll("a").forEach(a => a.onclick = e => { e.preventDefault(); const t = document.querySelector(a.getAttribute("href")); if (t) t.scrollIntoView({behavior:"smooth", block:"start"}); });
   $("#v-stories").querySelectorAll(".plink").forEach(el => el.onclick = () => { if (el.dataset.doc) openDoc(el.dataset.doc); else openProfile(el.dataset.p); });
   $("#v-stories").querySelectorAll(".s-imgs img").forEach(img => img.onclick = () => { $("#lbimg").src = img.src; $("#lightbox").classList.add("on"); });
 }
@@ -1990,8 +2111,25 @@ function drawMilitary(){
 }
 /* ---------- LIBRARY ---------- */
 let libDrawn = false;
+const LIB_CAT = {
+  record: ["📜","Record","기록"], biography: ["👤","Biography","전기"], military: ["🎖","Military","군사"],
+  immigration: ["🚢","Immigration","이주"], church: ["⛪","Church","교회"], census: ["📋","Census","인구조사"],
+  land: ["🗺️","Land","토지"], newspaper: ["📰","Newspaper","신문"], obituary: ["🕯️","Obituary","부고"],
+  heraldry: ["🛡️","Heraldry","문장"]
+};
 function drawLibrary(){
   libDrawn = true;
+  const catCounts = {};
+  LIBRARY.forEach(d => { catCounts[d.cat] = (catCounts[d.cat]||0) + 1; });
+  const unlinkedCount = LIBRARY.filter(d => !d.p.length).length;
+  const catOrder = Object.keys(LIB_CAT).filter(c => catCounts[c]);
+  let libCat = "all", libUnlinked = false;
+  const chipHtml = () => `
+    <div id="libchips" style="display:flex;flex-wrap:wrap;gap:7px;margin-top:12px">
+      <button class="libchip on" data-cat="all">${LANG === "ko" ? "전체" : "All"} (${LIBRARY.length})</button>
+      ${catOrder.map(c => `<button class="libchip" data-cat="${c}">${LIB_CAT[c][0]} ${LANG === "ko" ? LIB_CAT[c][2] : LIB_CAT[c][1]} (${catCounts[c]})</button>`).join("")}
+      <button class="libchip" data-cat="__unlinked" style="margin-left:auto">${LANG === "ko" ? "인물 미연결" : "Not yet linked to a person"} (${unlinkedCount})</button>
+    </div>`;
   $("#v-lib").innerHTML = `
     <div class="panelcard" style="margin-bottom:16px">
       <h3>${LANG === "ko" ? "📚 가족 문서 자료실 — " + LIBRARY.length + "건" : "📚 The family document archive — " + LIBRARY.length + " items"}</h3>
@@ -1999,24 +2137,38 @@ function drawLibrary(){
         ? "Ancestry 트리에 첨부되어 있던 모든 이야기·전기·필사 기록을 RootsMagic으로 내려받아 정리했습니다. 인물과 자동으로 연결된 문서는 해당 인물의 프로필에도 표시됩니다. (원문은 영어입니다.)"
         : "Every story, biography, transcription and note attached to the Ancestry tree, downloaded via RootsMagic and indexed here. Documents matched to people also appear on their profiles."}</div>
       <input id="libq" placeholder="${T("Search the document archive…")}" style="width:100%;margin-top:12px;padding:9px 14px;border:1px solid var(--line);border-radius:9px;background:var(--card);font-size:14px">
+      ${chipHtml()}
     </div>
     <div id="liblist"></div>`;
   const redraw = () => {
     const q = $("#libq").value.trim().toLowerCase();
-    const hits = LIBRARY.filter(doc => !q || doc.t.toLowerCase().includes(q) || doc.x.toLowerCase().includes(q) || doc.p.some(pid => P[pid] && (P[pid].name.toLowerCase().includes(q) || (P[pid]._ko||"").includes(q))));
-    $("#liblist").innerHTML = hits.slice(0, 120).map(doc => `
+    const hits = LIBRARY.filter(doc => (!q || doc.t.toLowerCase().includes(q) || doc.x.toLowerCase().includes(q) || doc.p.some(pid => P[pid] && (P[pid].name.toLowerCase().includes(q) || (P[pid]._ko||"").includes(q))))
+      && (libUnlinked ? !doc.p.length : (libCat === "all" || doc.cat === libCat)));
+    const sorted = hits.slice().sort((a, b) => (catOrder.indexOf(a.cat) - catOrder.indexOf(b.cat)) || a.t.localeCompare(b.t));
+    $("#liblist").innerHTML = sorted.slice(0, 120).map(doc => `
       <div class="panelcard" style="margin-bottom:10px;padding:14px 18px;cursor:pointer" data-d="${doc.id}">
         <div style="display:flex;gap:10px;align-items:baseline;flex-wrap:wrap">
+          <span style="font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:.8px">${LIB_CAT[doc.cat] ? LIB_CAT[doc.cat][0] + " " + (LANG === "ko" ? LIB_CAT[doc.cat][2] : LIB_CAT[doc.cat][1]) : doc.cat}</span>
           <span style="font-size:15.5px;color:var(--green)">📄 ${esc(doc.t)}</span>
           <span style="color:var(--ink2);font-size:12px">${Math.round(doc.x.length/1000)}k</span>
           ${doc.p.slice(0,3).map(pid => P[pid] ? `<span class="plink" data-p="${pid}" style="font-size:12px">${esc(nmOf(P[pid]))}</span>` : "").join("")}
         </div>
         <div style="color:var(--ink2);font-size:12.5px;margin-top:4px">${esc(doc.x.slice(0, 160))}…</div>
-      </div>`).join("") + (hits.length > 120 ? `<div style="color:var(--ink2);font-size:13px;padding:8px">${hits.length - 120} more — refine the search.</div>` : "");
+      </div>`).join("") + (sorted.length > 120 ? `<div style="color:var(--ink2);font-size:13px;padding:8px">${sorted.length - 120} more — refine the search.</div>` : "") + (!sorted.length ? `<div style="color:var(--ink2);font-size:13px;padding:8px">${LANG === "ko" ? "일치하는 문서가 없습니다." : "No documents match."}</div>` : "");
     $("#liblist").querySelectorAll("[data-d]").forEach(el => el.onclick = e => { if (!e.target.closest(".plink")) openDoc(el.dataset.d); });
     $("#liblist").querySelectorAll(".plink").forEach(el => el.onclick = e => { e.stopPropagation(); openProfile(el.dataset.p); });
   };
   $("#libq").addEventListener("input", redraw);
+  $("#libchips").addEventListener("click", e => {
+    const b = e.target.closest(".libchip"); if (!b) return;
+    if (b.dataset.cat === "__unlinked") { libUnlinked = !libUnlinked; if (libUnlinked) libCat = "all"; }
+    else { libUnlinked = false; libCat = b.dataset.cat; }
+    $("#libchips").querySelectorAll(".libchip").forEach(x => x.classList.remove("on"));
+    const activeSel = libUnlinked ? '[data-cat="__unlinked"]' : `[data-cat="${libCat}"]`;
+    const activeEl = $("#libchips").querySelector(activeSel);
+    if (activeEl) activeEl.classList.add("on");
+    redraw();
+  });
   redraw();
 }
 function openDoc(did){
