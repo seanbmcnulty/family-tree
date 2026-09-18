@@ -394,8 +394,8 @@ footer{max-width:1380px;margin:0 auto;padding:8px 26px 30px;font-size:12px;color
       <div class="panelcard" id="migchart"></div>
       <div class="panelcard" id="originsgrowth"></div>
       <div class="panelcard" id="origincontinents"></div>
-      <div class="panelcard" id="origincountries"></div>
     </div>
+    <div class="panelcard" id="origincountries" style="margin-top:16px"></div>
     <div class="panelcard" id="migwaves" style="margin-top:16px"></div>
   </section>
 
@@ -1923,30 +1923,22 @@ function svgWaffle(rows, opts){
     ${legend}
   </div>`;
 }
-function svgWaffleFlags(rows, opts){
+function flagCloud(rows, opts){
   opts = opts || {};
-  const total = rows.reduce((s,r) => s + r[1], 0) || 1;
-  const perIcon = opts.perIcon || Math.max(1, Math.round(total / 100));
-  const cols = opts.cols || 10;
-  const cell = opts.cell || 15, gap = opts.gap || 4;
-  const flagH = cell * (40/60), voff = (cell - flagH) / 2;
-  let squares = [];
-  rows.forEach(row => {
-    const n = Math.max(1, Math.round(row[1] / perIcon));
-    for (let k = 0; k < n; k++) squares.push({c: row[0], val: row[1]});
-  });
-  const rowsN = Math.ceil(squares.length / cols);
-  const w = cols * (cell + gap) - gap, h = rowsN * (cell + gap) - gap;
-  const sqEls = squares.map((sq, i) => {
-    const cx = (i % cols) * (cell + gap), cy = Math.floor(i / cols) * (cell + gap);
-    return `<g>${flagSVG(sq.c, cell, flagH, cx, cy + voff)}<rect x="${cx}" y="${cy}" width="${cell}" height="${cell}" fill="transparent"><title>${esc(cName(sq.c))}: ${sq.val}</title></rect></g>`;
+  const minPx = opts.minPx || 24, maxPx = opts.maxPx || 130;
+  const sorted = rows.slice().sort((a,b) => b[1]-a[1]);
+  const counts = sorted.map(r => r[1]);
+  const maxC = Math.max(...counts), minC = Math.min(...counts);
+  const sMax = Math.sqrt(maxC), sMin = Math.sqrt(minC);
+  const scale = c => (sMax === sMin) ? maxPx : minPx + (Math.sqrt(c) - sMin) / (sMax - sMin) * (maxPx - minPx);
+  const items = sorted.map(([c, n]) => {
+    const w = scale(n), h = w * (40/60);
+    return `<span style="display:inline-flex;margin:5px" title="${esc(cName(c))}: ${n}">${flagSVG(c, w, h)}</span>`;
   }).join("");
-  const legend = `<div style="display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:14px;font-size:12.5px;color:var(--ink2)">${rows.map(row => `<span>${flagSVG(row[0], 15, 10)} ${esc(cName(row[0]))} — <b style="color:var(--ink)">${row[1].toLocaleString()}</b></span>`).join("")}</div>`;
-  return `<div style="display:flex;flex-direction:column;align-items:center">
-    <svg viewBox="0 0 ${w} ${h}" width="100%" style="max-width:${Math.min(320,w)}px;display:block">${sqEls}</svg>
-    <div style="font-size:10.5px;color:var(--ink2);margin-top:8px;font-style:italic">${LANG === "ko" ? "국기 1개 ≈ " + perIcon + "명" : "each flag ≈ " + perIcon + " " + (perIcon===1?"person":"people")}</div>
-    ${legend}
-  </div>`;
+  const legend = `<div style="display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:16px;font-size:12.5px;color:var(--ink2)">${sorted.map(([c, n]) => `<span>${flagSVG(c, 15, 10)} ${esc(cName(c))} — <b style="color:var(--ink)">${n.toLocaleString()}</b></span>`).join("")}</div>`;
+  return `<div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:center">${items}</div>
+    <div style="font-size:10.5px;color:var(--ink2);margin-top:10px;font-style:italic;text-align:center">${LANG === "ko" ? "국기 크기는 해당 국가 출생자 수에 비례합니다." : "Flag size is proportional to the number of relatives born there."}</div>
+    ${legend}`;
 }
 function drawMigrationExtras(){
   const rows = migrantsByBirthDecade();
@@ -1979,7 +1971,7 @@ const cel = $("#origincontinents");
   const ccel = $("#origincountries");
   if (ccel) {
     const rows3 = Object.entries(DATA.meta.stats.countries).sort((a,b) => b[1]-a[1]);
-    ccel.innerHTML = `<h3>${LANG === "ko" ? "국가별 출생 인구" : "Birth population by country"}</h3>${rows3.length ? svgWaffleFlags(rows3) : "—"}<div style="font-size:12px;color:var(--ink2);margin-top:8px;font-style:italic">${LANG === "ko" ? "출생국이 기록된 모든 사람 기준." : "By recorded birth country, everyone with one on file."}</div>`;
+    ccel.innerHTML = `<h3>${LANG === "ko" ? "국가별 출생 인구" : "Birth population by country"}</h3>${rows3.length ? flagCloud(rows3) : "—"}<div style="font-size:12px;color:var(--ink2);margin-top:8px;font-style:italic">${LANG === "ko" ? "출생국이 기록된 모든 사람 기준." : "By recorded birth country, everyone with one on file."}</div>`;
   }
   const wel = $("#migwaves");
   if (wel) wel.innerHTML = `<h3>${LANG === "ko" ? "이주의 물결들" : "Migration waves"}</h3>
