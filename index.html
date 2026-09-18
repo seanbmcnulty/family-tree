@@ -4,23 +4,34 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>McNulty & Jeon Family Tree</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#f7f3ea; --panel:#fffdf7; --ink:#2b2620; --ink2:#6b6051; --line:#e3dac8;
   --green:#2e5339; --green2:#477a52; --gold:#b08d3e; --red:#8a3033; --blue:#2c4a6e;
-  --card:#fffefa; --shadow:0 2px 10px rgba(60,45,20,.10);
+  --terracotta:#9c5b3c; --plum:#6b4a6e; --rose:#a34a5c; --hover:#f3edda;
+  --card:#fffefa; --shadow:0 2px 10px rgba(60,45,20,.10); --accent:var(--green);
+}
+:root[data-theme="dark"]{
+  --bg:#1c1815; --panel:#262019; --ink:#ece4d3; --ink2:#a89985; --line:#3a3226;
+  --green:#4a8058; --green2:#63a06e; --gold:#d4ab5a; --red:#c2504f; --blue:#5b84ab;
+  --terracotta:#c98456; --plum:#9c7ba0; --rose:#d4788d; --hover:#3a3226;
+  --card:#2c2519; --shadow:0 2px 10px rgba(0,0,0,.45);
 }
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important} }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font:15px/1.5 Georgia,'Times New Roman',serif;min-height:100vh}
+body{background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");color:var(--ink);font:15px/1.5 Georgia,'Times New Roman',serif;min-height:100vh}
 button{font-family:inherit;cursor:pointer}
 input,select{font-family:inherit}
 
 /* ---------- header ---------- */
 header{background:linear-gradient(135deg,#243f2c,#2e5339 55%,#3a6647);color:#f5efdf;padding:18px 26px 0;box-shadow:var(--shadow);position:sticky;top:0;z-index:50}
 .h-top{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-h1{font-size:24px;font-weight:normal;letter-spacing:.5px}
+h1{font-size:24px;font-weight:normal;letter-spacing:.5px;font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif}
+h3{font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif}
 h1 .amp{color:var(--gold);font-style:italic}
 .h-sub{font-size:12.5px;opacity:.75;font-style:italic}
 .searchwrap{position:relative;margin-left:auto;min-width:300px;flex:1;max-width:430px}
@@ -29,7 +40,7 @@ h1 .amp{color:var(--gold);font-style:italic}
 #search:focus{background:rgba(255,255,255,.95);color:var(--ink)}
 #results{position:absolute;top:44px;left:0;right:0;background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,.18);max-height:380px;overflow:auto;display:none;z-index:60;color:var(--ink)}
 #results .r{padding:9px 14px;border-bottom:1px solid var(--line);cursor:pointer;display:flex;gap:9px;align-items:baseline}
-#results .r:hover{background:#f3edda}
+#results .r:hover{background:var(--hover)}
 #results .r .yrs{color:var(--ink2);font-size:12.5px;margin-left:auto;white-space:nowrap}
 .centerwrap{position:relative}
 #centerbtn{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);color:#f5efdf;border-radius:18px;padding:7px 14px;font-size:13px;cursor:pointer}
@@ -39,7 +50,7 @@ h1 .amp{color:var(--gold);font-style:italic}
 #centersearch{width:100%;box-sizing:border-box;padding:9px 14px;border-radius:10px;border:1px solid var(--line);background:var(--card);font-size:14px;margin-bottom:6px}
 #centerresults{max-height:280px;overflow:auto}
 #centerresults .r{padding:9px 14px;border-bottom:1px solid var(--line);cursor:pointer;display:flex;gap:9px;align-items:baseline;border-radius:6px}
-#centerresults .r:hover{background:#f3edda}
+#centerresults .r:hover{background:var(--hover)}
 #centerresults .r .yrs{color:var(--ink2);font-size:12.5px;margin-left:auto;white-space:nowrap}
 #centercaption{font-size:12px;color:var(--ink2);margin-bottom:7px;line-height:1.4}
 .tzctl{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;margin-left:2px}
@@ -68,7 +79,7 @@ h1 .amp{color:var(--gold);font-style:italic}
 nav{display:flex;gap:4px;margin-top:14px;flex-wrap:wrap}
 nav button{background:none;border:none;color:#e8e0c8;padding:10px 18px;font-size:14.5px;border-radius:10px 10px 0 0;opacity:.78}
 nav button:hover{opacity:1;background:rgba(255,255,255,.08)}
-nav button.on{background:var(--bg);color:var(--green);opacity:1;font-weight:bold}
+nav button.on{background:var(--bg);color:var(--accent);opacity:1;font-weight:bold;transition:color .3s ease}
 #langbtn{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);color:#f5efdf;border-radius:18px;padding:7px 14px;font-size:13px;cursor:pointer}
 #langbtn:hover{background:rgba(255,255,255,.28)}
 
@@ -167,7 +178,12 @@ table.ltable{width:100%;border-collapse:collapse;background:var(--panel);font-si
 /* ---------- generic cards ---------- */
 .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:18px}
 .panelcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:20px 22px}
-.panelcard h3{font-weight:normal;color:var(--green);font-size:18px;margin-bottom:12px}
+.statstrip{display:flex;flex-wrap:wrap;gap:10px 26px;margin:12px 0 16px;padding:12px 18px;background:var(--card);border:1px solid var(--line);border-radius:10px}
+.statstrip .st{display:flex;flex-direction:column;align-items:flex-start;min-width:90px}
+.statstrip .st b{font-size:21px;color:var(--accent);font-family:'Cormorant Garamond',Georgia,serif;line-height:1.1}
+.statstrip .st span{font-size:11px;color:var(--ink2);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+
+.panelcard h3{font-weight:600;color:var(--accent);font-size:19px;margin-bottom:12px;transition:color .3s ease}
 .statnum{font-size:30px;color:var(--green);font-family:Georgia}
 .statlbl{font-size:12px;color:var(--ink2);text-transform:uppercase;letter-spacing:1.2px}
 .statrow{display:flex;gap:26px;flex-wrap:wrap;margin-bottom:4px}
@@ -208,7 +224,7 @@ table.ltable{width:100%;border-collapse:collapse;background:var(--panel);font-si
 .relpick input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--card);font-size:14px}
 .relpick .rres{position:absolute;top:46px;left:0;right:0;background:var(--panel);border:1px solid var(--line);border-radius:9px;box-shadow:0 8px 26px rgba(0,0,0,.16);max-height:260px;overflow:auto;display:none;z-index:40}
 .relpick .rres .r{padding:8px 13px;cursor:pointer;border-bottom:1px solid var(--line);font-size:13.5px}
-.relpick .rres .r:hover{background:#f3edda}
+.relpick .rres .r:hover{background:var(--hover)}
 #relout{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:26px;text-align:center;display:none}
 #relout .big{font-size:26px;color:var(--green);margin:8px 0}
 #relout .via{color:var(--ink2);font-size:14px}
@@ -247,6 +263,7 @@ footer{max-width:1380px;margin:0 auto;padding:8px 26px 30px;font-size:12px;color
 .wcard .wf button{flex:1;padding:11px;border-radius:10px;border:none;font-size:14px;cursor:pointer}
 .wcard .wf .go{background:var(--green);color:#fff} .wcard .wf .lang{background:var(--panel);border:1px solid var(--line);color:var(--green)}
 #helpbtn{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#f5efdf;width:30px;height:30px;border-radius:50%;font-size:15px;cursor:pointer;flex:0 0 auto}
+#themebtn{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#f5efdf;width:30px;height:30px;border-radius:50%;font-size:14px;cursor:pointer;flex:0 0 auto}
 #helpbtn:hover{background:rgba(255,255,255,.28)}
 .copied{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;padding:10px 20px;border-radius:22px;font-size:13.5px;z-index:320;box-shadow:var(--shadow);opacity:0;transition:.2s}
 .copied.on{opacity:1}
@@ -262,7 +279,7 @@ footer{max-width:1380px;margin:0 auto;padding:8px 26px 30px;font-size:12px;color
 .report .dts{color:var(--ink2);font-size:12.5px}
 .report table{border-collapse:collapse;width:100%;margin:8px 0}
 .report td,.report th{border:1px solid var(--line);padding:6px 9px;text-align:left;font-size:13px}
-.report th{background:#f3edda;color:var(--green)}
+.report th{background:var(--hover);color:var(--accent)}
 .mpin{cursor:pointer}
 .mpin circle{stroke:#fffdf7;stroke-width:1.2}
 .mpin text{font-family:Georgia;font-size:9.5px;fill:#fdf6e0;pointer-events:none}
@@ -275,7 +292,7 @@ footer{max-width:1380px;margin:0 auto;padding:8px 26px 30px;font-size:12px;color
       <h1 id="apptitle">McNulty <span class="amp">&amp;</span> Jeon Family Tree</h1>
       <div class="h-sub" id="subtitle">Eight centuries, four lineages, one family</div>
     </div>
-    <button id="helpbtn" title="Help / 도움말">?</button><button id="langbtn">🇰🇷 한국어</button>
+    <button id="helpbtn" title="Help / 도움말">?</button><button id="themebtn" title="Toggle dark mode">🌙</button><button id="langbtn">🇰🇷 한국어</button>
     <div class="centerwrap">
       <button id="centerbtn" title="Search anyone’s name to re-center the whole tree on them">👤 View as…</button>
       <div id="centerpop">
@@ -334,6 +351,7 @@ footer{max-width:1380px;margin:0 auto;padding:8px 26px 30px;font-size:12px;color
   <section class="view" id="v-map">
     <div class="panelcard" style="margin-bottom:16px">
       <h3>Where the family was born, through time</h3>
+      <div id="originsstats" class="statstrip"></div>
       <div class="mapbar">
         <span class="ylab" id="maplab">All time</span>
         <input type="range" id="mapslider" min="1500" max="2030" step="10" value="2030">
@@ -343,9 +361,11 @@ footer{max-width:1380px;margin:0 auto;padding:8px 26px 30px;font-size:12px;color
       <div class="maphint">Bubble size = number of relatives born in that country up to the selected year. Drag the slider — or press Play — to watch the family migrate from the British Isles, the Emmental and the Rhineland toward Ontario and British Columbia. Click a bubble to list its people.</div>
     </div>
     <div class="panelcard" id="mapdetail" style="display:none"></div>
-    <div class="panelcard" id="migchart" style="margin-top:16px"></div>
-    <div class="panelcard" id="originsgrowth" style="margin-top:16px"></div>
-    <div class="panelcard" id="origincontinents" style="margin-top:16px"></div>
+    <div class="grid2" style="margin-top:16px">
+      <div class="panelcard" id="migchart"></div>
+      <div class="panelcard" id="originsgrowth"></div>
+      <div class="panelcard" id="origincontinents"></div>
+    </div>
     <div class="panelcard" id="migwaves" style="margin-top:16px"></div>
   </section>
 
@@ -397,6 +417,12 @@ const DATA = {"meta":{"title":"McNulty & Jeon Family Tree","root":"P1","generate
 const P = DATA.people, F = DATA.families, S = DATA.sources, ROOT = DATA.meta.root;
 
 /* ---------- i18n (English / Korean) ---------- */
+function applyTheme(t){
+  document.documentElement.setAttribute("data-theme", t);
+  try { localStorage.setItem("ft_theme", t); } catch(e){}
+  const b = document.getElementById("themebtn"); if (b) b.textContent = t === "dark" ? "☀️" : "🌙";
+}
+(function(){ let t = "light"; try { t = localStorage.getItem("ft_theme") || "light"; } catch(e){} applyTheme(t); })();
 let LANG = (function(){ try { return localStorage.getItem("ftlang") || "en"; } catch(e) { return "en"; } })();
 const KO = {
  "🌳 Tree":"🌳 가계도","🗺️ Origins & Migration":"🗺️ 출신지와 이주","📊 Statistics":"📊 통계","📖 Family Stories":"📖 가족 이야기","🎖 Military Service":"🎖 군 복무","🧮 How are we related?":"🧮 우리는 어떤 사이?",
@@ -1631,7 +1657,9 @@ $("#centerresults").addEventListener("click", e => {
 document.addEventListener("click", e => { if (!e.target.closest(".centerwrap")) $("#centerpop").classList.remove("on"); });
 
 /* ---------- VIEWS ---------- */
+const TAB_ACCENT = {tree:"var(--green)",map:"var(--blue)",stats:"var(--gold)",stories:"var(--terracotta)",mil:"var(--red)",lib:"var(--plum)",rel:"var(--blue)",jeon:"var(--rose)"};
 function showView(v){
+  document.documentElement.style.setProperty("--accent", TAB_ACCENT[v] || "var(--green)");
   document.querySelectorAll("nav button").forEach(b => b.classList.toggle("on", b.dataset.v === v));
   document.querySelectorAll(".view").forEach(s => s.classList.toggle("on", s.id === "v-" + v));
   if (v === "map" && !mapDrawn) drawMap();
@@ -1655,6 +1683,18 @@ const GEO = {
 };
 function drawMap(){
   mapDrawn = true;
+  (function(){
+    const withY = Object.values(P).filter(p => p.birth && p.birth.year);
+    const yrs = withY.map(p => p.birth.year);
+    const nCountries = Object.keys(DATA.meta.stats.countries).length;
+    const minY = yrs.length ? Math.min.apply(null, yrs) : null, maxY = yrs.length ? Math.max.apply(null, yrs) : null;
+    const el = $("#originsstats");
+    if (el) el.innerHTML = `
+      <div class="st"><b>${DATA.meta.stats.individuals.toLocaleString()}</b><span>${LANG === "ko" ? "가족 구성원" : "people traced"}</span></div>
+      <div class="st"><b>${nCountries}</b><span>${LANG === "ko" ? "출신 국가" : "countries of origin"}</span></div>
+      ${(minY && maxY) ? `<div class="st"><b>${maxY - minY}</b><span>${LANG === "ko" ? "년의 이주 역사" : "years of recorded migration"}</span></div>` : ""}
+    `;
+  })();
   const W = 1100, H = 540;
   const Z = [-168, 76, 182, -56];
   const px = (lon, lat) => [ (lon - Z[0]) / (Z[2] - Z[0]) * W, (lat - Z[1]) / (Z[3] - Z[1]) * H ];
@@ -1724,22 +1764,34 @@ let statsDrawn = false;
 function bars(entries, max){
   return entries.map(([l, v]) => `<div class="bar"><div class="bl">${String(l)}</div><div class="bt"><div class="bf" style="width:${Math.max(2, v/max*100)}%"></div></div><div class="bv">${v}</div></div>`).join("");
 }
+let __svgLineSeq = 0;
 function svgLine(rows, opts){
   opts = opts || {};
-  const w = opts.w || 640, h = opts.h || 190, pad = 32;
+  const w = opts.w || 640, h = opts.h || 190, pad = 32, padL = 42;
   const vals = rows.map(r => r[1]);
   const max = Math.max.apply(null, vals.concat([1]));
   const n = rows.length;
-  const x = i => pad + (i/(Math.max(1,n-1))) * (w - pad*2);
+  const x = i => padL + (i/(Math.max(1,n-1))) * (w - padL - pad);
   const y = v => h - pad - (v/max) * (h - pad*1.7);
+  const gid = "lgrad" + (__svgLineSeq++);
+  const ticks = 4;
+  const gridEls = [];
+  for (let t = 0; t <= ticks; t++) {
+    const v = Math.round(max * t / ticks);
+    const yy = y(v);
+    gridEls.push(`<line x1="${padL}" y1="${yy.toFixed(1)}" x2="${w-pad}" y2="${yy.toFixed(1)}" stroke="var(--line)" stroke-width="1" stroke-dasharray="${t===0?'0':'2,3'}"/>`);
+    gridEls.push(`<text x="${padL-8}" y="${(yy+3.5).toFixed(1)}" font-size="10" fill="var(--ink2)" text-anchor="end">${v.toLocaleString()}</text>`);
+  }
   const pts = rows.map((r,i) => x(i).toFixed(1) + "," + y(r[1]).toFixed(1)).join(" ");
-  const area = pad.toFixed(1) + "," + (h-pad) + " " + pts + " " + (w-pad).toFixed(1) + "," + (h-pad);
+  const area = padL.toFixed(1) + "," + (h-pad) + " " + pts + " " + (w-pad).toFixed(1) + "," + (h-pad);
   const labelEvery = Math.max(1, Math.ceil(n / 9));
   const labels = rows.map((r,i) => (i % labelEvery === 0 || i === n-1) ? `<text x="${x(i).toFixed(1)}" y="${h-8}" font-size="10" fill="var(--ink2)" text-anchor="middle">${esc(String(r[0]))}</text>` : "").join("");
   return `<svg viewBox="0 0 ${w} ${h}" width="100%" style="max-width:${w}px;display:block;margin:0 auto;overflow:visible">
-    <polygon points="${area}" fill="var(--green2)" opacity=".16"/>
-    <polyline points="${pts}" fill="none" stroke="var(--green)" stroke-width="2.2"/>
-    ${rows.map((r,i) => `<circle cx="${x(i).toFixed(1)}" cy="${y(r[1]).toFixed(1)}" r="2.6" fill="var(--gold)"><title>${esc(String(r[0]))}: ${r[1]}</title></circle>`).join("")}
+    <defs><linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--accent)" stop-opacity=".32"/><stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs>
+    ${gridEls.join("")}
+    <polygon points="${area}" fill="url(#${gid})"/>
+    <polyline points="${pts}" fill="none" stroke="var(--accent)" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+    ${rows.map((r,i) => `<circle cx="${x(i).toFixed(1)}" cy="${y(r[1]).toFixed(1)}" r="3.4" fill="var(--gold)" stroke="var(--panel)" stroke-width="1.6"><title>${esc(String(r[0]))}: ${r[1]}</title></circle>`).join("")}
     ${labels}
   </svg>`;
 }
@@ -1810,6 +1862,31 @@ const MIGRATION_CONTEXT = {
   "England|Canada": ["Direct British emigration and military postings to Canada across the 18th–19th centuries.", "18–19세기에 걸친 영국에서 캐나다로의 직접 이민과 군 주둔지 발령."],
   "Ireland|United States": ["19th-century Irish emigration to the United States, part of the same wave that sent other family lines to Canada.", "19세기 아일랜드인의 미국 이민 — 다른 가계가 캐나다로 향한 것과 같은 물결의 일부."]
 };
+function svgWaffle(rows, opts){
+  opts = opts || {};
+  const total = rows.reduce((s,r) => s + r[1], 0) || 1;
+  const perIcon = opts.perIcon || Math.max(1, Math.round(total / 100));
+  const cols = opts.cols || 10;
+  const cell = opts.cell || 15, gap = 3;
+  const COLORS = opts.colors || ["var(--accent)","var(--gold)","var(--blue)","var(--terracotta)","var(--plum)","var(--red)"];
+  let squares = [];
+  rows.forEach((row, ci) => {
+    const n = Math.max(1, Math.round(row[1] / perIcon));
+    for (let k = 0; k < n; k++) squares.push({col: COLORS[ci % COLORS.length], label: row[0], val: row[1]});
+  });
+  const rowsN = Math.ceil(squares.length / cols);
+  const w = cols * (cell + gap) - gap, h = rowsN * (cell + gap) - gap;
+  const sqEls = squares.map((sq, i) => {
+    const cx = (i % cols) * (cell + gap), cy = Math.floor(i / cols) * (cell + gap);
+    return `<rect x="${cx}" y="${cy}" width="${cell}" height="${cell}" rx="3" fill="${sq.col}"><title>${esc(String(sq.label))}: ${sq.val}</title></rect>`;
+  }).join("");
+  const legend = `<div style="display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:14px;font-size:12.5px;color:var(--ink2)">${rows.map((row,i) => `<span><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:${COLORS[i%COLORS.length]};margin-right:6px;vertical-align:middle"></span>${esc(String(row[0]))} — <b style="color:var(--ink)">${row[1].toLocaleString()}</b></span>`).join("")}</div>`;
+  return `<div style="display:flex;flex-direction:column;align-items:center">
+    <svg viewBox="0 0 ${w} ${h}" width="100%" style="max-width:${Math.min(320,w)}px;display:block">${sqEls}</svg>
+    <div style="font-size:10.5px;color:var(--ink2);margin-top:8px;font-style:italic">${LANG === "ko" ? "사각형 1개 ≈ " + perIcon + "명" : "each square ≈ " + perIcon + " " + (perIcon===1?"person":"people")}</div>
+    ${legend}
+  </div>`;
+}
 function drawMigrationExtras(){
   const rows = migrantsByBirthDecade();
   const el = $("#migchart");
@@ -1829,14 +1906,14 @@ function drawMigrationExtras(){
     }
     gel.innerHTML = `<h3>${LANG === "ko" ? "누적 국가 수" : "Countries represented, cumulative"}</h3>${svgLine(growth)}<div style="font-size:12px;color:var(--ink2);margin-top:8px;font-style:italic">${LANG === "ko" ? "해당 연도까지 출생지가 확인된 서로 다른 국가의 누적 수." : "Cumulative count of distinct birth countries confirmed by that decade."}</div>`;
   }
-  const cel = $("#origincontinents");
+const cel = $("#origincontinents");
   if (cel) {
     const CONTINENT_OF = {"England":"Europe","Canada":"North America","United States":"North America","Switzerland":"Europe","Ireland":"Europe","Germany":"Europe","Netherlands":"Europe","France":"Europe","United Kingdom":"Europe","Scotland":"Europe","Northern Ireland":"Europe","Ukraine":"Europe","Spain":"Europe","Belgium":"Europe","Wales":"Europe","Austria":"Europe","Luxembourg":"Europe","Singapore":"Asia","Jordan":"Asia","Denmark":"Europe","Norway":"Europe","Brazil":"South America","Italy":"Europe","South Korea":"Asia"};
     const CONT_KO = {"Europe":"유럽","North America":"북미","Asia":"아시아","South America":"남미"};
     const contCounts = {};
     Object.entries(DATA.meta.stats.countries).forEach(([c, n]) => { const cont = CONTINENT_OF[c] || c; contCounts[cont] = (contCounts[cont]||0) + n; });
     const rows = Object.entries(contCounts).sort((a,b) => b[1]-a[1]).map(([c, n]) => [(LANG === "ko" && CONT_KO[c]) ? CONT_KO[c] : c, n]);
-    cel.innerHTML = `<h3>${LANG === "ko" ? "대륙별 출생 인구" : "Birth population by continent"}</h3>${rows.length ? svgDonut(rows, {centerLabel: LANG === "ko" ? "명" : "people"}) : "—"}<div style="font-size:12px;color:var(--ink2);margin-top:8px;font-style:italic">${LANG === "ko" ? "출생국이 기록된 모든 사람 기준." : "By recorded birth country, everyone with one on file."}</div>`;
+    cel.innerHTML = `<h3>${LANG === "ko" ? "대륙별 출생 인구" : "Birth population by continent"}</h3>${rows.length ? svgWaffle(rows) : "—"}<div style="font-size:12px;color:var(--ink2);margin-top:8px;font-style:italic">${LANG === "ko" ? "출생국이 기록된 모든 사람 기준." : "By recorded birth country, everyone with one on file."}</div>`;
   }
   const wel = $("#migwaves");
   if (wel) wel.innerHTML = `<h3>${LANG === "ko" ? "이주의 물결들" : "Migration waves"}</h3>
@@ -2732,6 +2809,7 @@ function renderWelcome(){
 function openWelcome(){ renderWelcome(); $("#welcome").classList.add("on"); }
 function closeWelcome(){ $("#welcome").classList.remove("on"); try { localStorage.setItem("ft_seen", "1"); } catch(e){} }
 $("#helpbtn").onclick = openWelcome;
+$("#themebtn").onclick = () => applyTheme(document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark");
 $("#w-go").onclick = closeWelcome;
 $("#w-lang").onclick = () => { LANG = LANG === "ko" ? "en" : "ko"; try { localStorage.setItem("ftlang", LANG); } catch(e){}; renderWelcome(); refreshUI(); };
 $("#welcome").onclick = e => { if (e.target.id === "welcome") closeWelcome(); };
