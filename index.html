@@ -29,6 +29,16 @@ h1 .amp{color:var(--gold);font-style:italic}
 #results .r{padding:9px 14px;border-bottom:1px solid var(--line);cursor:pointer;display:flex;gap:9px;align-items:baseline}
 #results .r:hover{background:#f3edda}
 #results .r .yrs{color:var(--ink2);font-size:12.5px;margin-left:auto;white-space:nowrap}
+.centerwrap{position:relative}
+#centerbtn{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);color:#f5efdf;border-radius:18px;padding:7px 14px;font-size:13px;cursor:pointer}
+#centerbtn:hover{background:rgba(255,255,255,.28)}
+#centerpop{display:none;position:absolute;top:44px;right:0;min-width:280px;background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,.25);padding:8px;z-index:70;color:var(--ink)}
+#centerpop.on{display:block}
+#centersearch{width:100%;box-sizing:border-box;padding:9px 14px;border-radius:10px;border:1px solid var(--line);background:var(--card);font-size:14px;margin-bottom:6px}
+#centerresults{max-height:280px;overflow:auto}
+#centerresults .r{padding:9px 14px;border-bottom:1px solid var(--line);cursor:pointer;display:flex;gap:9px;align-items:baseline;border-radius:6px}
+#centerresults .r:hover{background:#f3edda}
+#centerresults .r .yrs{color:var(--ink2);font-size:12.5px;margin-left:auto;white-space:nowrap}
 nav{display:flex;gap:4px;margin-top:14px;flex-wrap:wrap}
 nav button{background:none;border:none;color:#e8e0c8;padding:10px 18px;font-size:14.5px;border-radius:10px 10px 0 0;opacity:.78}
 nav button:hover{opacity:1;background:rgba(255,255,255,.08)}
@@ -240,6 +250,13 @@ footer{max-width:1380px;margin:0 auto;padding:8px 26px 30px;font-size:12px;color
       <div class="h-sub" id="subtitle">Eight centuries, four lineages, one family</div>
     </div>
     <button id="helpbtn" title="Help / 도움말">?</button><button id="langbtn">🇰🇷 한국어</button>
+    <div class="centerwrap">
+      <button id="centerbtn" title="Center the tree on a different family member">🎯 Center on me</button>
+      <div id="centerpop">
+        <input id="centersearch" placeholder="Type your name…" autocomplete="off">
+        <div id="centerresults"></div>
+      </div>
+    </div>
     <div class="searchwrap">
       <input id="search" placeholder="🔍 Search 3,200+ relatives — name, place, year…" autocomplete="off">
       <div id="results"></div>
@@ -354,7 +371,7 @@ const KO = {
  "⌂ Back to Sean":"⌂ 션에게 돌아가기","Ancestor generations:":"조상 세대 수:",
  "Family archive":"가족 기록물","Life timeline":"생애 연표","From public records &amp; web research":"공공 기록·웹 조사 자료","Immediate family":"직계 가족","Notes &amp; anecdotes":"메모와 일화","Record sources":"출처 기록",
  "Parents":"부모","Siblings":"형제자매","Half-siblings":"이복 형제자매","Children":"자녀","Spouse":"배우자","Spouses":"배우자",
- "🌳 Center tree here":"🌳 여기를 중심으로","🧮 Relate to Sean":"🧮 션과의 관계 계산",
+ "🌳 Center tree here":"🌳 여기를 중심으로","🧮 Relate to Sean":"🧮 션과의 관계 계산","🎯 Center on me":"🎯 나를 중심으로",
  "★ Root of this tree":"★ 이 가계도의 중심","🎖 Military service":"🎖 군 복무","📷 Documents in family archive":"📷 가족 기록물 보유","⚠ Detached / unproven line":"⚠ 미입증·분리된 가계","Born in":"출생지:",
  "No record citations — treat as unverified":"출처 기록 없음 — 미검증",
  "Born":"출생","Died":"사망","Buried":"안장","Baptised":"세례","Living":"거주","Recorded in census":"인구조사 기록","Immigrated":"이주","Education":"학력","Occupation":"직업","Religion":"종교","Military service":"군 복무","Event":"기록","Married":"결혼:","Child born:":"자녀 출생:","date unknown":"날짜 미상","No dated events recorded.":"기록된 연대 정보가 없습니다.",
@@ -418,6 +435,8 @@ function applyStaticLang(){
   try { document.querySelectorAll("nav button").forEach(b => { const en = {tree:"🌳 Tree",map:"🗺️ Origins & Migration",stats:"📊 Statistics",stories:"📖 Family Stories",mil:"🎖 Military Service",lib:"📚 Library",rel:"🧮 How are we related?"}[b.dataset.v]; if (en) b.textContent = T(en); }); } catch(e){}
   try { document.querySelectorAll(".vswitch button").forEach(b => { const en = {h:"⇥ Horizontal",v:"⇩ Vertical",fan:"◠ Fan",list:"☰ List",charts:"📄 Charts & Reports",mapper:"📍 Tree Mapper"}[b.dataset.tv]; if (en) b.textContent = T(en); }); } catch(e){}
   t("#btn-home", T("⌂ Back to Sean"));
+  t("#centerbtn", T("🎯 Center on me"));
+  try { document.querySelector("#centersearch").placeholder = LANG === "ko" ? "이름을 입력하세요…" : "Type your name…"; } catch(e){}
   t("#genslabel", T("Ancestor generations:"));
   t("#langbtn", LANG === "ko" ? "🇬🇧 English" : "🇰🇷 한국어");
   try { document.querySelector("#apptitle").innerHTML = LANG === "ko" ? `맥널티 <span class="amp">&amp;</span> 전 가족 가계도` : `McNulty <span class="amp">&amp;</span> Jeon Family Tree`; } catch(e){}
@@ -648,7 +667,7 @@ function drawOTD(){
 }
 
 /* ---------- TREE (pedigree SVG) ---------- */
-let FOCUS = ROOT;
+let FOCUS = (function(){ try { const v = localStorage.getItem("ft_center"); if (v && P[v]) return v; } catch(e){} return ROOT; })();
 const COLW = 198, COLGAP = 46, CARDH = 58, VGAP = 10;
 function buildPedigree(focus, maxGen){
   // slots[g] = array of length 2^g of pid|null  (ahnentafel)
@@ -1336,7 +1355,7 @@ function openProfile(pid){
     const done = () => { const c = $("#copied"); c.textContent = LANG === "ko" ? "링크가 복사되었습니다" : "Link copied!"; c.classList.add("on"); setTimeout(() => c.classList.remove("on"), 1600); };
     if (navigator.clipboard) navigator.clipboard.writeText(url).then(done, done); else done();
   };
-  $("#dfocus").onclick = () => { FOCUS = pid; closeProfile(); showView("tree"); renderTree(); };
+  $("#dfocus").onclick = () => { closeProfile(); setFocusPerson(pid); };
   $("#drel").onclick = () => { closeProfile(); showView("rel"); setRel("A", ROOT); setRel("B", pid); calcRel(); };
   $("#drawer").querySelectorAll(".plink").forEach(el => el.onclick = () => openProfile(el.dataset.p));
   $("#drawer").querySelectorAll("[data-doc]").forEach(el => el.onclick = () => openDoc(el.dataset.doc));
@@ -1364,6 +1383,30 @@ $("#search").addEventListener("input", e => {
 });
 $("#results").addEventListener("click", e => { const t = e.target.closest(".r"); if (t) { $("#results").style.display = "none"; $("#search").value = ""; openProfile(t.dataset.p); } });
 document.addEventListener("click", e => { if (!e.target.closest(".searchwrap")) $("#results").style.display = "none"; });
+
+/* ---------- CENTER ON PERSON (header) ---------- */
+function setFocusPerson(pid){
+  if (!P[pid]) return;
+  FOCUS = pid;
+  try { localStorage.setItem("ft_center", pid); } catch(e){}
+  showView("tree");
+  renderTree();
+}
+$("#centerbtn").addEventListener("click", () => {
+  const pop = $("#centerpop");
+  const opening = !pop.classList.contains("on");
+  pop.classList.toggle("on", opening);
+  if (opening) { $("#centersearch").value = ""; $("#centerresults").innerHTML = ""; $("#centersearch").focus(); }
+});
+$("#centersearch").addEventListener("input", e => {
+  const hits = doSearch(e.target.value);
+  $("#centerresults").innerHTML = hits.map(h => `<div class="r" data-p="${h.pid}"><span>${flagOf(h.p)}</span><span>${esc(nmOf(h.p))}</span><span class="yrs">${yrs(h.p)}${h.p.directAncestor ? " ★" : ""}</span></div>`).join("");
+});
+$("#centerresults").addEventListener("click", e => {
+  const t = e.target.closest(".r");
+  if (t) { setFocusPerson(t.dataset.p); $("#centerpop").classList.remove("on"); }
+});
+document.addEventListener("click", e => { if (!e.target.closest(".centerwrap")) $("#centerpop").classList.remove("on"); });
 
 /* ---------- VIEWS ---------- */
 function showView(v){
